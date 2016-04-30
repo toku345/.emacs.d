@@ -63,3 +63,24 @@
   :init
   (elscreen-start))
 
+;;; mykie
+(use-package mykie
+  :config
+  (setq mykie:use-major-mode-key-override t)
+  (mykie:initialize))
+
+;;; happy (((()))) !!!
+(use-package paren
+  :init
+  (setq show-paren-style 'parenthesis)
+  (show-paren-mode 1))
+
+;;; yasnippet
+(use-package yasnippet
+  :init
+  (yas-global-mode 1)
+  (bind-keys :map yas-minor-mode-map
+	     ("<tab>" . nil)
+	     ("TAB" . nil)
+	     ("C-i" . nil)
+	     ("C-o" . yas/expand)))
