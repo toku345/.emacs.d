@@ -34,6 +34,22 @@
   :config
   (load-theme 'zenburn t))
 
+;;; setup exec-path
+(use-package exec-path-from-shell
+  :config
+  (when (memq window-system '(mac ns x))
+   (exec-path-from-shell-initialize)))
+
+;;; global keymap
+(use-package bind-key
+  :config
+  (bind-keys :map global-map
+	     ("C-h" . delete-backward-char)
+	     ("C-m" . newline-and-indent)
+	     ("C-c l" . toggle-truncate-lines)
+	     ("C-t" . other-window)
+	     ("C-x ?" . help-command)))
+
 ;;; magit
 (use-package magit
   :bind (("C-x M-g" . magit-dispatch-popup)
@@ -47,9 +63,3 @@
   :init
   (elscreen-start))
 
-
-;;; change key bindigs
-
-;; 入力されるキーシーケンスを置き換える
-;; ?\C-?はDELのキーシーケンス
-(keyboard-translate ?\C-h ?\C-?)
