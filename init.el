@@ -47,6 +47,9 @@
   :init
   (elscreen-start))
 
+
+;;; change key bindigs
+
 ;; 入力されるキーシーケンスを置き換える
 ;; ?\C-?はDELのキーシーケンス
 (keyboard-translate ?\C-h ?\C-?)
