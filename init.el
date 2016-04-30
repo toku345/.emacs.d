@@ -7,7 +7,7 @@
 ;;;
 
 (require 'package)
-;; (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
@@ -33,6 +33,19 @@
 (use-package zenburn-theme
   :config
   (load-theme 'zenburn t))
+
+;;; magit
+(use-package magit
+  :bind (("C-x M-g" . magit-dispatch-popup)
+	 ("C-c m" . magit-status)
+	 ("C-c b" . magit-blame))
+  :pin melpa-stable)
+
+;;; elscreen
+(use-package elscreen
+  :pin melpa
+  :init
+  (elscreen-start))
 
 ;; 入力されるキーシーケンスを置き換える
 ;; ?\C-?はDELのキーシーケンス
