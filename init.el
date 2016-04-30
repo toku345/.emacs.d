@@ -29,7 +29,10 @@
 (setq use-package-always-pin "melpa-stable")
 (setq use-package-verbose t)
 
-
+;;; load my preferred theme
+(use-package zenburn-theme
+  :config
+  (load-theme 'zenburn t))
 
 ;; 入力されるキーシーケンスを置き換える
 ;; ?\C-?はDELのキーシーケンス
