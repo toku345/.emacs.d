@@ -122,7 +122,7 @@
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
   (when (fboundp mode) (funcall mode -1)))
 
-;;; show me empty lines after buffer end
+;;; some useful settings
 (setq visible-bell t
       font-lock-maximum-decoration t
       truncate-partial-width-windows nil
