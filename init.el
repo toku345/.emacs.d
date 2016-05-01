@@ -121,3 +121,17 @@
 ;;; turn off graphical user interface
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
   (when (fboundp mode) (funcall mode -1)))
+
+;;; show me empty lines after buffer end
+(setq visible-bell t
+      font-lock-maximum-decoration t
+      truncate-partial-width-windows nil
+      echo-keystrokes 0.1
+      create-lockfiles nil
+      ;; disable to backup function
+      backup-inhibited t
+      delete-auto-save-files t
+      ;; completion ignore case (lower/upper)
+      completion-ignore-case t
+      read-file-name-completion-ignore-case t
+      inhibit-startup-message t)
