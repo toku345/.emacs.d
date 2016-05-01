@@ -89,10 +89,11 @@
 (use-package company
   :config
   (global-company-mode)
-  (setq company-idle-delay 0.1
+  (setq company-idle-delay 0.3
 	company-minimum-prefix-length 2
 	company-selection-wrap-around t
-	company-global-modes '(not magit-status-mode ))
+	;; company-show-numbers t
+	company-global-modes '(not magit-status-mode))
 
   (bind-keys :map company-mode-map
 	     ("C-i" . company-complete))
