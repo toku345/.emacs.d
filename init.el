@@ -104,3 +104,9 @@
   (bind-keys :map company-search-map
 	     ("C-n" . company-select-next)
 	     ("C-p" . company-select-previous)))
+
+;;; projectile
+(use-package projectile
+  :init
+  (projectile-global-mode 1))
+
