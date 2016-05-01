@@ -135,3 +135,8 @@
       completion-ignore-case t
       read-file-name-completion-ignore-case t
       inhibit-startup-message t)
+
+;;; show me empty lines after buffer end
+(set-default 'indicate-empty-lines t)
+(setq-default indicate-buffer-boundaries 'right)
+(setq uniquify-buffer-name-style 'post-forward)
