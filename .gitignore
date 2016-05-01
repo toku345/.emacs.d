@@ -44,7 +44,6 @@ flycheck_*.el
 
 # projectiles files
 .projectile
-projectile-bookmarks.eld
 
 ### OSX ###
 .DS_Store
