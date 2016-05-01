@@ -110,3 +110,7 @@
   :init
   (projectile-global-mode 1))
 
+;;; subword
+(use-package subword
+  :init
+  (global-subword-mode 1))
