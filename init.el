@@ -114,3 +114,10 @@
 (use-package subword
   :init
   (global-subword-mode 1))
+
+;;; answering just 'y' or 'n' will do
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;;; turn off graphical user interface
+(dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
+  (when (fboundp mode) (funcall mode -1)))
