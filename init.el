@@ -168,7 +168,7 @@
 (use-package summarye
   :config
   (bind-keys :map global-map
-             ("C-o" . se/make-summary-buffer))
+             ("C-o" . se/make-summary-buffer)))
 
 ;;; hl-line
 (use-package hl-line
