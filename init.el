@@ -119,7 +119,9 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;;; turn off graphical user interface
-(dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
+(dolist (mode '(tool-bar-mode
+                ;; menu-bar-mode
+                scroll-bar-mode))
   (when (fboundp mode) (funcall mode -1)))
 
 ;;; some useful settings
