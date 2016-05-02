@@ -95,8 +95,8 @@
 	;; company-show-numbers t
 	company-global-modes '(not magit-status-mode))
 
-  (bind-keys :map company-mode-map
-	     ("C-i" . company-complete))
+  ;; (bind-keys :map company-mode-map
+  ;; 	     ("C-i" . company-complete)) ; C-i & tab で候補を表示
   (bind-keys :map company-active-map
 	     ("C-n" . company-select-next)
 	     ("C-p" . company-select-previous)
