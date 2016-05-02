@@ -209,6 +209,13 @@
 ;;; helm
 ;;;
 
+(use-package helm-ag
+  :config
+  (setq helm-ag-base-command "ag --nocolor --nogrou --ignore-case"
+        helm-ag-thing-at-point 'symbol)
+  (bind-keys :map global-map
+             ("C-c s" . helm-ag)))
+
 (use-package helm
   :config
   (setq helm-quick-update t
@@ -222,7 +229,8 @@
              ;; ("C-x C-f" . helm-find-files) ; helm-projectile側で設定する
              ("C-x C-b" . helm-for-files))
   ;; (bind-keys :map helm-find-files-map
-  ;;            ("C-h" . delete-backward-char))
+  ;;            ("C-h" . delete-backward-char)
+  ;;            ("TAB" . helm-execute-persistent-action)) ; ここだと void helm-find-files-map と怒られるので別途設定する
   (bind-keys :map helm-map
              ("C-h" . delete-backward-char)))
 
@@ -236,9 +244,6 @@
     :default (call-interactively 'switch-to-buffer)
     :C-u helm-projectile-switch-to-buffer))
 
-(use-package helm-ag
-  :config
-  (setq helm-ag-base-command "ag --nocolor --nogrou --ignore-case"
-        helm-ag-thing-at-point 'symbol)
-  (bind-keys :map global-map
-             ("C-c s" . helm-ag)))
+(bind-keys :map helm-find-files-map
+           ("C-h" . delete-backward-char)
+           ("TAB" . helm-execute-persistent-action))
