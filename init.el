@@ -136,7 +136,8 @@
       ;; completion ignore case (lower/upper)
       completion-ignore-case t
       read-file-name-completion-ignore-case t
-      inhibit-startup-message t)
+      inhibit-startup-message t
+      frame-title-format "%f")
 
 ;;; show me empty lines after buffer end
 (set-default 'indicate-empty-lines t)
