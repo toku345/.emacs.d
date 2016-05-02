@@ -215,3 +215,42 @@
     (when path
       (setq output (concat ".../" output)))
     output))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:;;;;;;;;;;;;;
+;;;
+;;; helm
+;;;
+
+(use-package helm
+  :config
+  (setq helm-quick-update t
+        helm-buffers-fuzzy-matching t
+        helm-ff-transformer-show-only-basename nil)
+
+  (bind-keys :map global-map
+             ("M-x" . helm-M-x)
+             ("M-y" . helm-show-kill-ring)
+             ;; ("C-x b" . helm-buffers-list)
+             ;; ("C-x C-f" . helm-find-files) ; helm-projectile側で設定する
+             ("C-x C-b" . helm-for-files))
+  ;; (bind-keys :map helm-find-files-map
+  ;;            ("C-h" . delete-backward-char))
+  (bind-keys :map helm-map
+             ("C-h" . delete-backward-char)))
+
+(use-package helm-projectile
+  :config
+  (mykie:set-keys nil
+    "C-x C-f"
+    :default (call-interactively 'helm-find-files)
+    :C-u helm-projectile-find-file
+    "C-x b"
+    :default (call-interactively 'switch-to-buffer)
+    :C-u helm-projectile-switch-to-buffer))
+
+(use-package helm-ag
+  :config
+  (setq helm-ag-base-command "ag --nocolor --nogrou --ignore-case"
+        helm-ag-thing-at-point 'symbol)
+  (bind-keys :map global-map
+             ("C-c s" . helm-ag)))
