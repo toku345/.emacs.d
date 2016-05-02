@@ -168,7 +168,10 @@
 (use-package hl-line
   :config
   (global-hl-line-mode)
-  (set-face-background 'hl-line "#4B0082"))
+  (set-face-background 'hl-line "#525252"))
+
+;;; region background color
+(set-face-background 'region "dark green")
 
 ;;; modeline
 ;; show line nums & word count in region when the range specification
