@@ -80,30 +80,30 @@
   :init
   (yas-global-mode 1)
   (bind-keys :map yas-minor-mode-map
-	     ("<tab>" . nil)
-	     ("TAB" . nil)
-	     ("C-i" . nil)
-	     ("C-o" . yas/expand)))
+             ("<tab>" . nil)
+             ("TAB" . nil)
+             ("C-i" . nil)
+             ("C-o" . yas/expand)))
 
 ;;; company-mode
 (use-package company
   :config
   (global-company-mode)
   (setq company-idle-delay 0.3
-	company-minimum-prefix-length 2
-	company-selection-wrap-around t
-	;; company-show-numbers t
-	company-global-modes '(not magit-status-mode))
+        company-minimum-prefix-length 2
+        company-selection-wrap-around t
+        ;; company-show-numbers t
+        company-global-modes '(not magit-status-mode))
 
   ;; (bind-keys :map company-mode-map
-  ;; 	     ("C-i" . company-complete)) ; C-i & tab で候補を表示
+  ;;      ("C-i" . company-complete)) ; C-i & tab で候補を表示
   (bind-keys :map company-active-map
-	     ("C-n" . company-select-next)
-	     ("C-p" . company-select-previous)
-	     ("C-s" . company-search-words-regexp))
+             ("C-n" . company-select-next)
+             ("C-p" . company-select-previous)
+             ("C-s" . company-search-words-regexp))
   (bind-keys :map company-search-map
-	     ("C-n" . company-select-next)
-	     ("C-p" . company-select-previous)))
+             ("C-n" . company-select-next)
+             ("C-p" . company-select-previous)))
 
 ;;; projectile
 (use-package projectile
