@@ -160,3 +160,9 @@
 
 ;;; cleanup whitespace before file save
 (add-hook 'before-save-hook 'whitespace-cleanup)
+
+;;; hl-line
+(use-package hl-line
+  :config
+  (global-hl-line-mode)
+  (set-face-background 'hl-line "#525252"))
