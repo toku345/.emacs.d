@@ -164,6 +164,12 @@
 ;;; cleanup whitespace before file save
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
+;;; summarye
+(use-package summarye
+  :config
+  (bind-keys :map global-map
+             ("C-o" . se/make-summary-buffer))
+
 ;;; hl-line
 (use-package hl-line
   :config
