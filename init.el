@@ -170,6 +170,13 @@
   (bind-keys :map global-map
              ("C-o" . se/make-summary-buffer)))
 
+;;; undo-tree
+(use-package undo-tree
+  :config
+  (global-undo-tree-mode t)
+  (bind-keys :map global-map
+            ("C-'" . redo)))
+
 ;;; hl-line
 (use-package hl-line
   :config
