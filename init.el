@@ -157,3 +157,6 @@
   (setq whitespace-space-regexp "\\(\u3000+\\)")
   (global-whitespace-mode 1)
   (setq-default tab-width 4 indent-tabs-mode nil))
+
+;;; cleanup whitespace before file save
+(add-hook 'before-save-hook 'whitespace-cleanup)
