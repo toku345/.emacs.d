@@ -1,4 +1,3 @@
-
 # Created by https://www.gitignore.io/api/emacs,osx,linux,elisp
 
 ### Emacs ###
@@ -44,6 +43,8 @@ flycheck_*.el
 
 # projectiles files
 .projectile
+projectile.cache
+recentf
 
 ### OSX ###
 .DS_Store
@@ -91,4 +92,3 @@ Temporary Items
 
 # Packaging
 .cask
-
