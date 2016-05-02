@@ -44,17 +44,17 @@
 (use-package bind-key
   :config
   (bind-keys :map global-map
-	     ("C-h" . delete-backward-char)
-	     ("C-m" . newline-and-indent)
-	     ("C-c l" . toggle-truncate-lines)
-	     ("C-t" . other-window)
-	     ("C-x ?" . help-command)))
+             ("C-h" . delete-backward-char)
+             ("C-m" . newline-and-indent)
+             ("C-c l" . toggle-truncate-lines)
+             ("C-t" . other-window)
+             ("C-x ?" . help-command)))
 
 ;;; magit
 (use-package magit
   :bind (("C-x M-g" . magit-dispatch-popup)
-	 ("C-c m" . magit-status)
-	 ("C-c b" . magit-blame))
+         ("C-c m" . magit-status)
+         ("C-c b" . magit-blame))
   :pin melpa-stable)
 
 ;;; elscreen
