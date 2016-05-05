@@ -255,6 +255,12 @@
   :bind ("C-c b" . helm-descbinds)
   :init (helm-descbinds-mode))
 
+(use-package helm-swoop
+  :bind (("M-i" . helm-swoop)
+         ("M-I" . helm-swoop-back-to-last-point)
+         ("C-c M-i" . helm-multi-swoop)
+         ("C-x M-i" . helm-multi-swoop-all)))
+
 (use-package helm
   :config
   (setq helm-quick-update t
