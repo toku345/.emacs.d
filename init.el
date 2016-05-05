@@ -222,6 +222,9 @@
   (bind-keys :map global-map
              ("C-c s" . helm-ag)))
 
+(use-package helm-ls-git
+  :bind ("C-x C-d" . helm-browse-project))
+
 (use-package helm
   :config
   (setq helm-quick-update t
