@@ -266,7 +266,8 @@
              ("M-y" . helm-show-kill-ring)
              ;; ("C-x b" . helm-buffers-list)
              ;; ("C-x C-f" . helm-find-files) ; helm-projectile側で設定する
-             ("C-x C-b" . helm-for-files))
+             ("C-x C-b" . helm-for-files)
+             ("C-c o" . helm-occur))
   ;; (bind-keys :map helm-find-files-map
   ;;            ("C-h" . delete-backward-char)
   ;;            ("TAB" . helm-execute-persistent-action)) ; ここだと void helm-find-files-map と怒られるので別途設定する
