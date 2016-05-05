@@ -251,6 +251,10 @@
 (use-package helm-ls-git
   :bind ("C-x C-d" . helm-browse-project))
 
+(use-package helm-descbinds
+  :bind ("C-c b" . helm-descbinds)
+  :init (helm-descbinds-mode))
+
 (use-package helm
   :config
   (setq helm-quick-update t
