@@ -288,7 +288,26 @@
   :bind (("M-i" . helm-swoop)
          ("M-I" . helm-swoop-back-to-last-point)
          ("C-c M-i" . helm-multi-swoop)
-         ("C-x M-i" . helm-multi-swoop-all)))
+         ("C-x M-i" . helm-multi-swoop-all)
+         :map isearch-mode-map
+         ("M-i" . helm-swoop-from-isearch)
+         :map helm-swoop-map
+         ("M-i" . helm-multi-swoop-all-from-helm-swoop)
+         ("M-m" . helm-multi-swoop-current-mode-from-helm-swoop)
+         ("C-r" . helm-previous-line)
+         ("C-s" . helm-next-line)
+         :map helm-multi-swoop-map
+         ("C-r" . helm-previous-line)
+         ("C-s" . helm-next-line))
+
+  :config
+  (setq helm-multi-swoop-edit-save t ; Save buffer when helm-multi-swoop-edit complete
+        helm-swoop-split-with-multiple-windows nil ; If this value is t, split window inside the current window
+        helm-swoop-split-direction 'split-window-vertically ; Split direcion. 'split-window-vertically or 'split-window-horizontally
+        helm-swoop-speed-or-color nil ; If nil, you can slightly boost invoke speed in exchange for text color
+        helm-swoop-move-to-line-cycle t ; Go to the opposite side of line from the end or beginning of line
+        )
+  (helm-migemo-mode 1))
 
 (use-package helm
   :config
