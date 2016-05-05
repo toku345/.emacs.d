@@ -38,7 +38,7 @@
 (use-package exec-path-from-shell
   :config
   (when (memq window-system '(mac ns x))
-   (exec-path-from-shell-initialize)))
+    (exec-path-from-shell-initialize)))
 
 ;;; global keymap
 (use-package bind-key
@@ -175,7 +175,7 @@
   :config
   (global-undo-tree-mode t)
   (bind-keys :map global-map
-            ("C-'" . redo)))
+             ("C-'" . redo)))
 
 ;;; ediff
 (use-package ediff
