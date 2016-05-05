@@ -177,6 +177,12 @@
   (bind-keys :map global-map
             ("C-'" . redo)))
 
+;;; ediff
+(use-package ediff
+  :config
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain
+        ediff-split-window-function 'split-window-horizontally))
+
 ;;; hl-line
 (use-package hl-line
   :config
