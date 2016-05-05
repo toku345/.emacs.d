@@ -315,3 +315,16 @@
 (use-package clj-refactor
   :diminish clj-refactor-mode
   :config (cljr-add-keybindings-with-prefix "C-c j"))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:;;;;;;;;;;;;;
+;;;
+;;; after loading init.el
+;;;
+
+(message "init.el loaded!")
+
+(add-hook 'after-init-hook
+          (lambda ()
+            (message "init time: %.3f sec"
+                     (float-time (time-subtract after-init-time before-init-time)))))
