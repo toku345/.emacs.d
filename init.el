@@ -48,8 +48,8 @@
 ;;; magit
 (use-package magit
   :bind (("C-x M-g" . magit-dispatch-popup)
-         ("C-c m" . magit-status)
-         ("C-c b" . magit-blame))
+         ("C-c C-m" . magit-status)
+         ("C-c C-b" . magit-blame))
   :pin melpa-stable)
 
 ;;; elscreen
