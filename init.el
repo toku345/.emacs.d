@@ -29,11 +29,6 @@
 (setq use-package-always-pin "melpa-stable")
 (setq use-package-verbose t)
 
-;;; load my preferred theme
-(use-package zenburn-theme
-  :config
-  (load-theme 'zenburn t))
-
 ;;; setup exec-path
 (use-package exec-path-from-shell
   :config
@@ -124,46 +119,6 @@
                 scroll-bar-mode))
   (when (fboundp mode) (funcall mode -1)))
 
-;;; some useful settings
-(setq visible-bell t
-      font-lock-maximum-decoration t
-      truncate-partial-width-windows nil
-      echo-keystrokes 0.1
-      create-lockfiles nil
-      ;; disable to backup function
-      backup-inhibited t
-      delete-auto-save-files t
-      ;; completion ignore case (lower/upper)
-      completion-ignore-case t
-      read-file-name-completion-ignore-case t
-      inhibit-startup-message t
-      frame-title-format "%f")
-
-;;; show me empty lines after buffer end
-(set-default 'indicate-empty-lines t)
-(setq-default indicate-buffer-boundaries 'right)
-(setq uniquify-buffer-name-style 'post-forward)
-
-;;; whitespace
-(use-package whitespace
-  :config
-  (setq whitespace-style '(face
-                           trailing
-                           tabs
-                           spaces
-                           empty
-                           space-mark
-                           tab-mark))
-  (setq whitespace-display-mappings
-        '((space-mark ?\u3000 [?\u25a1])
-          (tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
-  (setq whitespace-space-regexp "\\(\u3000+\\)")
-  (global-whitespace-mode 1)
-  (setq-default tab-width 4 indent-tabs-mode nil))
-
-;;; cleanup whitespace before file save
-(add-hook 'before-save-hook 'whitespace-cleanup)
-
 ;;; summarye
 (use-package summarye
   :config
@@ -203,6 +158,56 @@
          ("C-x v SPC" . git-gutter:mark-hunk))
   :config
   (global-git-gutter-mode t))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:;;;;;;;;;;;;;
+;;;
+;;; emacs appearance settings
+;;;
+
+;;; load my preferred theme
+(use-package zenburn-theme
+  :config
+  (load-theme 'zenburn t))
+
+;;; some useful settings
+(setq visible-bell t
+      font-lock-maximum-decoration t
+      truncate-partial-width-windows nil
+      echo-keystrokes 0.1
+      create-lockfiles nil
+      ;; disable to backup function
+      backup-inhibited t
+      delete-auto-save-files t
+      ;; completion ignore case (lower/upper)
+      completion-ignore-case t
+      read-file-name-completion-ignore-case t
+      inhibit-startup-message t
+      frame-title-format "%f")
+
+;;; show me empty lines after buffer end
+(set-default 'indicate-empty-lines t)
+(setq-default indicate-buffer-boundaries 'right)
+(setq uniquify-buffer-name-style 'post-forward)
+
+;;; whitespace
+(use-package whitespace
+  :config
+  (setq whitespace-style '(face
+                           trailing
+                           tabs
+                           spaces
+                           empty
+                           space-mark
+                           tab-mark))
+  (setq whitespace-display-mappings
+        '((space-mark ?\u3000 [?\u25a1])
+          (tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
+  (setq whitespace-space-regexp "\\(\u3000+\\)")
+  (global-whitespace-mode 1)
+  (setq-default tab-width 4 indent-tabs-mode nil))
+
+;;; cleanup whitespace before file save
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 ;;; hl-line
 (use-package hl-line
