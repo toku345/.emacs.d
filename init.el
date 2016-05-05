@@ -183,6 +183,27 @@
   (setq ediff-window-setup-function 'ediff-setup-windows-plain
         ediff-split-window-function 'split-window-horizontally))
 
+;;; dired
+(setq dired-dwim-target t ; diredを2つのウィンドウで開いている時に、デフォルトの移動orコピー先をもう一方のdiredで開いているディレクトリにする
+      dired-recursive-copies 'always
+      dired-isearch-filenames t)
+
+;;; git-gutter
+(use-package git-gutter
+  :bind (("C-x C-g" . git-gutter:toggle)
+         ("C-x v =" . git-gutter:popup-hunk)
+         ;; Jump to next/previous hunk
+         ("C-x p" . git-gutter:previous-hunk)
+         ("C-x n" . git-gutter:next-hunk)
+         ;; Stage current hunk
+         ("C-x v s" . git-gutter:stage-hunk)
+         ;; Revert current hunk
+         ("C-x v r" . git-gutter:revert-hunk)
+         ;; Mark current hunk
+         ("C-x v SPC" . git-gutter:mark-hunk))
+  :config
+  (global-git-gutter-mode t))
+
 ;;; hl-line
 (use-package hl-line
   :config
