@@ -156,7 +156,7 @@
          ("C-x v r" . git-gutter:revert-hunk)
          ;; Mark current hunk
          ("C-x v SPC" . git-gutter:mark-hunk))
-  :config
+  :init
   (global-git-gutter-mode t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:;;;;;;;;;;;;;
