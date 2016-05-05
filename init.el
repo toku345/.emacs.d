@@ -240,6 +240,8 @@
 ;;; searching
 ;;;
 
+;; Need install cmigemo
+;; `$ brew install cmigemo`
 (use-package migemo
   :config
   (setq migemo-command "cmigemo"
