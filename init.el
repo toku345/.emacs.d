@@ -256,16 +256,16 @@
   :config
   (ivy-mode 1))
 
-(use-package avy-migemo
-  :config
-  (avy-migemo-mode 1)
-  (require 'avy-migemo-e.g.swiper))
-
 (use-package swiper
   :bind (("C-s" . swiper)
          ("C-c C-r" . ivy-resume))
   :init
   (setq ivy-use-virtual-buffers t))
+
+(use-package avy-migemo
+  :config
+  (avy-migemo-mode 1)
+  (require 'avy-migemo-e.g.swiper))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:;;;;;;;;;;;;;
 ;;;
