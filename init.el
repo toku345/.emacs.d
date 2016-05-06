@@ -175,6 +175,11 @@
       (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
       (eval-buffer))))
 
+;;; executable-make-buffer-file-executable-if-script-p
+;; ファイル名が #! から始まる場合、+xをつけて保存する
+(add-hook 'after-save-hook
+          'executable-make-buffer-file-executable-if-script-p)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:;;;;;;;;;;;;;
 ;;;
 ;;; emacs appearance settings
