@@ -45,6 +45,7 @@ flycheck_*.el
 .projectile
 projectile.cache
 recentf
+quelpa
 
 ### OSX ###
 .DS_Store
