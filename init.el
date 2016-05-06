@@ -159,6 +159,19 @@
   :init
   (global-git-gutter-mode t))
 
+;;; paradox
+(use-package paradox)
+
+;;; quelpa
+(use-package quelpa
+  :init
+  (package-initialize)
+  (if (require 'quelpa nil t)
+      (quelpa-self-upgrade)
+    (with-temp-buffer
+      (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+      (eval-buffer))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:;;;;;;;;;;;;;
 ;;;
 ;;; emacs appearance settings
