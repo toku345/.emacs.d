@@ -438,6 +438,23 @@
   :diminish clj-refactor-mode
   :config (cljr-add-keybindings-with-prefix "C-c j"))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:;;;;;;;;;;;;;
+;;;
+;;; ruby
+;;;
+
+(use-package slim-mode)
+(use-package ruby-block)
+
+(defun my/ruby-mode-hook ()
+  (ruby-electric-mode 1)
+  (when (require 'ruby-block nil t)
+    (setq ruby-block-highlight-toggle t)
+    (ruby-block-mode t)))
+
+(use-package ruby-mode
+  :init
+  (add-hook 'ruby-mode-hook #'my/ruby-mode-hook))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:;;;;;;;;;;;;;
 ;;;
