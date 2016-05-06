@@ -180,6 +180,9 @@
 (add-hook 'after-save-hook
           'executable-make-buffer-file-executable-if-script-p)
 
+;;; global-auto-revert-mode
+(global-auto-revert-mode 1)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:;;;;;;;;;;;;;
 ;;;
 ;;; emacs appearance settings
