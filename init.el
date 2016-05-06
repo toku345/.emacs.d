@@ -254,7 +254,9 @@
 
 (use-package ivy
   :config
-  (ivy-mode 1))
+  ; dired 使いにくくなるのでコメントアウト
+  ;; (ivy-mode 1)
+  )
 
 (use-package swiper
   :bind (("C-s" . swiper)
