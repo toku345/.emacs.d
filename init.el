@@ -454,7 +454,9 @@
 
 (use-package ruby-mode
   :init
-  (add-hook 'ruby-mode-hook #'my/ruby-mode-hook))
+  (add-hook 'ruby-mode-hook #'my/ruby-mode-hook)
+  (custom-set-variables
+   '(ruby-insert-encoding-magic-comment nil)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:;;;;;;;;;;;;;
 ;;;
