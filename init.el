@@ -45,6 +45,9 @@
              ("C-t" . other-window)
              ("C-x ?" . help-command)))
 
+;;; delete selection mode
+(delete-selection-mode t)
+
 ;;; magit
 (use-package magit
   :bind (("C-x M-g" . magit-dispatch-popup)
