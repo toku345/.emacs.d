@@ -43,7 +43,8 @@
              ("C-m" . newline-and-indent)
              ("C-c l" . toggle-truncate-lines)
              ("C-t" . other-window)
-             ("C-x ?" . help-command)))
+             ("C-x ?" . help-command)
+             ("C-x SPC" . cua-rectangle-mark-mode)))
 
 ;;; delete selection mode
 (delete-selection-mode t)
