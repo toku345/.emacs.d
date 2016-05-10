@@ -445,6 +445,7 @@
 ;;;
 
 (use-package slim-mode)
+(use-package yaml-mode)
 (use-package ruby-block)
 
 (defun my/ruby-mode-hook ()
