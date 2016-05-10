@@ -237,8 +237,15 @@
 ;;; hl-line
 (use-package hl-line
   :config
-  (global-hl-line-mode)
+  (setq global-hl-line-timer
+        (run-with-idle-timer 0.03 t #'global-hl-line-timer-function))
   (set-face-background 'hl-line "#525252"))
+
+(defun global-hl-line-timer-function ()
+  (global-hl-line-unhighlight-all)
+  (let ((global-hl-line-mode t))
+    (global-hl-line-highlight)))
+
 
 ;;; region background color
 (set-face-background 'region "dark green")
