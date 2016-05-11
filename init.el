@@ -454,9 +454,10 @@
 (use-package slim-mode)
 (use-package yaml-mode)
 (use-package ruby-block)
+(use-package ruby-electric)
 
 (defun my/ruby-mode-hook ()
-  (ruby-electric-mode 1)
+  (ruby-electric-mode t)
   (when (require 'ruby-block nil t)
     (setq ruby-block-highlight-toggle t)
     (ruby-block-mode t)))
