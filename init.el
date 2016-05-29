@@ -492,8 +492,16 @@
    '(js2-bounce-indent-p nil)
    '(jsx-indent-level 2))
   :config
-  (add-to-list 'auto-mode-alist '("\\.\\(js\\|jsx\\|json\\)$" . js2-mode)))
+  (add-to-list 'auto-mode-alist '("\\.\\(js\\|jsx\\)$" . js2-mode)))
 
+;;; json
+(use-package json-mode
+  :config
+  (setq js-indent-level 2
+        tab-width 2)
+  :init
+  (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
+  (add-hook 'json-mode-hook #'company-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:;;;;;;;;;;;;;
 ;;;
