@@ -486,13 +486,13 @@
 ;;; javascript
 ;;;
 (use-package js2-mode
-  :init
+  :config
+  (add-to-list 'auto-mode-alist '("\\.\\(js\\|jsx\\)$" . js2-mode))
   (custom-set-variables
    '(js2-basic-offset 2)
    '(js2-bounce-indent-p nil)
    '(jsx-indent-level 2))
-  :config
-  (add-to-list 'auto-mode-alist '("\\.\\(js\\|jsx\\)$" . js2-mode)))
+  :pin melpa-stable)
 
 ;;; json
 (use-package json-mode
