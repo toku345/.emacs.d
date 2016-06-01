@@ -453,6 +453,7 @@
 
 (use-package slim-mode)
 (use-package yaml-mode)
+(use-package web-mode)
 (use-package ruby-block)
 (use-package ruby-electric)
 
