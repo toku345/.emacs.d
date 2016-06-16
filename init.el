@@ -229,7 +229,7 @@
           (tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
   (setq whitespace-space-regexp "\\(\x3000+\\|^ +\\| +$\\)")
   (global-whitespace-mode 1)
-  (setq-default tab-width 4 indent-tabs-mode nil))
+  (setq-default tab-width 2 indent-tabs-mode nil))
 
 ;;; cleanup whitespace before file save
 (add-hook 'before-save-hook 'whitespace-cleanup)
@@ -453,7 +453,19 @@
 
 (use-package slim-mode)
 (use-package yaml-mode)
-(use-package web-mode)
+(use-package web-mode
+  :config
+  (setq-default indent-tabs-mode nil)
+  (setq web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-style-padding 2
+        web-mode-code-indent-offset 2
+        web-mode-script-padding 2
+        web-mode-block-padding 2)
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 (use-package ruby-block)
 (use-package ruby-electric)
 
