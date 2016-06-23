@@ -52,8 +52,8 @@
 ;;; magit
 (use-package magit
   :bind (("C-x M-g" . magit-dispatch-popup)
-         ("C-c C-m" . magit-status)
-         ("C-c C-b" . magit-blame))
+         ("C-c m" . magit-status)
+         ("C-c b" . magit-blame))
   :pin melpa-stable)
 
 ;;; elscreen
@@ -317,7 +317,7 @@
   :bind ("C-x C-d" . helm-browse-project))
 
 (use-package helm-descbinds
-  :bind ("C-c b" . helm-descbinds)
+  :bind ("C-c C-b C-b" . helm-descbinds)
   :init (helm-descbinds-mode))
 
 (use-package helm-swoop
