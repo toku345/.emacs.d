@@ -49,6 +49,11 @@
 ;;; delete selection mode
 (delete-selection-mode t)
 
+;;; GUI only
+(when (memq window-system '(mac ns))
+  (progn
+    (server-start)))
+
 ;;; magit
 (use-package magit
   :bind (("C-x M-g" . magit-dispatch-popup)
