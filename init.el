@@ -67,6 +67,11 @@
   :init
   (elscreen-start))
 
+;;; flycheck
+(use-package flycheck
+  :init
+  (global-flycheck-mode))
+
 ;;; mykie
 (use-package mykie
   :config
@@ -566,6 +571,14 @@
   (bind-keys :map rust-mode-map
              ("TAB" . company-indent-or-complete-common))
   (setq company-tooltip-align-annotations t))
+
+(use-package cargo
+  :config
+  (add-hook 'rust-mode-hook 'cargo-minor-mode))
+
+(use-package flycheck-rust
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
