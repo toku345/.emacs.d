@@ -539,8 +539,6 @@
 ;;;
 ;;; python
 ;;;
-
-
 (use-package company-jedi
   :config
   (defun my/python-mode-hook ()
