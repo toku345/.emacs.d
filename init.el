@@ -568,7 +568,9 @@
   (add-hook 'racer-mode-hook #'company-mode)
   (bind-keys :map rust-mode-map
              ("TAB" . company-indent-or-complete-common))
-  (setq company-tooltip-align-annotations t))
+  (setq company-tooltip-align-annotations t
+        racer-cmd "~/.cargo/bin/racer"
+        racer-rust-src-path (getenv "RACER_RUST_SRC_PATH")))
 
 (use-package cargo
   :config
