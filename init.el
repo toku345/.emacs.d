@@ -570,7 +570,7 @@
              ("TAB" . company-indent-or-complete-common))
   (setq company-tooltip-align-annotations t
         racer-cmd "~/.cargo/bin/racer"
-        racer-rust-src-path (getenv "RACER_RUST_SRC_PATH")))
+        racer-rust-src-path (getenv "RACER_RUST_SRC_PATH"))) ; Add `export RACER_RUST_SRC_PATH="~/works/github/rust/src"` to .zshenv!
 
 (use-package cargo
   :config
