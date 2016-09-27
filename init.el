@@ -133,18 +133,18 @@
                 scroll-bar-mode))
   (when (fboundp mode) (funcall mode -1)))
 
-;;; summarye
-(use-package summarye
-  :config
-  (bind-keys :map global-map
-             ("C-o" . se/make-summary-buffer)))
+;; ;;; summarye
+;; (use-package summarye
+;;   :config
+;;   (bind-keys :map global-map
+;;              ("C-o" . se/make-summary-buffer)))
 
-;;; undo-tree
-(use-package undo-tree
-  :config
-  (global-undo-tree-mode t)
-  (bind-keys :map global-map
-             ("C-'" . redo)))
+;; ;;; undo-tree
+;; (use-package undo-tree
+;;   :config
+;;   (global-undo-tree-mode t)
+;;   (bind-keys :map global-map
+;;              ("C-'" . redo)))
 
 ;;; ediff
 (use-package ediff
@@ -176,15 +176,15 @@
 ;;; paradox
 (use-package paradox)
 
-;;; quelpa
-(use-package quelpa
-  :init
-  (package-initialize)
-  (if (require 'quelpa nil t)
-      (quelpa-self-upgrade)
-    (with-temp-buffer
-      (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
-      (eval-buffer))))
+;; ;;; quelpa
+;; (use-package quelpa
+;;   :init
+;;   (package-initialize)
+;;   (if (require 'quelpa nil t)
+;;       (quelpa-self-upgrade)
+;;     (with-temp-buffer
+;;       (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+;;       (eval-buffer))))
 
 ;;; executable-make-buffer-file-executable-if-script-p
 ;; ファイル名が #! から始まる場合、+xをつけて保存する
@@ -476,18 +476,18 @@
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
-(use-package ruby-block)
-(use-package ruby-electric)
+;; (use-package ruby-block)
+;; (use-package ruby-electric)
 
-(defun my/ruby-mode-hook ()
-  (ruby-electric-mode t)
-  (when (require 'ruby-block nil t)
-    (setq ruby-block-highlight-toggle t)
-    (ruby-block-mode t)))
+;; (defun my/ruby-mode-hook ()
+;;   (ruby-electric-mode t)
+;;   (when (require 'ruby-block nil t)
+;;     (setq ruby-block-highlight-toggle t)
+;;     (ruby-block-mode t)))
 
 (use-package ruby-mode
   :init
-  (add-hook 'ruby-mode-hook #'my/ruby-mode-hook)
+  ;; (add-hook 'ruby-mode-hook #'my/ruby-mode-hook)
   (custom-set-variables
    '(ruby-insert-encoding-magic-comment nil)))
 
@@ -559,7 +559,7 @@
 ;;;
 ;;; rust
 ;;;
-(use-package rust-mode)
+;; (use-package rust-mode)
 
 (use-package racer
   :config
@@ -576,9 +576,9 @@
   :config
   (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
-(use-package flycheck-rust
-  :config
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+;; (use-package flycheck-rust
+;;   :config
+;;   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
