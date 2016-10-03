@@ -194,6 +194,11 @@
 ;;; global-auto-revert-mode
 (global-auto-revert-mode 1)
 
+;;; edit-server
+(use-package edit-server
+  :init
+  (edit-server-start))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; emacs appearance settings
