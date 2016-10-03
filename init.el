@@ -197,7 +197,9 @@
 ;;; edit-server
 (use-package edit-server
   :init
-  (edit-server-start))
+  (edit-server-start)
+  :config
+  (setq edit-server-new-frame nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -585,6 +587,14 @@
 ;;   :config
 ;;   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; wiki
+;;;
+(use-package mediawiki)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; backup & auto saving
@@ -612,3 +622,31 @@
           (lambda ()
             (message "init time: %.3f sec"
                      (float-time (time-subtract after-init-time before-init-time)))))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(avy-migemo-function-names
+   (quote
+    (swiper--add-overlays-migemo ivy--regex-migemo ivy--format-minibuffer-line-migemo avy-migemo-goto-char avy-migemo-goto-char-2 avy-migemo-goto-char-in-line avy-migemo-goto-char-timer avy-migemo-goto-subword-1 avy-migemo-goto-word-1 avy-migemo-isearch avy-migemo--overlay-at avy-migemo--overlay-at-full)))
+ '(js-indent-level 2)
+ '(js2-bounce-indent-p nil)
+ '(jsx-indent-level 2)
+ '(mediawiki-debug t)
+ '(mediawiki-site-alist
+   (quote
+    (("hacosco" "http://ec2-52-198-39-164.ap-northeast-1.compute.amazonaws.com/" "toku345" "bt205045wk" "Main Page"))))
+ '(mediawiki-site-default "hacosco")
+ '(package-selected-packages
+   (quote
+    (wikipedia wikipedia-mode mediawiki wiki-mode wiki edit-server cargo racer ein company-jedi coffee-mode json-mode js2-mode markdown-mode scss-mode web-mode yaml-mode slim-mode clj-refactor cider-eval-sexp-fu cider clojure-mode rainbow-delimiters paredit helm-projectile helm-swoop helm-descbinds helm-ls-git helm-ag avy-migemo swiper ivy migemo zenburn-theme paradox git-gutter projectile company yasnippet mykie flycheck elscreen magit exec-path-from-shell use-package)))
+ '(paradox-github-token t)
+ '(ruby-insert-encoding-magic-comment nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
