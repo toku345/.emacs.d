@@ -155,7 +155,13 @@
 ;;; dired
 (setq dired-dwim-target t ; diredを2つのウィンドウで開いている時に、デフォルトの移動orコピー先をもう一方のdiredで開いているディレクトリにする
       dired-recursive-copies 'always
-      dired-isearch-filenames t)
+      dired-isearch-filenames t
+      dired-use-ls-dired t)
+
+;; macOS の `ls` コマンドだとオプションに対応していないので coreutils内の `gls` を使うようにする
+;; http://qiita.com/maangie/items/5a80ae50c13d14368a72
+(let ((gls "/usr/local/bin/gls"))
+  (if (file-exists-p gls) (setq insert-directory-program gls)))
 
 ;;; git-gutter
 (use-package git-gutter
