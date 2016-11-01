@@ -368,6 +368,8 @@
         )
   (helm-migemo-mode 1))
 
+(use-package helm-ghq)
+
 (use-package helm
   :config
   (setq helm-quick-update t
