@@ -147,11 +147,11 @@
 ;;              ("C-o" . se/make-summary-buffer)))
 
 ;; ;;; undo-tree
-;; (use-package undo-tree
-;;   :config
-;;   (global-undo-tree-mode t)
-;;   (bind-keys :map global-map
-;;              ("C-'" . redo)))
+(use-package undo-tree
+  :config
+  (global-undo-tree-mode t)
+  (bind-keys :map global-map
+             ("C-'" . redo)))
 
 ;;; ediff
 (use-package ediff
