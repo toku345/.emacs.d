@@ -1,5 +1,9 @@
-;; -*- mode: Emacs-Lisp ; Coding: utf-8 -*-
-(set-language-environment "UTF-8")
+;;; init.el --- initialize emacs
+;;; -*- mode: Emacs-Lisp ; Coding: utf-8 -*-
+;;; Commentary:
+;;; This is init.el.
+
+;;; Code:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -22,6 +26,9 @@
 ;;;
 ;;; basic configurations
 ;;;
+
+(set-language-environment "UTF-8")
+
 
 ;;; enable use-package
 (require 'use-package)
@@ -678,3 +685,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(provide 'init)
+;;; init.el ends here
