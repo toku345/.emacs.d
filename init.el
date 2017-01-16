@@ -458,11 +458,13 @@
 
 (use-package cider
   :init
-  (add-hook 'cider-mode-hook #'clj-refactor-mode)
+  ;; (add-hook 'cider-mode-hook #'clj-refactor-mode)
   (add-hook 'cider-mode-hook #'company-mode)
   (add-hook 'cider-repl-mode-hook #'company-mode)
   (add-hook 'cider-repl-mode-hook #'my/lisp-mode-hook)
+
   :diminish subword-mode
+
   :config
   (setq nrepl-log-messages t
         cider-repl-display-in-current-window t
@@ -470,13 +472,18 @@
         cider-prompt-save-file-on-load 'always-save
         cider-font-lock-dynamically '(macro core function var)
         cider-overlays-use-font-lock t)
-  (cider-repl-toggle-pretty-printing))
+  (cider-repl-toggle-pretty-printing)
+  ;; Config for re-frame
+  ;; Navigate to a clojurescript file and start a figwheel REPL with cider-jack-in-clojurescript or (C-c M-J)
+  ;; https://github.com/Day8/re-frame-template#development-mode
+  (setq cider-cljs-lein-repl "(do (use 'figwheel-sidecar.repl-api) (start-figwheel!) (cljs-repl))"))
 
-(use-package cider-eval-sexp-fu)
+;; (use-package cider-eval-sexp-fu)
 
-(use-package clj-refactor
-  :diminish clj-refactor-mode
-  :config (cljr-add-keybindings-with-prefix "C-c j"))
+;; (use-package clj-refactor
+;;   :diminish clj-refactor-mode
+;;   :config (cljr-add-keybindings-with-prefix "C-c j"))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
