@@ -522,11 +522,21 @@
 ;;     (setq ruby-block-highlight-toggle t)
 ;;     (ruby-block-mode t)))
 
+(use-package rubocop
+  :config
+  (add-hook 'rubocop-mode-hook 'rubocop-mode))
+
 (use-package ruby-mode
   :init
   ;; (add-hook 'ruby-mode-hook #'my/ruby-mode-hook)
   (custom-set-variables
-   '(ruby-insert-encoding-magic-comment nil)))
+   '(ruby-insert-encoding-magic-comment nil))
+  :config
+  (add-hook 'ruby-mode-hook
+          '(lambda ()
+             (setq flycheck-checker 'ruby-rubocop)
+             (flycheck-mode 1))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
