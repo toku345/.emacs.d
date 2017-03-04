@@ -151,8 +151,9 @@
 ;;   (bind-keys :map global-map
 ;;              ("C-o" . se/make-summary-buffer)))
 
-;; ;;; undo-tree
+;;; undo-tree
 (use-package undo-tree
+  :pin melpa
   :config
   (global-undo-tree-mode t)
   (bind-keys :map global-map
