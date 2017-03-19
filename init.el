@@ -576,6 +576,12 @@
   (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
   (add-hook 'json-mode-hook #'company-mode))
 
+(use-package babel
+  :pin
+  melpa-stable
+  :init
+  (add-to-list 'auto-mode-alist '("\\.babelrc$" . json-mode)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; coffescript
