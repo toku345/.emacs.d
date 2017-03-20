@@ -582,6 +582,10 @@
   :init
   (add-to-list 'auto-mode-alist '("\\.babelrc$" . json-mode)))
 
+(use-package vue-mode
+ :pin
+ melpa)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; coffescript
