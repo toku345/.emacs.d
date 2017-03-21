@@ -565,6 +565,8 @@
    '(js2-basic-offset 2)
    '(js2-bounce-indent-p nil)
    '(jsx-indent-level 2))
+  (setq js2-strict-missing-semi-warning nil
+        js2-missing-semi-one-line-override t)
   :pin melpa-stable)
 
 ;;; json
