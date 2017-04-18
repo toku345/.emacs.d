@@ -687,11 +687,15 @@
 ;;;
 ;;; PlantUML
 ;;;
-;; (use-package plantuml-mode
-;;   :config
-;;   (add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
-;;   (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
-;;   (setq plantuml-java-args "/usr/local/bin/plantuml"))
+(use-package plantuml-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
+  (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+  ;; (setq plantuml-jar-path (getenv "PLANTUML_JAR_PATH"))
+  (setq plantuml-jar-path "~/bin/plantuml.jar"))
+
+(use-package flycheck-plantuml
+  :pin melpa)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
