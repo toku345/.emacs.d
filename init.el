@@ -545,6 +545,15 @@
              (setq flycheck-checker 'ruby-rubocop)
              (flycheck-mode 1))))
 
+(use-package ruby-electric
+  :pin melpa
+  :config
+  (add-hook 'ruby-mode-hook 'ruby-electric-mode))
+
+(use-package ruby-refactor
+  :pin melpa
+  :config
+  (add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
