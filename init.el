@@ -292,6 +292,11 @@
   (let ((global-hl-line-mode t))
     (global-hl-line-highlight)))
 
+;;; highlight-symbol
+(use-package highlight-symbol
+  :config
+  (setq highlight-symbol-idle-delay 0.1))
+
 
 ;;; region background color
 (set-face-background 'region "dark green")
@@ -470,7 +475,9 @@
   :init
   (add-hook 'clojure-mode-hook #'yas-minor-mode)
   (add-hook 'clojure-mode-hook #'subword-mode)
-  (add-hook 'clojure-mode-hook #'my/lisp-mode-hook))
+  (add-hook 'clojure-mode-hook #'my/lisp-mode-hook)
+  (add-hook 'clojure-mode-hook 'highlight-symbol-mode)
+  (add-hook 'clojure-mode-hook 'highlight-symbol-nav-mode))
 
 (use-package cider
   :init
@@ -543,7 +550,9 @@
   (add-hook 'ruby-mode-hook
           '(lambda ()
              (setq flycheck-checker 'ruby-rubocop)
-             (flycheck-mode 1))))
+             (flycheck-mode 1)))
+  (add-hook 'ruby-mode-hook 'highlight-symbol-mode)
+  (add-hook 'ruby-mode-hook 'highlight-symbol-nav-mode))
 
 (use-package ruby-electric
   :pin melpa
