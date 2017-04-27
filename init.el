@@ -56,7 +56,11 @@
              ("C-c l" . toggle-truncate-lines)
              ("C-t" . other-window)
              ("C-x ?" . help-command)
-             ("C-x SPC" . cua-rectangle-mark-mode)))
+             ("C-x SPC" . cua-rectangle-mark-mode)
+             ("M-n" . (lambda () (interactive) (scroll-up 1))) ; http://dev.classmethod.jp/devenv/emacs-settings/
+             ("M-p" . (lambda () (interactive) (scroll-down 1)))
+             ("M-[" . switch-to-prev-buffer)
+             ("M-]" . switch-to-next-buffer)))
 
 ;;; delete selection mode
 (delete-selection-mode t)
