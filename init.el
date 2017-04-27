@@ -150,11 +150,12 @@
                 scroll-bar-mode))
   (when (fboundp mode) (funcall mode -1)))
 
-;; ;;; summarye
-;; (use-package summarye
-;;   :config
-;;   (bind-keys :map global-map
-;;              ("C-o" . se/make-summary-buffer)))
+;;; summarye
+(use-package summarye
+  :config
+  (bind-keys :map global-map
+             ("C-o" . se/make-summary-buffer))
+  :pin melpa)
 
 ;;; undo-tree
 (use-package undo-tree
