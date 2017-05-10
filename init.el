@@ -70,6 +70,10 @@
   (progn
     (server-start)))
 
+;;; C-k (kill-line) => kill entire line (with return code)
+;;; https://emacs.stackexchange.com/a/2348
+(setq kill-whole-line t)
+
 ;;; magit
 (use-package magit
   :bind (("C-x M-g" . magit-dispatch-popup)
