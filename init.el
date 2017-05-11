@@ -47,6 +47,24 @@
 ;;   (when (memq window-system '(mac ns))
 ;;     (exec-path-from-shell-initialize)))
 
+
+;;; Move Current Line Up or Down
+;;; http://emacsredux.com/blog/2013/04/02/move-current-line-up-or-down/
+(defun move-line-up ()
+  "Move up the current line."
+  (interactive)
+  (transpose-lines 1)
+  (forward-line -2)
+  (indent-according-to-mode))
+
+(defun move-line-down ()
+  "Move down the current line."
+  (interactive)
+  (forward-line 1)
+  (transpose-lines 1)
+  (forward-line -1)
+  (indent-according-to-mode))
+
 ;;; global keymap
 (use-package bind-key
   :config
@@ -60,7 +78,9 @@
              ("M-n" . (lambda () (interactive) (scroll-up 1))) ; http://dev.classmethod.jp/devenv/emacs-settings/
              ("M-p" . (lambda () (interactive) (scroll-down 1)))
              ("M-[" . switch-to-prev-buffer)
-             ("M-]" . switch-to-next-buffer)))
+             ("M-]" . switch-to-next-buffer)
+             ("C-c C-p" . move-line-up)
+             ("C-c C-n" . move-line-down)))
 
 ;;; delete selection mode
 (delete-selection-mode t)
