@@ -37,15 +37,11 @@
 (setq use-package-always-pin "melpa-stable")
 (setq use-package-verbose t)
 
-;; ;;; setup exec-path
-;; (use-package exec-path-from-shell
-;;   :pin melpa
-;;   ;; :config
-;;   ;; (setq exec-path-from-shell-debug t)
-;;   :init
-;;   (setq exec-path-from-shell-debug t)
-;;   (when (memq window-system '(mac ns))
-;;     (exec-path-from-shell-initialize)))
+;;; setup exec-path
+(use-package exec-path-from-shell
+  :init
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize)))
 
 
 ;;; Move Current Line Up or Down
