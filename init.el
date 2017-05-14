@@ -38,6 +38,7 @@
 (setq use-package-verbose t)
 
 ;;; setup exec-path
+;;; https://github.com/purcell/exec-path-from-shell/blob/master/exec-path-from-shell.el#L88-L89
 (use-package exec-path-from-shell
   :init
   (when (memq window-system '(mac ns))
@@ -738,6 +739,17 @@
 (use-package csv-mode
   :pin elpa)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; esa
+;;;
+(use-package esa
+  :pin melpa
+  :config
+  (setq esa-token (getenv "ESA_ACCESS_TOKEN")
+        esa-team-name (getenv "ESA_TEAM_NAME")))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; backup & auto saving
