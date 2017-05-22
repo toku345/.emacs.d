@@ -576,6 +576,7 @@
   (add-hook 'ruby-mode-hook
           '(lambda ()
              (setq flycheck-checker 'ruby-rubocop)
+             (setq-default flycheck-disabled-checkers '(ruby-rubylint))
              (flycheck-mode 1)))
   (add-hook 'ruby-mode-hook 'highlight-symbol-mode)
   (add-hook 'ruby-mode-hook 'highlight-symbol-nav-mode))
