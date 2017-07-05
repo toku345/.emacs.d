@@ -751,6 +751,15 @@
         esa-team-name (getenv "ESA_TEAM_NAME")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; apib-mode
+;;;
+(use-package apib-mode
+  :pin melpa
+  :config
+  (add-to-list 'auto-mode-alist '("\\.apib\\'" . apib-mode))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; backup & auto saving
