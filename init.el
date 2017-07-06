@@ -757,7 +757,7 @@
 (use-package apib-mode
   :pin melpa
   :config
-  (add-to-list 'auto-mode-alist '("\\.apib\\'" . apib-mode))
+  (add-to-list 'auto-mode-alist '("\\.apib\\'" . apib-mode)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
