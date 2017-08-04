@@ -522,12 +522,16 @@
         cider-font-lock-dynamically '(macro core function var)
         cider-overlays-use-font-lock t)
   (cider-repl-toggle-pretty-printing)
+
   ;; Configure for figwheel
   ;; https://github.com/bhauman/lein-figwheel/wiki/Using-the-Figwheel-REPL-within-NRepl#integration-with-emacscider
-  (setq cider-cljs-lein-repl
-        "(do (require 'figwheel-sidecar.repl-api)
-             (figwheel-sidecar.repl-api/start-figwheel!)
-             (figwheel-sidecar.repl-api/cljs-repl)"))
+  ;; !! ↓ Doesn't work properly... ↓ !!
+  ;; (setq cider-cljs-lein-repl
+  ;;       "(do (require 'figwheel-sidecar.repl-api)
+  ;;            (figwheel-sidecar.repl-api/start-figwheel!)
+  ;;            (figwheel-sidecar.repl-api/cljs-repl)")
+  ;; https://github.com/Day8/re-frame-template#development-mode
+  (setq cider-cljs-lein-repl "(do (use 'figwheel-sidecar.repl-api) (start-figwheel!) (cljs-repl))"))
 
 ;; (use-package cider-eval-sexp-fu)
 
