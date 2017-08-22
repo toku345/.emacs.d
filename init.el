@@ -535,10 +535,28 @@
 
 ;; (use-package cider-eval-sexp-fu)
 
-;; (use-package clj-refactor
-;;   :diminish clj-refactor-mode
-;;   :config (cljr-add-keybindings-with-prefix "C-c j"))
+(use-package flycheck-clojure
+  :init
+  (eval-after-load 'flycheck '(flycheck-clojure-setup))
+  (add-hook 'after-init-hook #'global-flycheck-mode))
 
+(use-package flycheck-pos-tip
+  :init
+  (eval-after-load 'flycheck
+  '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
+
+(defun my/clojure-mode-hook ()
+  "Hook for clojure mode."
+  (clj-refactor-mode 1)
+  (yas-minor-mode 1)
+  (cljr-add-keybindings-with-prefix "C-c j"))
+
+(use-package clj-refactor
+  :config
+  (add-hook 'clojure-mode-hook #'my/clojure-mode-hook))
+
+(use-package cljr-helm
+  :bind (("C-c r" . cljr-helm)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
