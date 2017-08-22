@@ -47,6 +47,9 @@ projectile.cache
 recentf
 quelpa
 
+# local custom-set-variables
+custom.el
+
 ### OSX ###
 .DS_Store
 .AppleDouble
