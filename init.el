@@ -564,6 +564,10 @@
 (use-package cljr-helm
   :bind (("C-c r" . cljr-helm)))
 
+(use-package helm-cider
+  :init
+  (helm-cider-mode 1))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; ruby
