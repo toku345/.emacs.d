@@ -548,13 +548,14 @@
 ;;   :init
 ;;   (eval-after-load 'flycheck
 ;;   '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
-;;
-;; (defun my/clojure-mode-hook ()
-;;   "Hook for clojure mode."
-;;   (clj-refactor-mode 1)
-;;   (yas-minor-mode 1)
-;;   (cljr-add-keybindings-with-prefix "C-c j")
-;;   (setq-default flycheck-disabled-checkers '(clojure-cider-eastwood)))
+
+(defun my/clojure-mode-hook ()
+  "Hook for clojure mode."
+  (clj-refactor-mode 1)
+  (yas-minor-mode 1)
+  (cljr-add-keybindings-with-prefix "C-c j")
+  ;; (setq-default flycheck-disabled-checkers '(clojure-cider-eastwood))
+  )
 
 (use-package clj-refactor
   :config
