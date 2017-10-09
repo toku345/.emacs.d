@@ -506,7 +506,19 @@
   (add-hook 'clojure-mode-hook #'subword-mode)
   (add-hook 'clojure-mode-hook #'my/lisp-mode-hook)
   (add-hook 'clojure-mode-hook 'highlight-symbol-mode)
-  (add-hook 'clojure-mode-hook 'highlight-symbol-nav-mode))
+  (add-hook 'clojure-mode-hook 'highlight-symbol-nav-mode)
+  :config
+  (define-clojure-indent
+    ;; Settings for Compojure
+    ;; https://github.com/weavejester/compojure/wiki/Emacs-indentation
+    (defroutes 'defun)
+    (GET 2)
+    (POST 2)
+    (PUT 2)
+    (DELETE 2)
+    (HEAD 2)
+    (ANY 2)
+    (context 2)))
 
 (use-package cider
   :init
