@@ -595,7 +595,8 @@
         web-mode-style-padding 2
         web-mode-code-indent-offset 2
         web-mode-script-padding 2
-        web-mode-block-padding 2)
+        web-mode-block-padding 2
+        web-mode-enable-engine-detection t)
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
