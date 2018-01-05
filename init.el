@@ -82,6 +82,9 @@
 ;;; delete selection mode
 (delete-selection-mode t)
 
+;;; electric-pair-mode: set globally
+(electric-pair-mode t)
+
 ;;; GUI only
 (when (memq window-system '(mac ns))
   (progn
