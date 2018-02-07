@@ -384,6 +384,9 @@
 ;;   (avy-migemo-mode 1)
 ;;   (require 'avy-migemo-e.g.swiper))
 
+;;; wgrep
+(use-package wgrep)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; helm
