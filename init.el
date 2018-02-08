@@ -644,6 +644,12 @@
   :config
   (add-hook 'ruby-mode-hook 'ruby-refactor-mode-launch))
 
+(use-package robe
+  :config
+  (add-hook 'ruby-mode-hook 'robe-mode)
+  (eval-after-load 'company
+    '(push 'company-robe company-backends)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; stylesheet
