@@ -258,7 +258,7 @@
 ;;; imenu-list
 (use-package imenu-list
   :bind
-  ("C-'" . imenu-list-smart-toggle))
+  ("C-o" . imenu-list-smart-toggle))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
