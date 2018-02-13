@@ -136,7 +136,8 @@
              ("<tab>" . nil)
              ("TAB" . nil)
              ("C-i" . nil)
-             ("C-o" . yas/expand)))
+             ;; ("C-o" . yas/expand)
+             ))
 
 ;;; company-mode
 (use-package company
