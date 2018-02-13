@@ -177,13 +177,6 @@
                 scroll-bar-mode))
   (when (fboundp mode) (funcall mode -1)))
 
-;;; summarye
-(use-package summarye
-  :config
-  (bind-keys :map global-map
-             ("C-o" . se/make-summary-buffer))
-  :pin melpa)
-
 ;;; undo-tree
 (use-package undo-tree
   :pin melpa
@@ -261,6 +254,11 @@
          ("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
          ("C-c C-<" . mc/mark-all-like-this)))
+
+;;; imenu-list
+(use-package imenu-list
+  :bind
+  ("C-'" . imenu-list-smart-toggle))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
