@@ -603,7 +603,7 @@
 (if (file-exists-p "~/.roswell/helper.el")
     (progn
       (load (expand-file-name "~/.roswell/helper.el"))
-      (add-hook 'slime-mode-hook #'my/lisp-mode-hook)))
+      (add-hook 'sly-mode-hook #'my/lisp-mode-hook)))
 (use-package sly-company
   :init
   (add-hook 'sly-mode-hook 'sly-company-mode)
