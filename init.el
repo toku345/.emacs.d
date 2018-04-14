@@ -180,7 +180,7 @@
 
 ;;; undo-tree
 (use-package undo-tree
-  :pin melpa
+  :pin elpa
   :config
   (global-undo-tree-mode t)
   (bind-keys :map global-map
