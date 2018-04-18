@@ -335,19 +335,24 @@
 ;;; modeline
 (display-time-mode t)
 
-;; show line nums & word count in region when the range specification
-(add-to-list 'default-mode-line-format
-             '(:eval (count-lines-and-chars)))
+;; smart-mode-line
+;;   https://qiita.com/blue0513/items/99476f4ae51f17600636
+(use-package smart-mode-line
+  :init
+  (setq sml/no-confirm-load-theme t)
+  (setq sml/theme 'respectful)
+  (setq sml/shorten-directory -1) ; Full path
+  (sml/setup)
+  :config
+  (column-number-mode t)
+  (line-number-mode) t)
+;; diminish
+(use-package diminish
+  :init
+  (eval-after-load "company" '(diminish 'company-mode "Comp"))  ;; Minor Mode名を変更
+  (eval-after-load "ivy" '(diminish 'ivy-mode))) ;; Minor mode 非表示
 
-;; http://d.hatena.ne.jp/sonota88/20110224/1298557375
-(defun count-lines-and-chars ()
-  (if mark-active
-      (format "%d lines, %d chars "
-              (count-lines (region-beginning) (region-end))
-              (- (region-end) (region-beginning)))
-    ;; これだとエコーエリアがチラつく
-    ;; (count-lines-region (region-beginning) (region-end))
-    ""))
+; Count the number of lines / chars in the region: => M-= (count-words-region)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
