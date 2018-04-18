@@ -205,7 +205,7 @@
 
 ;;; git-gutter
 (use-package git-gutter
-  :bind (("C-x C-g" . git-gutter:toggle)
+  :bind (("C-x C-g" . git-gutter-mode)
          ("C-x v =" . git-gutter:popup-hunk)
          ;; Jump to next/previous hunk
          ("C-x p" . git-gutter:previous-hunk)
