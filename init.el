@@ -572,7 +572,6 @@
 (defun my/clojure-mode-hook ()
   "Hook for clojure mode."
   (yas-minor-mode 1)
-  (cljr-add-keybindings-with-prefix "C-c j")
   ;; (setq-default flycheck-disabled-checkers '(clojure-cider-eastwood))
   )
 
