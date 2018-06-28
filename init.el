@@ -714,6 +714,13 @@
   (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
   (add-hook 'json-mode-hook #'company-mode))
 
+;;; JSON Reformat
+;;; https://qiita.com/saku/items/d97e930ffc9ca39ac976
+(defun jq-format (beg end)
+  "Reformat by jq"
+  (interactive "r")
+  (shell-command-on-region beg end "jq ." nil t))
+
 (use-package babel
   :pin
   melpa-stable
