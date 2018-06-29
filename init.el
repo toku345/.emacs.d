@@ -390,6 +390,12 @@
 ;;; wgrep
 (use-package wgrep)
 
+;;; quick-preview
+(use-package quick-preview
+  :pin melpa
+  :bind ("C-c q" . 'quick-preview-at-point)
+  :config (define-key dired-mode-map (kbd "Q") 'quick-preview-at-point))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; helm
