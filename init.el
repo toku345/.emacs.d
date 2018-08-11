@@ -716,6 +716,7 @@
   :config
   (setq js-indent-level 2
         tab-width 2)
+  (setq-default flycheck-disabled-checkers '(json-python-json))
   :init
   (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
   (add-hook 'json-mode-hook #'company-mode))
