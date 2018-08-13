@@ -890,6 +890,12 @@
             ;; use code format
             (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
 
+;;; groovy
+(use-package groovy-mode)
+
+;;; gradle
+(use-package gradle-mode)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; ABC
