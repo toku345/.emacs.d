@@ -615,8 +615,12 @@
 ;;; ruby
 ;;;
 
-(use-package slim-mode)
-(use-package yaml-mode)
+(use-package slim-mode
+  :config
+  (add-hook 'slim-mode-hook #'display-line-numbers-mode))
+(use-package yaml-mode
+  :config
+  (add-hook 'yaml-mode-hook #'display-line-numbers-mode))
 (use-package web-mode
   :config
   (setq-default indent-tabs-mode nil)
@@ -654,7 +658,8 @@
           '(lambda ()
              (setq flycheck-checker 'ruby-rubocop)
              (setq-default flycheck-disabled-checkers '(ruby-rubylint))
-             (flycheck-mode 1)))
+             (flycheck-mode 1)
+             (display-line-numbers-mode t)))
   (add-hook 'ruby-mode-hook 'highlight-symbol-mode)
   (add-hook 'ruby-mode-hook 'highlight-symbol-nav-mode))
 
@@ -742,7 +747,9 @@
 ;;;
 ;;; coffescript
 ;;;
-(use-package coffee-mode)
+(use-package coffee-mode
+  :config
+  (add-hook 'coffee-mode-hook #'display-line-numbers-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
