@@ -516,6 +516,7 @@
 ;;;
 
 (use-package clojure-mode
+  :pin melpa
   :init
   (add-hook 'clojure-mode-hook #'yas-minor-mode)
   (add-hook 'clojure-mode-hook #'subword-mode)
@@ -536,6 +537,7 @@
     (context 2)))
 
 (use-package cider
+  :pin melpa
   :init
   (add-hook 'cider-mode-hook #'company-mode)
   (add-hook 'cider-repl-mode-hook #'company-mode)
@@ -549,7 +551,8 @@
         cider-repl-use-clojure-font-lock t
         cider-save-file-on-load 'always-save
         cider-font-lock-dynamically '(macro core function var)
-        cider-overlays-use-font-lock t)
+        cider-overlays-use-font-lock t
+        cider-repl-toggle-pretty-printing t)
   (cider-repl-toggle-pretty-printing)
 
   ;; Configure for figwheel
