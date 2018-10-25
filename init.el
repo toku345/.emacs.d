@@ -594,6 +594,9 @@
 ;;; scheme
 ;;;
 (use-package geiser
+  :init
+  (add-hook 'geiser-mode-hook #'my/lisp-mode-hook)
+  (add-hook 'geiser-repl-mode-hook #'my/lisp-mode-hook)
   :config
   (setq geiser-active-implementations '(racket)))
 
