@@ -39,10 +39,10 @@
 ;;; setup exec-path
 ;;; https://github.com/purcell/exec-path-from-shell/blob/master/exec-path-from-shell.el#L88-L89
 (use-package exec-path-from-shell
-  :init
-  (when (memq window-system '(mac ns))
-    (exec-path-from-shell-initialize)))
-
+  :if (memq window-system '(mac ns))
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize))
 
 ;;; Move Current Line Up or Down
 ;;; http://emacsredux.com/blog/2013/04/02/move-current-line-up-or-down/
