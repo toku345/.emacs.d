@@ -1,4 +1,9 @@
 projectile-bookmarks.eld
+.python-environments
+eww-bookmarks
+meghanada
+network-security.data
+url
 
 # Created by https://www.gitignore.io/api/emacs,osx,linux,elisp
 
