@@ -720,6 +720,7 @@
    '(jsx-indent-level 2))
   (setq js2-strict-missing-semi-warning nil
         js2-missing-semi-one-line-override t)
+  (setq-default flycheck-disabled-checkers '(javascript-jshint))
   :pin melpa-stable)
 
 ;;; json
