@@ -792,8 +792,7 @@
   (bind-keys :map rust-mode-map
              ("TAB" . company-indent-or-complete-common))
   (setq company-tooltip-align-annotations t
-        racer-cmd "~/.cargo/bin/racer"
-        racer-rust-src-path (getenv "RACER_RUST_SRC_PATH"))) ; Add `export RACER_RUST_SRC_PATH="~/works/github/rust/src"` to .zshenv!
+        racer-rust-src-path "~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src"))
 
 (use-package cargo
   :config
