@@ -111,6 +111,7 @@
 
 ;;; flycheck
 (use-package flycheck
+  :pin melpa
   :ensure t
   :init
   (global-flycheck-mode))
