@@ -475,10 +475,6 @@
            ("C-h" . delete-backward-char)
            ("TAB" . helm-execute-persistent-action))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; lisp
-;;;
 
 (use-package paredit
   :defer t
@@ -490,6 +486,14 @@
     (if (eq this-command 'eval-expression)
         (paredit-mode 1)))
   (add-hook 'minibuffer-setup-hook 'conditionally-enable-paredit-mode))
+
+(use-package smartparens)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; lisp
+;;;
 
 (use-package eldoc
   :defer t
