@@ -640,6 +640,14 @@
 ;;; web
 ;;;
 
+(use-package prettier-js
+  :pin melpa)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; web
+;;;
+
 (use-package web-mode
   :config
   (setq-default indent-tabs-mode nil)
@@ -653,7 +661,8 @@
   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-hook 'web-mode-hook #'prettier-js-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -707,7 +716,8 @@
 (use-package scss-mode
   :config
   (setq css-indent-offset 2
-        scss-compile-at-save nil))
+        scss-compile-at-save nil)
+  (add-hook 'css-mode-hook #'prettier-js-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -735,6 +745,7 @@
   (setq js2-strict-missing-semi-warning nil
         js2-missing-semi-one-line-override t)
   (setq-default flycheck-disabled-checkers '(javascript-jshint))
+  (add-hook 'js2-mode-hook #'prettier-js-mode)
   :pin melpa-stable)
 
 ;;; json
