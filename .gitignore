@@ -4,6 +4,7 @@ eww-bookmarks
 meghanada
 network-security.data
 url
+.lsp-session-*
 
 # Created by https://www.gitignore.io/api/emacs,osx,linux,elisp
 
