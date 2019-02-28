@@ -627,15 +627,19 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; ruby
+;;; yaml
 ;;;
 
-(use-package slim-mode
-  :config
-  (add-hook 'slim-mode-hook #'display-line-numbers-mode))
 (use-package yaml-mode
   :config
   (add-hook 'yaml-mode-hook #'display-line-numbers-mode))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; web
+;;;
+
 (use-package web-mode
   :config
   (setq-default indent-tabs-mode nil)
@@ -650,6 +654,16 @@
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; ruby
+;;;
+
+(use-package slim-mode
+  :config
+  (add-hook 'slim-mode-hook #'display-line-numbers-mode))
 ;; (use-package ruby-block)
 ;; (use-package ruby-electric)
 
