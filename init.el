@@ -664,14 +664,6 @@
 (use-package slim-mode
   :config
   (add-hook 'slim-mode-hook #'display-line-numbers-mode))
-;; (use-package ruby-block)
-;; (use-package ruby-electric)
-
-;; (defun my/ruby-mode-hook ()
-;;   (ruby-electric-mode t)
-;;   (when (require 'ruby-block nil t)
-;;     (setq ruby-block-highlight-toggle t)
-;;     (ruby-block-mode t)))
 
 (use-package rubocop
   :config
@@ -679,7 +671,6 @@
 
 (use-package ruby-mode
   :init
-  ;; (add-hook 'ruby-mode-hook #'my/ruby-mode-hook)
   (custom-set-variables
    '(ruby-insert-encoding-magic-comment nil))
   :config
