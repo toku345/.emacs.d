@@ -792,29 +792,13 @@
 ;;; rust
 ;;;
 (use-package rust-mode
-  :config
-  (setq rust-format-on-save t))
-
-(use-package racer
-  :config
-  (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'rust-mode-hook #'smartparens-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode)
-  (add-hook 'racer-mode-hook #'company-mode)
-  (bind-keys :map rust-mode-map
-             ("TAB" . company-indent-or-complete-common))
-  (setq company-tooltip-align-annotations t
-        racer-rust-src-path "~/.rustup/toolchains/stable-x86_64-apple-darwin/lib/rustlib/src/rust/src"))
-
-(use-package cargo
-  :config
-  (add-hook 'rust-mode-hook 'cargo-minor-mode))
-
-(use-package flycheck-rust
   :pin melpa
   :init
-  (with-eval-after-load 'rust-mode
-    (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
+  (setq rust-format-on-save t))
+
+(use-package cargo
+  :init
+  (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
