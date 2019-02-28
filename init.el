@@ -803,6 +803,30 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; lsp
+;;;
+(use-package lsp-mode
+  :pin melpa
+  :commands lsp
+  :init
+  (add-hook 'prog-mode-hook #'lsp)
+  :config
+  (setq lsp-print-io t
+        lsp-inhibit-message t
+        lsp-auto-guess-root t
+        lsp-prefer-flymake nil
+        lsp-enable-completion-at-point nil))
+
+(use-package lsp-ui :commands lsp-ui-mode :pin melpa)
+(use-package company-lsp
+  :commands company-lsp
+  :pin melpa
+  :config
+  (setq company-lsp-completion-cache 'auto))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; wiki
 ;;;
 (use-package mediawiki)
