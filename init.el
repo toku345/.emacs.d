@@ -617,10 +617,6 @@
     (progn
       (load (expand-file-name "~/.roswell/helper.el"))
       (add-hook 'sly-mode-hook #'my/lisp-mode-hook)))
-(use-package sly-company
-  :init
-  (add-hook 'sly-mode-hook 'sly-company-mode)
-  (add-to-list 'company-backends 'sly-company))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
