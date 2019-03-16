@@ -912,7 +912,7 @@
 ;;; SQL
 ;;;
 (use-package sql-indent
-  :pin melpa
+  :pin elpa
   :config
   (eval-after-load "sql"
     '(load-library "sql-indent")))
