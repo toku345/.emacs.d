@@ -842,7 +842,9 @@
         lsp-prefer-flymake nil
         lsp-enable-completion-at-point t))
 
-(use-package lsp-ui :commands lsp-ui-mode :pin melpa)
+(use-package lsp-ui
+  :pin melpa
+  :commands lsp-ui-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
