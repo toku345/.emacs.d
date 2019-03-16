@@ -825,14 +825,9 @@
         lsp-inhibit-message t
         lsp-auto-guess-root t
         lsp-prefer-flymake nil
-        lsp-enable-completion-at-point nil))
+        lsp-enable-completion-at-point t))
 
 (use-package lsp-ui :commands lsp-ui-mode :pin melpa)
-(use-package company-lsp
-  :commands company-lsp
-  :pin melpa
-  :config
-  (setq company-lsp-completion-cache 'auto))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
