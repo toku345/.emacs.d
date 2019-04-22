@@ -781,11 +781,6 @@
 ;;;
 ;;; python
 ;;;
-(use-package company-jedi
-  :config
-  (defun my/python-mode-hook ()
-    (add-to-list 'company-backends 'company-jedi))
-  (add-hook 'python-mode-hook 'my/python-mode-hook))
 
 (use-package pipenv
   :pin melpa
