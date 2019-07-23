@@ -5,6 +5,7 @@ meghanada
 network-security.data
 url
 .lsp-session-*
+image-dired
 
 # Created by https://www.gitignore.io/api/emacs,osx,linux,elisp
 
