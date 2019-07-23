@@ -784,6 +784,14 @@
 (use-package typescript-mode
   :pin melpa)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Angular
+;;;
+(use-package ng2-mode
+  :pin melpa
+  :config
+  (with-eval-after-load 'typescript-mode (add-hook 'typescript-mode-hook #'lsp)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
