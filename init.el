@@ -791,7 +791,9 @@
 (use-package ng2-mode
   :pin melpa
   :config
-  (with-eval-after-load 'typescript-mode (add-hook 'typescript-mode-hook #'lsp)))
+  (with-eval-after-load 'typescript-mode (add-hook 'typescript-mode-hook #'lsp))
+  (setq typescript-indent-level 2
+        sgml-basic-offse 2))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
