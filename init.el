@@ -36,6 +36,10 @@
 (setq use-package-always-pin "melpa-stable")
 (setq use-package-verbose t)
 
+(use-package use-package-ensure-system-package
+  :pin melpa
+  :ensure t)
+
 ;;; setup exec-path
 ;;; https://github.com/purcell/exec-path-from-shell/blob/master/exec-path-from-shell.el#L88-L89
 (use-package exec-path-from-shell
