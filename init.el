@@ -1012,6 +1012,33 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
+;;; Dart
+;;;
+(use-package dart-mode
+  :pin melpa
+  :hook (dart-mode . lsp)
+  :after lsp
+  :ensure-system-package (dart_language_server . "pub global activate dart_language_server")
+  :custom
+  (dart-format-on-save t)
+  (dart-sdk-path "~/flutter/bin/cache/dart-sdk/"))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Flutter
+;;;
+(use-package flutter
+  :pin melpa
+  :after dart-mode
+  :bind (:map dart-mode-map
+              ("C-M-x" . #'flutter-run-on-hot-reload))
+  :custom
+  (flutter-sdk-path "~/flutter/"))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; backup & auto saving
 ;;;
 ;; バックアップとオートセーブファイルを~/.emacs.d/backups/へ集める
