@@ -1017,11 +1017,14 @@
 (use-package dart-mode
   :pin melpa
   :hook (dart-mode . lsp)
-  :after lsp
+  :after (lsp projectile)
   :ensure-system-package (dart_language_server . "pub global activate dart_language_server")
   :custom
   (dart-format-on-save t)
-  (dart-sdk-path "~/flutter/bin/cache/dart-sdk/"))
+  (dart-sdk-path "~/flutter/bin/cache/dart-sdk/")
+  :config
+  (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
+  (add-to-list 'projectile-project-root-files-bottom-up "BUILD"))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
