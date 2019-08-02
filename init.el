@@ -1044,6 +1044,7 @@
 ;;; org-mode
 ;;;
 (use-package org
+  :after htmlize
   :bind
   (:map global-map
         ("C-c c" . #'org-capture)
@@ -1058,6 +1059,8 @@
    '(("n" "Note" entry
       (file+headline "~/works/org/notes.org" "Notes")
       "* %?\nEntered on %U\n%i\n%a"))))
+
+(use-package htmlize)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
