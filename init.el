@@ -1055,6 +1055,8 @@
   (org-directory "~/works/org")
   (org-default-notes-file "notes.org")
   (org-startup-with-inline-images t)
+  (org-html-doctype "html5")
+  (org-html-html5-fancy t)
   (org-capture-templates
    '(("n" "Note" entry
       (file+headline "~/works/org/notes.org" "Notes")
