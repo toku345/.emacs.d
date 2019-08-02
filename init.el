@@ -71,7 +71,7 @@
   (bind-keys :map global-map
              ("C-h" . delete-backward-char)
              ("C-m" . newline-and-indent)
-             ("C-c l" . toggle-truncate-lines)
+             ("C-c t" . toggle-truncate-lines)
              ("C-t" . other-window)
              ("C-x ?" . help-command)
              ("C-x SPC" . cua-rectangle-mark-mode)
