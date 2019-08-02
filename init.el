@@ -1039,6 +1039,26 @@
   :custom
   (flutter-sdk-path "~/flutter/"))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; org-mode
+;;;
+(use-package org
+  :bind
+  (:map global-map
+        ("C-c c" . #'org-capture)
+        ("C-c l" . #'org-store-link))
+  (:map org-mode-map
+        ("C-'" . #'redo)) ; org-agenda-sycle
+  :custom
+  (org-directory "~/works/org")
+  (org-default-notes-file "notes.org")
+  (org-startup-with-inline-images t)
+  (org-capture-templates
+   '(("n" "Note" entry
+      (file+headline "~/works/org/notes.org" "Notes")
+      "* %?\nEntered on %U\n%i\n%a"))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
