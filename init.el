@@ -413,7 +413,7 @@
   (setq helm-ag-base-command "ag --nocolor --nogrou --ignore-case"
         helm-ag-thing-at-point 'symbol)
   :bind (("C-c s" . helm-ag)
-         ("C-c t" . helm-ag-this-file)))
+         ("C-c f" . helm-ag-this-file)))
 
 (use-package helm-ls-git
   :bind ("C-x C-d" . helm-browse-project))
