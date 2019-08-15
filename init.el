@@ -360,6 +360,16 @@
 
 ; Count the number of lines / chars in the region: => M-= (count-words-region)
 
+(use-package dumb-jump
+  :pin melpa
+  :bind (("M-g o" . dumb-jump-go-other-window)
+         ("M-g j" . dumb-jump-go)
+         ("M-g q" . dumb-jump-quick-look))
+  :custom
+  (dumb-jump-selector 'helm)
+  :ensure)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; searching
