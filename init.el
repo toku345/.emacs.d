@@ -205,9 +205,6 @@
       dired-isearch-filenames t
       dired-use-ls-dired t)
 
-;;; ido-mode
-(ido-mode 1)
-
 ;; macOS の `ls` コマンドだとオプションに対応していないので coreutils内の `gls` を使うようにする
 ;; http://qiita.com/maangie/items/5a80ae50c13d14368a72
 (let ((gls "/usr/local/bin/gls"))
