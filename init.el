@@ -826,7 +826,8 @@
   :pin melpa
   :hook (python-mode . pipenv-mode)
   :init
-  (setq pipenv-projectile-after-switch-function  #'pipenv-projectile-after-switch-extended))
+  (setq pipenv-projectile-after-switch-function  #'pipenv-projectile-after-switch-extended)
+  (setq-default flycheck-disabled-checkers '(python-pycompile)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
