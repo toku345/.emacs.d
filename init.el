@@ -827,7 +827,7 @@
   :hook (python-mode . pipenv-mode)
   :init
   (setq pipenv-projectile-after-switch-function  #'pipenv-projectile-after-switch-extended)
-  (setq-default flycheck-disabled-checkers '(python-pycompile)))
+  (setq-default flycheck-disabled-checkers '(python-pycompile pylint)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
