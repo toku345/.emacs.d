@@ -857,22 +857,6 @@
   :init
   (add-hook 'rust-mode-hook 'cargo-minor-mode))
 
-(use-package racer
-  :pin melpa
-  :config
-  (add-hook 'rust-mode-hook #'racer-mode)
-  (add-hook 'rust-mode-hook #'smartparens-mode)
-  (add-hook 'racer-mode-hook #'eldoc-mode)
-  (add-hook 'racer-mode-hook #'company-mode)
-  (setq company-tooltip-align-annotations t)
-  :bind
-  (:map rust-mode-map
-        ("TAB" . company-indent-or-complete-common))
-  :init
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-copy-env "RUST_SRC_PATH")))
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; lsp
