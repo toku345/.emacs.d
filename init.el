@@ -878,11 +878,13 @@
   :init
   (add-hook 'prog-mode-hook #'lsp)
   :config
-  (setq lsp-print-io t
+  (setq lsp-log-io t
+        lsp-print-performance t
         lsp-inhibit-message t
         lsp-auto-guess-root t
-        lsp-prefer-flymake nil
-        lsp-enable-completion-at-point t))
+        lsp-prefer-flymake t
+        lsp-enable-completion-at-point t
+        lsp-report-if-no-buffer t))
 
 (use-package lsp-ui
   :pin melpa
