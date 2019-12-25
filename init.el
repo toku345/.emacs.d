@@ -118,8 +118,9 @@
 (use-package flycheck
   :pin melpa
   :ensure t
-  :init
-  (global-flycheck-mode))
+  ;; :init
+  ;; (global-flycheck-mode) ; disabled
+  )
 
 ;;; mykie
 (use-package mykie
