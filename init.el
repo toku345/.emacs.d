@@ -753,18 +753,10 @@
 ;;;
 ;;; javascript
 ;;;
-(use-package js2-mode
-  :pin melpa-stable
-  :config
-  (add-to-list 'auto-mode-alist '("\\.\\(js\\|jsx\\)$" . js2-mode))
-  (custom-set-variables
-   '(js2-basic-offset 2)
-   '(js2-bounce-indent-p nil)
-   '(jsx-indent-level 2))
-  (setq js2-strict-missing-semi-warning nil
-        js2-missing-semi-one-line-override t)
-  (setq-default flycheck-disabled-checkers '(javascript-jshint))
-  (add-hook 'js2-mode-hook #'prettier-js-mode))
+
+(eval-after-load 'js
+  (add-hook 'js-mode-hook #'prettier-js-mode))
+
 
 ;;; json
 (use-package json-mode
