@@ -993,9 +993,7 @@
 ;;;
 ;;; scala
 ;;;
-(use-package ensime
-  :ensure t
-  :pin melpa-stable)
+;;; Ensime -> Metals : https://scalameta.org/metals/docs/editors/emacs.html
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
