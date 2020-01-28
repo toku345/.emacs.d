@@ -269,6 +269,12 @@
   :bind
   ("C-o" . imenu-list-smart-toggle))
 
+;;; open-junk-file
+(use-package open-junk-file
+  :pin melpa
+  :bind
+  ("C-x j" . open-junk-file))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; emacs appearance settings
