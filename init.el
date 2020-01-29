@@ -273,7 +273,9 @@
 (use-package open-junk-file
   :pin melpa
   :bind
-  ("C-x j" . open-junk-file))
+  ("C-x j" . open-junk-file)
+  :custom
+  (open-junk-file-format "~/works/junk/%Y/%m/%d-%H_%M_%S."))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
