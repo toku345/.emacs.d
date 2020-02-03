@@ -1091,7 +1091,7 @@
 
 (use-package easy-hugo
   :custom
-  (easy-hugo-basedir "~/works/toku345/toku345com/")
+  (easy-hugo-basedir "~/works/toku345/toku345.com/")
   (easy-hugo-previewtime "300")
   (easy-hugo-url "https://blogs-toku345.firebaseapp.com")
   (easy-hugo-default-ext ".org")
