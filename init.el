@@ -832,12 +832,9 @@
 ;;; python
 ;;;
 
-(use-package pipenv
+(use-package poetry
   :pin melpa
-  :hook (python-mode . pipenv-mode)
-  :init
-  (setq pipenv-projectile-after-switch-function  #'pipenv-projectile-after-switch-extended)
-  (setq-default flycheck-disabled-checkers '(python-pycompile pylint)))
+  :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
