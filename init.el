@@ -832,6 +832,11 @@
 ;;; python
 ;;;
 
+(use-package python-mode
+  :config
+  (add-hook 'python-mode-hook
+            (lambda () (add-hook 'before-save-hook #'lsp-format-buffer nil t))))
+
 (use-package poetry
   :pin melpa
   :ensure t)
