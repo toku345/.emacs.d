@@ -857,21 +857,12 @@
 ;;;
 (use-package rust-mode
   :pin melpa
-  :init
-  (add-hook 'rust-mode-hook #'flycheck-mode)
   :config
   (setq rust-format-on-save t))
 
-(use-package flycheck-rust
-  :pin melpa
-  :after
-  (flycheck rust-mode)
-  :init
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
-
 (use-package cargo
   :init
-  (add-hook 'rust-mode-hook 'cargo-minor-mode))
+  (add-hook 'rust-mode-hook #'cargo-minor-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
