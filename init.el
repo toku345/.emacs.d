@@ -868,11 +868,13 @@
 ;;;
 ;;; lsp
 ;;;
+(setq lsp-keymap-prefix "C-M-z")
 (use-package lsp-mode
   :pin melpa
   :commands lsp
   :init
-  (add-hook 'prog-mode-hook #'lsp)
+  (add-hook 'prog-mode-hook #'lsp-deferred)
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
   :config
   (setq lsp-log-io t
         lsp-print-performance t
