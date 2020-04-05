@@ -886,6 +886,10 @@
   :pin melpa
   :commands lsp-ui-mode)
 
+(use-package which-key
+  :pin melpa
+  :config
+  (which-key-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
