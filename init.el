@@ -420,6 +420,11 @@
 ;;; wgrep
 (use-package wgrep)
 
+;;; rg.el
+(use-package rg
+  :config
+  (rg-enable-default-bindings))
+
 ;;; quick-preview
 (use-package quick-preview
   :pin melpa
@@ -430,13 +435,6 @@
 ;;;
 ;;; helm
 ;;;
-
-(use-package helm-ag
-  :config
-  (setq helm-ag-base-command "ag --nocolor --nogrou --ignore-case"
-        helm-ag-thing-at-point 'symbol)
-  :bind (("C-c s" . helm-ag)
-         ("C-c f" . helm-ag-this-file)))
 
 (use-package helm-ls-git
   :bind ("C-x C-d" . helm-browse-project))
