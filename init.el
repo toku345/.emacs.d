@@ -187,7 +187,7 @@
 
 ;;; undo-tree
 (use-package undo-tree
-  :pin elpa
+  :pin gnu
   :config
   (global-undo-tree-mode t)
   (bind-keys :map global-map
@@ -937,7 +937,7 @@
 ;;; CSV
 ;;;
 (use-package csv-mode
-  :pin elpa)
+  :pin gnu)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -970,7 +970,7 @@
 ;;; SQL
 ;;;
 (use-package sql-indent
-  :pin elpa
+  :pin gnu
   :config
   (eval-after-load "sql"
     '(load-library "sql-indent")))
