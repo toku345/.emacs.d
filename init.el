@@ -106,6 +106,10 @@
          ("C-c m" . magit-status)
          ("C-c b" . magit-blame))
   :pin melpa-stable)
+(use-package magit-todos
+  :pin melpa-stable
+  :init
+  (add-hook 'magit-mode-hook #'magit-todos-mode))
 
 ;;; elscreen
 (use-package elscreen
