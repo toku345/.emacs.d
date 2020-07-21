@@ -7,6 +7,7 @@ url
 .lsp-session-*
 image-dired
 .mc-lists.el
+lsp-cache
 
 # Created by https://www.gitignore.io/api/emacs,osx,linux,elisp
 
