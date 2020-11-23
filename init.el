@@ -71,7 +71,7 @@
   (bind-keys :map global-map
              ("C-h" . delete-backward-char)
              ("C-m" . newline-and-indent)
-             ("C-c t" . toggle-truncate-lines)
+             ("C-c l" . toggle-truncate-lines)
              ("C-t" . other-window)
              ("C-x ?" . help-command)
              ("C-x SPC" . cua-rectangle-mark-mode)
@@ -1093,7 +1093,8 @@
   :bind
   (:map global-map
         ("C-c c" . #'org-capture)
-        ("C-c l" . #'org-store-link))
+        ;; ("C-c l" . #'org-store-link)
+        )
   (:map org-mode-map
         ("C-'" . #'redo)) ; org-agenda-sycle
   :custom
