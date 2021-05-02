@@ -746,6 +746,7 @@
 ;;; markdown
 ;;;
 (use-package markdown-mode
+  :pin  melpa-stable
   :ensure t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
