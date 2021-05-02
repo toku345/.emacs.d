@@ -230,11 +230,6 @@
   :init
   (global-git-gutter-mode t))
 
-;;; paradox
-(use-package paradox
-  :config
-  (setq paradox-github-token (getenv "PARADOX_GITHUB_TOKEN")))
-
 ;; ;;; quelpa
 ;; (use-package quelpa
 ;;   :init
