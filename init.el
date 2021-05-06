@@ -655,7 +655,8 @@
 (use-package yaml-mode
   :config
   (add-hook 'yaml-mode-hook #'display-line-numbers-mode)
-  (add-hook 'yaml-mode-hook #'prettier-js-mode))
+  ;; (add-hook 'yaml-mode-hook #'prettier-js-mode)
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -700,7 +701,9 @@
 
 (use-package rubocop
   :config
-  (add-hook 'rubocop-mode-hook 'rubocop-mode))
+  (add-hook 'ruby-mode-hook 'rubocop-mode)
+  :custom
+  (rubocop-autocorrect-on-save t))
 
 (use-package ruby-mode
   :init
@@ -713,7 +716,8 @@
              (setq-default flycheck-disabled-checkers '(ruby-rubylint))
              (display-line-numbers-mode t)))
   (add-hook 'ruby-mode-hook 'highlight-symbol-mode)
-  (add-hook 'ruby-mode-hook 'highlight-symbol-nav-mode))
+  (add-hook 'ruby-mode-hook 'highlight-symbol-nav-mode)
+  (with-eval-after-load 'ruby-mode (add-hook 'ruby-mode-hook #'lsp)))
 
 (use-package ruby-electric
   :pin melpa
@@ -872,7 +876,7 @@
   :pin melpa
   :commands (lsp lsp-deferred)
   :init
-  (add-hook 'prog-mode-hook #'lsp-deferred)
+  ;; (add-hook 'prog-mode-hook #'lsp-deferred)
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
   :config
   (setq lsp-log-io nil
@@ -1024,45 +1028,45 @@
 ;;;
 ;;; F#
 ;;;
-(use-package fsharp-mode)
+;; (use-package fsharp-mode)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Erlang
 ;;;
-(use-package erlang
-  :pin melpa)
+;; (use-package erlang
+;;   :pin melpa)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Dart
 ;;;
-(use-package dart-mode
-  :pin melpa
-  :hook (dart-mode . lsp)
-  :after (lsp projectile)
-  :ensure-system-package (dart_language_server . "pub global activate dart_language_server")
-  :custom
-  (dart-format-on-save t)
-  (dart-sdk-path "~/flutter/bin/cache/dart-sdk/")
-  :config
-  (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
-  (add-to-list 'projectile-project-root-files-bottom-up "BUILD"))
+;; (use-package dart-mode
+;;   :pin melpa
+;;   :hook (dart-mode . lsp)
+;;   :after (lsp projectile)
+;;   :ensure-system-package (dart_language_server . "pub global activate dart_language_server")
+;;   :custom
+;;   (dart-format-on-save t)
+;;   (dart-sdk-path "~/flutter/bin/cache/dart-sdk/")
+;;   :config
+;;   (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
+;;   (add-to-list 'projectile-project-root-files-bottom-up "BUILD"))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Flutter
 ;;;
-(use-package flutter
-  :pin melpa
-  :after dart-mode
-  :bind (:map dart-mode-map
-              ("C-M-x" . #'flutter-run-on-hot-reload))
-  :custom
-  (flutter-sdk-path "~/flutter/"))
+;; (use-package flutter
+;;   :pin melpa
+;;   :after dart-mode
+;;   :bind (:map dart-mode-map
+;;               ("C-M-x" . #'flutter-run-on-hot-reload))
+;;   :custom
+;;   (flutter-sdk-path "~/flutter/"))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
