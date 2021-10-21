@@ -519,6 +519,12 @@
   :config
   (editorconfig-mode 1))
 
+(use-package yafolding
+  :pin melpa
+  :config
+  (bind-keys :map global-map
+             ("M-RET" . yafolding-toggle-element)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; lisp
@@ -715,6 +721,7 @@
                (display-line-numbers-mode t)))
   (add-hook 'ruby-mode-hook 'highlight-symbol-mode)
   (add-hook 'ruby-mode-hook 'highlight-symbol-nav-mode)
+  (add-hook 'ruby-mode-hook 'yafolding-mode)
   (with-eval-after-load 'ruby-mode (add-hook 'ruby-mode-hook #'lsp)))
 
 (use-package ruby-electric
