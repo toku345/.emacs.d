@@ -877,32 +877,19 @@
 ;;;
 ;;; lsp
 ;;;
-(setq lsp-keymap-prefix "C-M-z")
 (use-package lsp-mode
   :pin melpa
-  :commands (lsp lsp-deferred)
-  :init
-  ;; (add-hook 'prog-mode-hook #'lsp-deferred)
-  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
-  :config
-  (setq lsp-log-io nil
-        lsp-print-performance nil
-        lsp-inhibit-message t
-        lsp-auto-guess-root t
-        lsp-prefer-flymake t
-        lsp-enable-completion-at-point t
-        lsp-report-if-no-buffer t
-        gc-cons-threshold 100000000
-        read-process-output-max (* 1024 1024)))
+  :ensure t
+  :init (yas-global-mode)
+  :hook
+  (rust-mode . lsp)
+  (ruby-mode . lsp)
+  :bind ("C-c h" . lsp-describe-thing-at-point)
+  :custom (lsp-rust-server 'rust-analyzer))
 
 (use-package lsp-ui
   :pin melpa
-  :commands lsp-ui-mode)
-
-(use-package which-key
-  :pin melpa
-  :config
-  (which-key-mode))
+  :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
