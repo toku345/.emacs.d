@@ -865,12 +865,13 @@
 ;;;
 (use-package rust-mode
   :pin melpa
-  :config
-  (setq rust-format-on-save t))
+  :ensure t
+  :custom rust-format-on-save t)
 
 (use-package cargo
-  :init
-  (add-hook 'rust-mode-hook #'cargo-minor-mode))
+  :pin melpa
+  :ensure t
+  :hook (rust-mode . cargo-minor-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
