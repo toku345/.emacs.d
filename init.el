@@ -820,7 +820,7 @@
   :config
   (with-eval-after-load 'typescript-mode (add-hook 'typescript-mode-hook #'lsp))
   (setq typescript-indent-level 2
-        sgml-basic-offse 2)
+        sgml-basic-offset 2)
   (add-hook 'ng2-ts-mode #'prettier-js-mode)
   (add-hook 'ng2-html-mode #'prettier-js-mode))
 
