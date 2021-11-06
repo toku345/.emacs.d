@@ -8,6 +8,7 @@ url
 image-dired
 .mc-lists.el
 lsp-cache
+transient
 
 # Created by https://www.gitignore.io/api/emacs,osx,linux,elisp
 
@@ -67,7 +68,8 @@ custom.el
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
