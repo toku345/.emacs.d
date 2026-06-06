@@ -3,9 +3,10 @@
 ;;; エディタの基本的な既定値・挙動。特定パッケージに依存しない設定群。
 ;;; Code:
 
-;;; macOS でシェルの PATH を引き継ぐ
+;;; GUI / daemon 起動時にシェルの PATH を引き継ぐ
+;;; （GNU Emacs NS 版でも window-system は 'ns。daemon も対象に含める）
 (use-package exec-path-from-shell
-  :if (memq window-system '(mac ns))
+  :if (or (memq window-system '(mac ns x)) (daemonp))
   :config
   (exec-path-from-shell-initialize))
 
@@ -61,8 +62,8 @@
 (add-hook 'after-save-hook
           #'executable-make-buffer-file-executable-if-script-p)
 
-;;; GUI 起動時のみ emacsclient 用サーバを起動
-(when (display-graphic-p)
+;;; GUI / daemon 起動時に emacsclient 用サーバを起動（二重起動は避ける）
+(when (or (display-graphic-p) (daemonp))
   (require 'server)
   (unless (server-running-p)
     (server-start)))
@@ -77,9 +78,9 @@
         dired-use-ls-dired t
         dired-listing-switches "-alh")
   ;; macOS の ls はオプション非対応なので coreutils の gls を使う
-  (let ((gls "/usr/local/bin/gls"))
-    (when (file-exists-p gls)
-      (setq insert-directory-program gls))))
+  ;; （Apple Silicon の /opt/homebrew・Intel の /usr/local 両対応）
+  (when-let ((gls (executable-find "gls")))
+    (setq insert-directory-program gls)))
 
 ;;; バックアップ・オートセーブを ~/.emacs.d/backups/ に集約
 (setq backup-inhibited nil
