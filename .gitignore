@@ -59,6 +59,7 @@ flycheck_*.el
 .projectile
 projectile.cache
 recentf
+history
 quelpa
 
 # local custom-set-variables
