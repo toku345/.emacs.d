@@ -27,6 +27,8 @@
 (require 'init-misc)         ; その他ユーティリティ
 
 ;;; custom-set-* は custom.el に退避（バージョン管理外）
+(unless custom-file
+  (setq custom-file (locate-user-emacs-file "custom.el")))
 (load custom-file 'noerror)
 
 ;;; 起動時間の表示

@@ -58,8 +58,7 @@
 ;;; アクションメニュー（候補に対する操作）。consult との統合も。
 (use-package embark
   :bind (("C-." . embark-act)
-         ("C-;" . embark-dwim)
-         ("C-h B" . embark-bindings)))
+         ("C-;" . embark-dwim)))
 
 (use-package embark-consult
   :after (embark consult)
