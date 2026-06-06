@@ -38,9 +38,5 @@
       use-package-expand-minimally t   ; 展開コードを簡潔に
       use-package-compute-statistics nil)
 
-;;; 外部コマンド依存を宣言できるようにする（任意・存在すれば利用）
-(use-package use-package-ensure-system-package
-  :ensure t)
-
 (provide 'init-package)
 ;;; init-package.el ends here
