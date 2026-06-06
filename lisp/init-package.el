@@ -1,19 +1,19 @@
 ;;; init-package.el --- package.el + use-package -*- lexical-binding: t; -*-
 ;;; Commentary:
-;;; パッケージアーカイブと use-package の基本設定。
-;;; use-package は Emacs 29+ に同梱されているため install 不要。
+;;; Basic package archives and use-package setup.
+;;; use-package is bundled with Emacs 29+, so it usually needs no install.
 ;;; Code:
 
 (require 'package)
 
-;;; アーカイブ: GNU ELPA / NonGNU ELPA / MELPA
-;;; 多くのモダンパッケージ（vertico/corfu 等）は melpa・nongnu にある。
+;;; Archives: GNU ELPA / NonGNU ELPA / MELPA.
+;;; Many modern packages such as Vertico and Corfu live in MELPA or NonGNU.
 (setq package-archives
       '(("gnu"    . "https://elpa.gnu.org/packages/")
         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
         ("melpa"  . "https://melpa.org/packages/")))
 
-;;; アーカイブ優先度（基本は melpa を優先。安定性が要るものは個別 :pin）
+;;; Archive priorities. Pin individual packages when stability matters.
 (setq package-archive-priorities
       '(("gnu"    . 10)
         ("nongnu" . 8)
@@ -22,20 +22,20 @@
 (unless (bound-and-true-p package--initialized)
   (package-initialize))
 
-;;; アーカイブ情報が無ければ取得（初回のみ）
+;;; Fetch archive contents only when missing, usually on first startup.
 (unless package-archive-contents
   (ignore-errors (package-refresh-contents)))
 
-;;; use-package は同梱（古い Emacs 向けのフォールバックのみ残す）
+;;; use-package is bundled; keep only the fallback for older Emacs versions.
 (unless (require 'use-package nil t)
   (package-install 'use-package)
   (require 'use-package))
 
-;;; use-package 既定動作
-;;; - 旧設定の `use-package-always-pin "melpa-stable"` は撤廃。
-;;;   stable 未提供パッケージが多いため melpa ローリングを既定にする。
-(setq use-package-always-ensure t      ; :ensure を都度書かなくて済む
-      use-package-expand-minimally t   ; 展開コードを簡潔に
+;;; use-package defaults.
+;;; - The old `use-package-always-pin "melpa-stable"` default is removed.
+;;;   Many packages are not available on stable, so use rolling MELPA by default.
+(setq use-package-always-ensure t      ; Avoid repeating :ensure everywhere.
+      use-package-expand-minimally t   ; Keep generated expansion concise.
       use-package-compute-statistics nil)
 
 (provide 'init-package)

@@ -2,68 +2,69 @@
 
 My Emacs configurations.
 
-Emacs 30 系を前提に、モジュール分割で構成したモダンな設定。
+Modern modular configuration targeting Emacs 30.
 
-## 構成
+## Structure
 
 ```
-early-init.el        起動最適化（GC・native-comp・UI 抑制）
-init.el              load-path 設定 + 各モジュールの require のみ
+early-init.el        Startup optimization: GC, native-comp, and UI suppression
+init.el              load-path setup and module requires only
 lisp/
-  init-package.el    パッケージアーカイブ + use-package（同梱）設定
-  init-core.el       基本設定（既定値・auto-revert・dired・バックアップ等）
-  init-keys.el       グローバルキーバインド
-  init-completion.el 補完スタック（Vertico/Consult/Marginalia/Orderless/Embark/Corfu/Cape）
-  init-ui.el         テーマ・モードライン・空白表示・行/シンボルハイライト
-  init-editing.el    括弧編集・スニペット・マルチカーソル・undo・折り畳み
-  init-vc.el         magit・diff-hl
-  init-project.el    project.el・wgrep・dumb-jump
-  init-lsp.el        eglot・flymake・tree-sitter（treesit-auto）
-  init-langs.el      各言語モード（*-ts-mode + eglot）
-  init-org.el        org・easy-hugo
-  init-misc.el       その他ユーティリティ
+  init-package.el    Package archives and bundled use-package setup
+  init-core.el       Core defaults, auto-revert, dired, backups, and history
+  init-keys.el       Global key bindings
+  init-completion.el Completion stack: Vertico/Consult/Marginalia/Orderless/Embark/Corfu/Cape
+  init-ui.el         Theme, modeline, whitespace, line, and symbol highlighting
+  init-editing.el    Structural editing, snippets, multiple cursors, undo, and folding
+  init-vc.el         magit and diff-hl
+  init-project.el    project.el, wgrep, and dumb-jump
+  init-lsp.el        eglot, flymake, and tree-sitter via treesit-auto
+  init-langs.el      Per-language modes with *-ts-mode and eglot
+  init-org.el        org and easy-hugo
+  init-misc.el       Miscellaneous utilities
 legacy/
-  init-legacy-2021.el  旧・単一ファイル設定（参照用）
+  init-legacy-2021.el  Old monolithic configuration kept for reference
 ```
 
-## 主要な技術選定（モダン化）
+## Technology Choices
 
-| 領域 | 採用 |
+| Area | Choice |
 |------|------|
-| パッケージ管理 | `package.el` + `use-package`（Emacs 同梱） |
-| ミニバッファ補完 | Vertico + Marginalia + Orderless + Consult + Embark |
-| バッファ内補完 | Corfu + Cape |
-| LSP | eglot（組込） |
-| 構文解析 | tree-sitter（`*-ts-mode`） + `treesit-auto` |
-| 文法チェック | flymake（組込） |
+| Package management | `package.el` + bundled `use-package` |
+| Minibuffer completion | Vertico + Marginalia + Orderless + Consult + Embark |
+| In-buffer completion | Corfu + Cape |
+| LSP | built-in eglot |
+| Parsing | tree-sitter with `*-ts-mode` + `treesit-auto` |
+| Syntax checking | built-in flymake |
 | Git | magit + diff-hl |
-| プロジェクト | project.el（組込） |
+| Project management | built-in project.el |
 
-## セットアップ
+## Setup
 
-1. Emacs 30 以降をインストール（tree-sitter / native-comp 付きが望ましい）。
-2. 本リポジトリを `~/.emacs.d` に配置。
-3. 初回起動時に `package.el` が必要なパッケージを自動取得する
-   （ネットワーク接続が必要）。
-4. tree-sitter 文法は初回利用時に導入を確認される（`treesit-auto-install` が `'prompt`）。
+1. Install Emacs 30 or later, preferably with tree-sitter and native-comp.
+2. Place this repository at `~/.emacs.d`.
+3. On first startup, `package.el` installs required packages automatically.
+   Network access is required.
+4. Missing tree-sitter grammars are prompted for on first use because
+   `treesit-auto-install` is set to `'prompt`.
 
-### 外部ツール（言語ごとに必要なもの）
+### External Tools
 
-- LSP サーバ: `rust-analyzer` / `gopls` / `pyright` / `typescript-language-server` /
-  `solargraph`（または `ruby-lsp`）/ `jdtls` / `terraform-ls` など
-- 整形: `prettier` / `rubocop` / `jq`
-- その他: `multimarkdown`（Markdown）/ PlantUML jar（`~/bin/plantuml.jar`）/
-  Roswell（Common Lisp, `~/.roswell/helper.el`）
+- LSP servers: `rust-analyzer` / `gopls` / `pyright` / `typescript-language-server` /
+  `solargraph` or `ruby-lsp` / `jdtls` / `terraform-ls`
+- Formatters: `prettier` / `rubocop` / `jq`
+- Other tools: `multimarkdown` for Markdown / PlantUML jar at `~/bin/plantuml.jar` /
+  Roswell for Common Lisp via `~/.roswell/helper.el`
 
-## キーバインド（抜粋）
+## Key Bindings
 
-| キー | コマンド |
+| Key | Command |
 |------|----------|
-| `C-h` | `delete-backward-char`（ヘルプは `C-x ?`） |
+| `C-h` | `delete-backward-char`; help is on `C-x ?` |
 | `C-t` | `other-window` |
-| `C-s` | `consult-line`（インクリメンタル検索） |
-| `M-s r` | `consult-ripgrep`（全文検索） |
+| `C-s` | `consult-line` incremental search |
+| `M-s r` | `consult-ripgrep` full-text search |
 | `C-.` | `embark-act` |
 | `C-c m` | `magit-status` |
-| `C-c g n/p/r/s` | diff-hl ハンク操作 |
-| `C-x u` | `vundo`（視覚的 undo ツリー） |
+| `C-c g n/p/r/s` | diff-hl hunk operations |
+| `C-x u` | `vundo` visual undo tree |

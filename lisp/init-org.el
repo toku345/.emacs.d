@@ -1,6 +1,6 @@
 ;;; init-org.el --- org-mode & blogging -*- lexical-binding: t; -*-
 ;;; Commentary:
-;;; org-mode と HTML/Hugo へのエクスポート。
+;;; org-mode and HTML/Hugo export.
 ;;; Code:
 
 (use-package htmlize

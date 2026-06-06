@@ -1,12 +1,12 @@
 ;;; init-keys.el --- global key bindings -*- lexical-binding: t; -*-
 ;;; Commentary:
-;;; グローバルなキーバインド。パッケージ固有のバインドは各モジュール側で定義する。
-;;; 旧 init.el のキー操作感をそのまま維持している。
+;;; Global key bindings. Package-specific bindings live in their modules.
+;;; Preserve the feel of the old init.el bindings.
 ;;; Code:
 
 (require 'bind-key)
 
-;;; 現在行を上下に移動
+;;; Move the current line up or down.
 ;;; http://emacsredux.com/blog/2013/04/02/move-current-line-up-or-down/
 (defun my/move-line-up ()
   "Move up the current line."
@@ -23,9 +23,9 @@
   (forward-line -1)
   (indent-according-to-mode))
 
-;;; グローバルキーマップ（旧設定を踏襲）
+;;; Global keymap, following the old configuration.
 (bind-keys :map global-map
-           ("C-h"     . delete-backward-char)  ; ヘルプは C-x ? に退避
+           ("C-h"     . delete-backward-char)  ; Help is moved to C-x ?.
            ("C-m"     . newline-and-indent)
            ("C-c l"   . toggle-truncate-lines)
            ("C-t"     . other-window)

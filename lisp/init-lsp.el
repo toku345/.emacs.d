@@ -1,29 +1,29 @@
 ;;; init-lsp.el --- LSP, flymake, tree-sitter -*- lexical-binding: t; -*-
 ;;; Commentary:
-;;; LSP は組込の eglot（旧 lsp-mode + lsp-ui）。
-;;; 文法チェックは eglot と統合される flymake（旧 flycheck）。
-;;; 構文解析は tree-sitter（treesit-auto で文法を自動導入し *-ts-mode へ remap）。
+;;; LSP uses built-in eglot, replacing lsp-mode and lsp-ui.
+;;; Syntax checking uses flymake, integrated with eglot, replacing flycheck.
+;;; Parsing uses tree-sitter with treesit-auto grammar installation and remaps.
 ;;; Code:
 
-;;; --- eglot（組込 LSP クライアント） ---
+;;; --- eglot, the built-in LSP client ---
 (use-package eglot
   :ensure nil
   :commands (eglot eglot-ensure)
   :bind (:map eglot-mode-map
-              ("C-c h" . eldoc-doc-buffer)   ; 旧 lsp-describe-thing-at-point
+              ("C-c h" . eldoc-doc-buffer)   ; Old lsp-describe-thing-at-point.
               ("C-c r" . eglot-rename)
               ("C-c a" . eglot-code-actions))
   :config
-  (setq eglot-autoshutdown t          ; 最後のバッファを閉じたらサーバ停止
-        eglot-events-buffer-size 0    ; イベントログを無効化して軽量化
+  (setq eglot-autoshutdown t          ; Stop server after the last buffer closes.
+        eglot-events-buffer-size 0    ; Disable event logs to keep eglot light.
         eglot-sync-connect 1)
-  ;; Swift（旧 lsp-sourcekit）。パスがあれば登録。
+  ;; Swift, replacing lsp-sourcekit. Register it when the binary exists.
   (let ((sourcekit "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp"))
     (when (file-exists-p sourcekit)
       (add-to-list 'eglot-server-programs
                    `((swift-mode swift-ts-mode) . (,sourcekit))))))
 
-;;; --- flymake（組込の文法チェック） ---
+;;; --- flymake, built-in syntax checking ---
 (use-package flymake
   :ensure nil
   :hook (prog-mode . flymake-mode)
@@ -32,14 +32,14 @@
               ("M-p" . flymake-goto-prev-error)
               ("C-c ! l" . flymake-show-buffer-diagnostics)))
 
-;;; --- tree-sitter（組込 treesit + 文法自動導入） ---
+;;; --- tree-sitter, built-in treesit plus automatic grammar installation ---
 (use-package treesit-auto
   :config
-  ;; 文法が無ければ導入を確認し、対応モードを *-ts-mode へ自動 remap
+  ;; Prompt for missing grammars and remap supported modes to *-ts-mode.
   (setq treesit-auto-install 'prompt)
   (global-treesit-auto-mode 1))
 
-;;; tree-sitter のフォントロックを最大レベルに
+;;; Use the maximum tree-sitter font-lock level.
 (setq treesit-font-lock-level 4)
 
 (provide 'init-lsp)

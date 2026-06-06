@@ -1,25 +1,25 @@
 ;;; init-misc.el --- misc utilities -*- lexical-binding: t; -*-
 ;;; Commentary:
-;;; その他のユーティリティ。特定言語に紐づかない便利パッケージ群。
+;;; Miscellaneous utilities not tied to a specific language.
 ;;; Code:
 
-;;; シンボルアウトライン
+;;; Symbol outline.
 (use-package imenu-list
   :bind ("C-o" . imenu-list-smart-toggle))
 
-;;; 一時ファイルを素早く作る
+;;; Quickly create throwaway files.
 (use-package open-junk-file
   :bind ("C-x j" . open-junk-file)
   :custom
   (open-junk-file-format "~/works/junk/%Y/%m/%d-%H_%M_%S."))
 
-;;; dired からのクイックプレビュー
+;;; Quick preview from dired.
 (use-package quick-preview
   :bind (("C-c q" . quick-preview-at-point)
          :map dired-mode-map
          ("Q" . quick-preview-at-point)))
 
-;;; ブラウザのテキストエリアを Emacs で編集
+;;; Edit browser text areas in Emacs.
 (use-package edit-server
   :commands edit-server-start
   :init
@@ -28,15 +28,15 @@
   :config
   (setq edit-server-new-frame nil))
 
-;;; プレゼンテーション（文字を大きく表示）
+;;; Presentation mode for large text.
 (use-package presentation
   :commands presentation-mode)
 
-;;; MediaWiki 編集
+;;; MediaWiki editing.
 (use-package mediawiki
   :commands mediawiki-open)
 
-;;; esa.io 連携
+;;; esa.io integration.
 (use-package esa
   :commands (esa esa-list)
   :config

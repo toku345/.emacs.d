@@ -1,16 +1,16 @@
 ;;; init-langs.el --- per-language setup -*- lexical-binding: t; -*-
 ;;; Commentary:
-;;; 各プログラミング言語のモード設定。
-;;; 方針: 組込 tree-sitter モード（*-ts-mode）を使い、LSP は eglot に統一。
-;;;       treesit-auto（init-lsp.el）が文法導入と従来モードからの remap を担う。
+;;; Per-language mode setup.
+;;; Prefer built-in tree-sitter modes (*-ts-mode) and use eglot for LSP.
+;;; treesit-auto, configured in init-lsp.el, installs grammars and remaps modes.
 ;;; Code:
 
-;;; 保存時に eglot で整形するためのヘルパー
+;;; Helper for formatting with eglot before save.
 (defun my/eglot-format-on-save ()
-  "現在バッファの保存前に eglot-format-buffer を実行する。"
+  "Run `eglot-format-buffer' before saving the current buffer."
   (add-hook 'before-save-hook #'eglot-format-buffer nil t))
 
-;;; 整形ツール（外部 prettier コマンド）
+;;; Formatter using the external prettier command.
 (use-package prettier-js
   :commands prettier-js-mode)
 
@@ -21,7 +21,7 @@
   (add-hook 'clojure-mode-hook #'subword-mode)
   (add-hook 'clojure-mode-hook #'my/lisp-mode-hook)
   :config
-  ;; Compojure 用インデント
+  ;; Compojure indentation.
   ;; https://github.com/weavejester/compojure/wiki/Emacs-indentation
   (define-clojure-indent
    (defroutes 'defun)
@@ -48,7 +48,7 @@
   (setq geiser-active-implementations '(racket)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Common Lisp ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Roswell 経由の sly。helper があれば読み込む。
+;;; Sly through Roswell. Load the helper if it exists.
 (when (file-exists-p "~/.roswell/helper.el")
   (load (expand-file-name "~/.roswell/helper.el"))
   (with-eval-after-load 'sly
@@ -59,7 +59,7 @@
   :ensure nil
   :init
   (setq ruby-insert-encoding-magic-comment nil)
-  ;; ruby-mode は treesit-auto により ruby-ts-mode へ remap される
+  ;; ruby-mode is remapped to ruby-ts-mode by treesit-auto.
   :hook ((ruby-ts-mode . display-line-numbers-mode)
          (ruby-ts-mode . yafolding-mode)
          (ruby-ts-mode . eglot-ensure)))
@@ -106,7 +106,7 @@
          (go-ts-mode . my/eglot-format-on-save)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; JavaScript / TypeScript ;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; js/typescript/tsx は組込 *-ts-mode を使用（treesit-auto が remap）
+;;; js/typescript/tsx use built-in *-ts-mode via treesit-auto remapping.
 (add-hook 'js-ts-mode-hook #'prettier-js-mode)
 (add-hook 'typescript-ts-mode-hook #'eglot-ensure)
 (add-hook 'typescript-ts-mode-hook #'prettier-js-mode)
@@ -152,11 +152,11 @@
         scss-compile-at-save nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; JSON / YAML ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; json-ts-mode / yaml-ts-mode は組込（treesit-auto が remap）
+;;; json-ts-mode and yaml-ts-mode are built in and remapped by treesit-auto.
 (add-to-list 'auto-mode-alist '("\\.babelrc\\'" . json-ts-mode))
 (add-hook 'yaml-ts-mode-hook #'display-line-numbers-mode)
 
-;;; jq による JSON 整形（外部 jq コマンド）
+;;; JSON formatting with the external jq command.
 (defun my/jq-format (beg end)
   "Reformat region (BEG END) by jq."
   (interactive "r")
@@ -175,7 +175,7 @@
   :hook (php-mode . eglot-ensure))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Java ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; meghanada は廃し、eglot（jdtls）に統一
+;;; Replace meghanada with eglot and jdtls.
 (add-hook 'java-ts-mode-hook #'eglot-ensure)
 (add-hook 'java-ts-mode-hook (lambda () (setq c-basic-offset 2)))
 
@@ -199,16 +199,16 @@
 (use-package fish-mode    :mode "\\.fish\\'")
 (use-package csv-mode     :mode "\\.csv\\'")
 (use-package abc-mode     :mode "\\.abc\\'")
-(use-package cmake-mode   :commands cmake-mode)   ; cmake-ts-mode へ remap
+(use-package cmake-mode   :commands cmake-mode)   ; Remapped to cmake-ts-mode.
 (use-package bazel        :commands bazel-mode)
 (use-package apib-mode    :mode "\\.apib\\'")
 
-;;; dockerfile は組込 dockerfile-ts-mode（treesit-auto が remap）
-;;; SQL のインデント
+;;; dockerfile uses built-in dockerfile-ts-mode via treesit-auto remapping.
+;;; SQL indentation.
 (use-package sql-indent
   :hook (sql-mode . sqlind-minor-mode))
 
-;;; PlantUML（flycheck-plantuml は flycheck 廃止に伴い削除）
+;;; PlantUML. flycheck-plantuml is removed with the flycheck migration.
 (use-package plantuml-mode
   :mode ("\\.puml\\'" "\\.plantuml\\'")
   :config

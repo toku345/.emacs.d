@@ -1,46 +1,46 @@
 ;;; init-core.el --- basic editor defaults -*- lexical-binding: t; -*-
 ;;; Commentary:
-;;; エディタの基本的な既定値・挙動。特定パッケージに依存しない設定群。
+;;; Core editor defaults and behavior that do not depend on specific packages.
 ;;; Code:
 
-;;; GUI / daemon 起動時にシェルの PATH を引き継ぐ
-;;; （GNU Emacs NS 版でも window-system は 'ns。daemon も対象に含める）
+;;; Import shell PATH for GUI and daemon sessions.
+;;; GNU Emacs for NS also uses window-system 'ns; daemon sessions are included.
 (use-package exec-path-from-shell
   :if (or (memq window-system '(mac ns x)) (daemonp))
   :config
   (exec-path-from-shell-initialize))
 
-;;; y/n で答えられるようにする（Emacs 28+ の正攻法。defalias は使わない）
+;;; Allow y/n answers without using the older defalias approach.
 (setq use-short-answers t)
 
-;;; 各種既定値（旧 init.el より移植）
+;;; General defaults ported from the old init.el.
 (setq visible-bell t
       ring-bell-function 'ignore
       echo-keystrokes 0.1
       create-lockfiles nil
       truncate-partial-width-windows nil
-      kill-whole-line t                 ; C-k で改行ごと削除
+      kill-whole-line t                 ; Let C-k delete the newline too.
       completion-ignore-case t
       read-file-name-completion-ignore-case t
       read-buffer-completion-ignore-case t
       frame-title-format "%f"
       uniquify-buffer-name-style 'post-forward)
 
-;;; インデント: タブではなくスペース、幅 2
+;;; Indentation: spaces instead of tabs, width 2.
 (setq-default tab-width 2
               indent-tabs-mode nil)
 
-;;; バッファ端の表示
+;;; Buffer boundary display.
 (set-default 'indicate-empty-lines t)
 (setq-default indicate-buffer-boundaries 'right)
 
-;;; 選択範囲を入力で置換
+;;; Replace the selected region when typing.
 (delete-selection-mode 1)
 
-;;; 括弧の自動補完（グローバル）
+;;; Enable automatic pairing globally.
 (electric-pair-mode 1)
 
-;;; 対応括弧の強調
+;;; Highlight matching parentheses.
 (use-package paren
   :ensure nil
   :init
@@ -48,21 +48,21 @@
   :config
   (show-paren-mode 1))
 
-;;; CamelCase をサブワードとして扱う
+;;; Treat CamelCase parts as subwords.
 (use-package subword
   :ensure nil
   :config
   (global-subword-mode 1))
 
-;;; ファイル変更を自動で再読込
+;;; Automatically reload changed files.
 (setq global-auto-revert-non-file-buffers t)
 (global-auto-revert-mode 1)
 
-;;; #! で始まるファイルは保存時に +x を付与
+;;; Make scripts executable on save when they start with #!.
 (add-hook 'after-save-hook
           #'executable-make-buffer-file-executable-if-script-p)
 
-;;; GUI / daemon 起動時に emacsclient 用サーバを起動（二重起動は避ける）
+;;; Start the emacsclient server for GUI and daemon sessions, avoiding duplicates.
 (when (or (display-graphic-p) (daemonp))
   (require 'server)
   (unless (server-running-p)
@@ -72,17 +72,17 @@
 (use-package dired
   :ensure nil
   :config
-  (setq dired-dwim-target t            ; 2 画面 dired でコピー/移動先を賢く
+  (setq dired-dwim-target t            ; Guess copy/move target in two-pane dired.
         dired-recursive-copies 'always
         dired-isearch-filenames t
         dired-use-ls-dired t
         dired-listing-switches "-alh")
-  ;; macOS の ls はオプション非対応なので coreutils の gls を使う
-  ;; （Apple Silicon の /opt/homebrew・Intel の /usr/local 両対応）
+  ;; macOS ls lacks some GNU options, so prefer coreutils gls.
+  ;; Support both Apple Silicon /opt/homebrew and Intel /usr/local.
   (when-let ((gls (executable-find "gls")))
     (setq insert-directory-program gls)))
 
-;;; バックアップ・オートセーブを ~/.emacs.d/backups/ に集約
+;;; Keep backups and auto-saves under ~/.emacs.d/backups/.
 (setq backup-inhibited nil
       delete-auto-save-files t
       auto-save-timeout 15
@@ -93,7 +93,7 @@
   (setq backup-directory-alist `(("." . ,backup-dir))
         auto-save-file-name-transforms `((".*" ,backup-dir t))))
 
-;;; 最近開いたファイル・ミニバッファ履歴
+;;; Recent files and minibuffer history.
 (use-package recentf
   :ensure nil
   :init
@@ -112,7 +112,7 @@
   :config
   (save-place-mode 1))
 
-;;; EditorConfig（プロジェクト間のスタイル統一）
+;;; EditorConfig for project-local style consistency.
 (use-package editorconfig
   :config
   (editorconfig-mode 1))

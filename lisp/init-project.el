@@ -1,20 +1,21 @@
 ;;; init-project.el --- project & search -*- lexical-binding: t; -*-
 ;;; Commentary:
-;;; プロジェクト管理は組込の project.el（旧 projectile）。検索系もここに集約。
+;;; Project management uses built-in project.el, replacing projectile.
+;;; Search-related setup also lives here.
 ;;; Code:
 
-;;; 組込 project.el。旧 projectile のキー（C-c p / s-p）も使えるようにする。
+;;; Built-in project.el with the old projectile keys, C-c p and s-p.
 (use-package project
   :ensure nil
   :bind-keymap (("C-c p" . project-prefix-map)
                 ("s-p"   . project-prefix-map)))
 
-;;; grep バッファを直接編集して反映（consult/embark の export と相性が良い）
+;;; Edit grep buffers directly; this works well with consult/embark export.
 (use-package wgrep
   :config
   (setq wgrep-auto-save-buffer t))
 
-;;; 定義ジャンプのフォールバック（xref バックエンドとして登録）
+;;; Definition-jump fallback registered as an xref backend.
 (use-package dumb-jump
   :init
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)

@@ -1,19 +1,19 @@
 ;;; init-ui.el --- appearance & modeline -*- lexical-binding: t; -*-
 ;;; Commentary:
-;;; 見た目（テーマ・モードライン・空白表示・行ハイライト等）。
+;;; Appearance: theme, modeline, whitespace display, line highlights, and more.
 ;;; Code:
 
-;;; テーマ（zenburn を踏襲。組込の modus-themes に乗り換える場合は
-;;; (load-theme 'modus-vivendi t) で置き換え可能）
+;;; Theme. Keep zenburn for now; switch to built-in modus-themes with
+;;; (load-theme 'modus-vivendi t) if desired.
 (use-package zenburn-theme
   :config
   (load-theme 'zenburn t)
-  ;; 旧設定の色味を踏襲
+  ;; Preserve colors from the old configuration.
   (with-eval-after-load 'hl-line
     (set-face-background 'hl-line "#525252"))
   (set-face-background 'region "dark green"))
 
-;;; モードライン
+;;; Modeline.
 (use-package smart-mode-line
   :init
   (setq sml/no-confirm-load-theme t
@@ -26,10 +26,10 @@
 
 (display-time-mode 1)
 
-;;; マイナーモード表示を簡潔に
+;;; Keep minor-mode lighters concise.
 (use-package diminish)
 
-;;; 空白の可視化（旧設定の表示マッピングを踏襲）
+;;; Whitespace visualization, preserving the old display mappings.
 (use-package whitespace
   :ensure nil
   :diminish global-whitespace-mode
@@ -41,16 +41,16 @@
         whitespace-space-regexp "\\(\x3000+\\|^ +\\| +$\\)")
   (global-whitespace-mode 1))
 
-;;; 保存時に行末の余分な空白を除去
+;;; Clean trailing whitespace before save.
 (add-hook 'before-save-hook #'whitespace-cleanup)
 
-;;; 現在行のハイライト（モダンに global-hl-line-mode へ簡素化）
+;;; Highlight the current line using global-hl-line-mode.
 (use-package hl-line
   :ensure nil
   :config
   (global-hl-line-mode 1))
 
-;;; シンボルのハイライト/ナビゲーション（highlight-symbol の後継）
+;;; Symbol highlighting and navigation, replacing highlight-symbol.
 (use-package symbol-overlay
   :diminish
   :hook (prog-mode . symbol-overlay-mode)
