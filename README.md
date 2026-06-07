@@ -6,7 +6,7 @@ Modern modular configuration targeting Emacs 30.
 
 ## Structure
 
-```
+```text
 early-init.el        Startup optimization: GC, native-comp, and UI suppression
 init.el              load-path setup and module requires only
 lisp/
