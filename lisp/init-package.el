@@ -24,7 +24,7 @@
 
 ;;; Fetch archive contents only when missing, usually on first startup.
 (unless package-archive-contents
-  (ignore-errors (package-refresh-contents)))
+  (package-refresh-contents))
 
 ;;; use-package is bundled; keep only the fallback for older Emacs versions.
 (unless (require 'use-package nil t)
