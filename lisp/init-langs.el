@@ -91,6 +91,8 @@
   :commands (ein:run ein:login))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Rust ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
+
 (use-package rust-mode
   :ensure nil
   :custom (rust-format-on-save t)
@@ -100,6 +102,8 @@
   :hook (rust-ts-mode . cargo-minor-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Go ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
+
 (use-package go-mode
   :ensure nil
   :hook ((go-ts-mode . eglot-ensure)
@@ -152,8 +156,9 @@
         scss-compile-at-save nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; JSON / YAML ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; json-ts-mode and yaml-ts-mode are built in and remapped by treesit-auto.
+;;; Use built-in tree-sitter modes directly on fresh installs.
 (add-to-list 'auto-mode-alist '("\\.babelrc\\'" . json-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
 (add-hook 'yaml-ts-mode-hook #'display-line-numbers-mode)
 
 ;;; JSON formatting with the external jq command.
@@ -204,6 +209,8 @@
 (use-package apib-mode    :mode "\\.apib\\'")
 
 ;;; dockerfile uses built-in dockerfile-ts-mode via treesit-auto remapping.
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-ts-mode))
+
 ;;; SQL indentation.
 (use-package sql-indent
   :hook (sql-mode . sqlind-minor-mode))
