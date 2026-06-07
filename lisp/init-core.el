@@ -82,16 +82,11 @@
   (when-let ((gls (executable-find "gls")))
     (setq insert-directory-program gls)))
 
-;;; Keep backups and auto-saves under ~/.emacs.d/backups/.
-(setq backup-inhibited nil
+;;; Disable backup files and delete transient auto-save files after saving.
+(setq backup-inhibited t
       delete-auto-save-files t
       auto-save-timeout 15
       auto-save-interval 60)
-(let ((backup-dir (expand-file-name "backups/" user-emacs-directory)))
-  (unless (file-directory-p backup-dir)
-    (make-directory backup-dir t))
-  (setq backup-directory-alist `(("." . ,backup-dir))
-        auto-save-file-name-transforms `((".*" ,backup-dir t))))
 
 ;;; Recent files and minibuffer history.
 (use-package recentf
