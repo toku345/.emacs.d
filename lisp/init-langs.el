@@ -91,20 +91,15 @@
   :commands (ein:run ein:login))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Rust ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package rust-mode
-  :ensure nil
-  :custom (rust-format-on-save t)
-  :hook ((rust-ts-mode . eglot-ensure)
-         (rust-ts-mode . my/eglot-format-on-save)))
+(add-hook 'rust-ts-mode-hook #'eglot-ensure)
+(add-hook 'rust-ts-mode-hook #'my/eglot-format-on-save)
 
 (use-package cargo
   :hook (rust-ts-mode . cargo-minor-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Go ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package go-mode
-  :ensure nil
-  :hook ((go-ts-mode . eglot-ensure)
-         (go-ts-mode . my/eglot-format-on-save)))
+(add-hook 'go-ts-mode-hook #'eglot-ensure)
+(add-hook 'go-ts-mode-hook #'my/eglot-format-on-save)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; JavaScript / TypeScript ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; js/typescript/tsx use built-in *-ts-mode via treesit-auto associations.
@@ -147,7 +142,7 @@
 
 ;;; Stylesheet
 (use-package scss-mode
-  :hook (css-mode . prettier-js-mode)
+  :hook (scss-mode . prettier-js-mode)
   :config
   (setq css-indent-offset 2
         scss-compile-at-save nil))
