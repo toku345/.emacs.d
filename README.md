@@ -22,8 +22,6 @@ lisp/
   init-langs.el      Per-language modes with *-ts-mode and eglot
   init-org.el        org and easy-hugo
   init-misc.el       Miscellaneous utilities
-legacy/
-  init-legacy-2021.el  Old monolithic configuration kept for reference
 ```
 
 ## Technology Choices
