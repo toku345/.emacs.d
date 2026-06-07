@@ -75,12 +75,12 @@
   (setq dired-dwim-target t            ; Guess copy/move target in two-pane dired.
         dired-recursive-copies 'always
         dired-isearch-filenames t
-        dired-use-ls-dired t
         dired-listing-switches "-alh")
   ;; macOS ls lacks some GNU options, so prefer coreutils gls.
   ;; Support both Apple Silicon /opt/homebrew and Intel /usr/local.
   (when-let ((gls (executable-find "gls")))
-    (setq insert-directory-program gls)))
+    (setq insert-directory-program gls
+          dired-use-ls-dired t)))
 
 ;;; Disable backup files and delete transient auto-save files after saving.
 (setq backup-inhibited t

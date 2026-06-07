@@ -22,12 +22,10 @@
 (unless (bound-and-true-p package--initialized)
   (package-initialize))
 
-;;; Fetch archive contents only when missing, usually on first startup.
-(unless package-archive-contents
-  (package-refresh-contents))
-
 ;;; use-package is bundled; keep only the fallback for older Emacs versions.
 (unless (require 'use-package nil t)
+  (unless package-archive-contents
+    (package-refresh-contents))
   (package-install 'use-package)
   (require 'use-package))
 
