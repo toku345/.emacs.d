@@ -43,7 +43,7 @@
       inhibit-startup-echo-area-message user-login-name
       frame-inhibit-implied-resize t
       frame-resize-pixelwise t
-      ;; init-package.el controls package.el initialization.
+      ;; Keep package activation before init.el; init-package.el sets archives.
       package-enable-at-startup t
       ;; Initial default-frame appearance, set early to avoid frame flicker.
       default-frame-alist '((tool-bar-lines . 0)
