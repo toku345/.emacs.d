@@ -9,22 +9,20 @@
 (use-package org
   :ensure nil
   :bind ((:map global-map
-               ("C-c c" . org-capture))
-         (:map org-mode-map
-               ("C-'" . undo-redo)))
+               ("C-c c" . org-capture)))
   :custom
   (org-directory "~/works/org")
-  (org-default-notes-file "notes.org")
+  (org-default-notes-file (expand-file-name "notes.org" org-directory))
   (org-startup-with-inline-images t)
   (org-html-doctype "html5")
   (org-html-html5-fancy t)
   (org-capture-templates
-   '(("n" "Note" entry
-      (file+headline "~/works/org/notes.org" "Notes")
+   `(("n" "Note" entry
+      (file+headline ,org-default-notes-file "Notes")
       "* %?\nEntered on %U\n%i\n%a"))))
 
 (use-package easy-hugo
-  :bind ("C-c C-e" . easy-hugo)
+  :bind ("C-c H" . easy-hugo)
   :custom
   (easy-hugo-basedir "~/works/toku345/toku345.com/")
   (easy-hugo-previewtime "300")
