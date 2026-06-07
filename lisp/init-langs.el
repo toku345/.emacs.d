@@ -91,26 +91,23 @@
   :commands (ein:run ein:login))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Rust ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
-
 (use-package rust-mode
   :ensure nil
   :custom (rust-format-on-save t)
-  :hook (rust-ts-mode . eglot-ensure))
+  :hook ((rust-ts-mode . eglot-ensure)
+         (rust-ts-mode . my/eglot-format-on-save)))
 
 (use-package cargo
   :hook (rust-ts-mode . cargo-minor-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Go ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
-
 (use-package go-mode
   :ensure nil
   :hook ((go-ts-mode . eglot-ensure)
          (go-ts-mode . my/eglot-format-on-save)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; JavaScript / TypeScript ;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; js/typescript/tsx use built-in *-ts-mode via treesit-auto remapping.
+;;; js/typescript/tsx use built-in *-ts-mode via treesit-auto associations.
 (add-hook 'js-ts-mode-hook #'prettier-js-mode)
 (add-hook 'typescript-ts-mode-hook #'eglot-ensure)
 (add-hook 'typescript-ts-mode-hook #'prettier-js-mode)
@@ -156,9 +153,8 @@
         scss-compile-at-save nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; JSON / YAML ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Use built-in tree-sitter modes directly on fresh installs.
-(add-to-list 'auto-mode-alist '("\\.babelrc\\'" . json-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
+;;; Let treesit-auto promote JSON/YAML files when grammars are ready.
+(add-to-list 'auto-mode-alist '("\\.babelrc\\'" . js-json-mode))
 (add-hook 'yaml-ts-mode-hook #'display-line-numbers-mode)
 
 ;;; JSON formatting with the external jq command.
@@ -208,8 +204,7 @@
 (use-package bazel        :commands bazel-mode)
 (use-package apib-mode    :mode "\\.apib\\'")
 
-;;; dockerfile uses built-in dockerfile-ts-mode via treesit-auto remapping.
-(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-ts-mode))
+;;; dockerfile uses built-in dockerfile-ts-mode via treesit-auto associations.
 
 ;;; SQL indentation.
 (use-package sql-indent

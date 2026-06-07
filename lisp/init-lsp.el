@@ -17,6 +17,12 @@
   (setq eglot-autoshutdown t          ; Stop server after the last buffer closes.
         eglot-events-buffer-size 0    ; Disable event logs to keep eglot light.
         eglot-sync-connect 1)
+  ;; Ruby: support ruby-lsp while keeping Eglot's solargraph default as fallback.
+  (add-to-list 'eglot-server-programs
+               `((ruby-mode ruby-ts-mode)
+                 . ,(eglot-alternatives
+                     '(("ruby-lsp")
+                       ("solargraph" "socket" "--port" :autoport)))))
   ;; Swift, replacing lsp-sourcekit. Register it when the binary exists.
   (let ((sourcekit "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp"))
     (when (file-exists-p sourcekit)
@@ -37,7 +43,9 @@
   :config
   ;; Prompt for missing grammars and remap supported modes to *-ts-mode.
   (setq treesit-auto-install 'prompt)
-  (global-treesit-auto-mode 1))
+  (global-treesit-auto-mode 1)
+  (treesit-auto-add-to-auto-mode-alist
+   '(dockerfile go json rust typescript tsx yaml)))
 
 ;;; Use the maximum tree-sitter font-lock level.
 (setq treesit-font-lock-level 4)

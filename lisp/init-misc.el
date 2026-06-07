@@ -23,7 +23,7 @@
 (use-package edit-server
   :commands edit-server-start
   :init
-  (when (display-graphic-p)
+  (when (or (display-graphic-p) (daemonp))
     (add-hook 'emacs-startup-hook #'edit-server-start))
   :config
   (setq edit-server-new-frame nil))
