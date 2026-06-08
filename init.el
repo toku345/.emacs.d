@@ -1,6 +1,6 @@
 ;;; init.el --- main init: load modular config -*- lexical-binding: t; -*-
 ;;; Commentary:
-;;; The configuration is split into modules. This file only sets load-path
+;;; The configuration is split into modules.  This file only sets load-path
 ;;; and requires the init-*.el modules under lisp/.
 ;;; Code:
 

@@ -13,6 +13,26 @@
         (push arg files)))
     (nreverse files)))
 
+(defun my/checkdoc-batch--diagnostics (start)
+  "Return checkdoc diagnostics added after START, or nil when clean."
+  (with-current-buffer checkdoc-diagnostic-buffer
+    (save-excursion
+      (goto-char start)
+      (when (re-search-forward "^.+:[0-9]+: " nil t)
+        (buffer-substring-no-properties start (point-max))))))
+
+(defun my/checkdoc-batch--check-file (file)
+  "Run checkdoc over FILE and return diagnostics, or nil when clean."
+  (with-current-buffer (find-file-noselect file)
+    (let ((checkdoc-diagnostic-buffer "*checkdoc-batch*")
+          (start nil))
+      (with-current-buffer (get-buffer-create checkdoc-diagnostic-buffer)
+        (let ((inhibit-read-only t))
+          (erase-buffer))
+        (setq start (point-min)))
+      (checkdoc-current-buffer t)
+      (my/checkdoc-batch--diagnostics start))))
+
 (defun my/checkdoc-batch-run ()
   "Run `checkdoc-file' over all command-line file arguments."
   (let ((failed nil)
@@ -20,15 +40,14 @@
         (checkdoc-autofix-flag 'never))
     (dolist (file (my/checkdoc-batch--files))
       (message "Checking documentation in %s" file)
-      (let ((checkdoc-pending-errors nil))
-        (condition-case err
-            (progn
-              (checkdoc-file file)
-              (when checkdoc-pending-errors
-                (setq failed t)))
-          (error
-           (setq failed t)
-           (message "%s: %s" file (error-message-string err))))))
+      (condition-case err
+          (let ((diagnostics (my/checkdoc-batch--check-file file)))
+            (when diagnostics
+              (setq failed t)
+              (princ diagnostics)))
+        (error
+         (setq failed t)
+         (message "%s: %s" file (error-message-string err)))))
     (kill-emacs (if failed 1 0))))
 
 (provide 'checkdoc-batch)
