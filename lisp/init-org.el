@@ -8,8 +8,8 @@
 
 (use-package org
   :ensure nil
-  :bind ((:map global-map
-               ("C-c c" . org-capture)))
+  :bind (:map global-map
+              ("C-c c" . org-capture))
   :custom
   (org-directory "~/works/org")
   (org-default-notes-file (expand-file-name "notes.org" org-directory))
