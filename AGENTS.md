@@ -43,11 +43,9 @@ exact batch command in `README.md`.
 
 Git history uses short imperative English subjects such as `Clarify org capture
 key binding` and `Avoid startup regressions in package and dired setup`; do not
-use Conventional Commit prefixes unless the project adopts them. Include the
-trailer `Co-authored-by: Codex <noreply@openai.com>` exactly once when Codex
-writes or edits a commit message. PRs should summarize changed modules, mention
-package or keybinding effects, link related issues when available, and list the
-verification commands run.
+use Conventional Commit prefixes unless the project adopts them. PRs should
+summarize changed modules, mention package or keybinding effects, link related
+issues when available, and list the verification commands run.
 
 ## Security & Configuration Tips
 
