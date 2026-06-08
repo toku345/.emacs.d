@@ -1,3 +1,5 @@
+/var/
+/eln-cache/
 projectile-bookmarks.eld
 .python-environments
 eww-bookmarks
@@ -57,6 +59,8 @@ flycheck_*.el
 .projectile
 projectile.cache
 recentf
+/history
+/places
 quelpa
 
 # local custom-set-variables
