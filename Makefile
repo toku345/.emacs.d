@@ -24,6 +24,7 @@ check: whitespace smoke checkdoc byte-compile
 
 whitespace:
 	git diff --check
+	git diff --cached --check
 
 smoke:
 	$(EMACS) --batch -l init.el
