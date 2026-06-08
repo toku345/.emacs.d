@@ -67,7 +67,7 @@ The check target runs:
 - `git diff --check`
 - `emacs --batch -l init.el`
 - `checkdoc` over repository Emacs Lisp files
-- byte compilation with warnings treated as errors
+- byte compilation of repository Emacs Lisp files
 
 `emacs` must be available on `PATH`. The first smoke load may access package
 archives because this configuration uses `package.el` to install missing

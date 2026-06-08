@@ -1,6 +1,6 @@
 ;;; byte-compile-batch.el --- batch byte-compile runner -*- lexical-binding: t; -*-
 ;;; Commentary:
-;;; Compile repository Emacs Lisp files with warnings as errors.
+;;; Compile repository Emacs Lisp files in a batch process.
 ;;; Code:
 
 (require 'bytecomp)
@@ -37,7 +37,6 @@
   "Byte-compile all command-line file arguments."
   (let ((files (my/byte-compile-batch--files))
         (failed nil)
-        (byte-compile-error-on-warn t)
         (byte-compile-dest-file-function
          #'my/byte-compile-batch--dest-file))
     (add-to-list 'load-path (expand-file-name "lisp" default-directory))

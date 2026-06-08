@@ -33,7 +33,7 @@ checkdoc:
 	$(EMACS) -Q --batch --eval "(progn (load-file \"scripts/checkdoc-batch.el\") (my/checkdoc-batch-run))" -- $(ELISP_FILES)
 
 byte-compile:
-	$(EMACS) -Q --batch --eval "(progn (load-file \"scripts/byte-compile-batch.el\") (my/byte-compile-batch-run))" -- $(ELISP_FILES)
+	$(EMACS) -Q --batch -L lisp -l lisp/init-package.el --eval "(progn (load-file \"scripts/byte-compile-batch.el\") (my/byte-compile-batch-run))" -- $(ELISP_FILES)
 
 clean-elc:
 	find . -name '*.elc' -type f -delete
