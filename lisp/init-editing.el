@@ -66,10 +66,23 @@
          ("C-'"   . undo-redo)))
 
 ;;; --- Folding ---
+(declare-function treesit-fold-ready-p "treesit-fold")
+(declare-function treesit-fold-toggle "treesit-fold")
+(declare-function treesit-fold-usable-mode-p "treesit-fold")
+
+(defun my/treesit-fold-toggle ()
+  "Toggle a tree-sitter fold when the current buffer supports it."
+  (interactive)
+  (if (and (fboundp 'treesit-fold-ready-p)
+           (treesit-fold-ready-p)
+           (treesit-fold-usable-mode-p))
+      (treesit-fold-toggle)
+    (message "No tree-sitter folding available in this buffer")))
+
 (use-package treesit-fold
   :bind (:map global-map
-              ("M-RET" . treesit-fold-toggle))
-  :config
+              ("M-RET" . my/treesit-fold-toggle))
+  :init
   (setq treesit-fold-line-count-show t)
   (global-treesit-fold-mode 1))
 
