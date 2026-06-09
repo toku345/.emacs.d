@@ -27,7 +27,7 @@ whitespace:
 	git diff --cached --check
 
 smoke:
-	$(EMACS) -Q --batch -l init.el
+	$(EMACS) -Q --batch -l early-init.el -l init.el
 
 checkdoc:
 	$(EMACS) -Q --batch --eval "(progn (load-file \"scripts/checkdoc-batch.el\") (my/checkdoc-batch-run))" -- $(ELISP_FILES)
