@@ -1,6 +1,8 @@
 /var/
 /eln-cache/
+/tree-sitter/
 projectile-bookmarks.eld
+projects
 .python-environments
 eww-bookmarks
 meghanada
