@@ -66,9 +66,28 @@
          ("C-'"   . undo-redo)))
 
 ;;; --- Folding ---
-(use-package yafolding
+(declare-function treesit-fold-ready-p "treesit-fold")
+(declare-function treesit-fold-toggle "treesit-fold")
+(declare-function treesit-fold-usable-mode-p "treesit-fold")
+
+(defun my/treesit-fold-toggle ()
+  "Toggle a tree-sitter fold when the current buffer supports it."
+  (interactive)
+  (if (and (fboundp 'treesit-fold-ready-p)
+           (fboundp 'treesit-fold-usable-mode-p)
+           (fboundp 'treesit-fold-toggle)
+           (treesit-fold-ready-p)
+           (treesit-fold-usable-mode-p))
+      (treesit-fold-toggle)
+    (message "No tree-sitter folding available in this buffer")))
+
+(use-package treesit-fold
+  :demand t
   :bind (:map global-map
-              ("M-RET" . yafolding-toggle-element)))
+              ("M-RET" . my/treesit-fold-toggle))
+  :config
+  (setq treesit-fold-line-count-show t)
+  (global-treesit-fold-mode 1))
 
 (provide 'init-editing)
 ;;; init-editing.el ends here

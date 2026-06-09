@@ -61,7 +61,6 @@
   (setq ruby-insert-encoding-magic-comment nil)
   ;; ruby-mode is remapped to ruby-ts-mode by treesit-auto.
   :hook ((ruby-ts-mode . display-line-numbers-mode)
-         (ruby-ts-mode . yafolding-mode)
          (ruby-ts-mode . eglot-ensure)))
 
 (use-package rubocop
