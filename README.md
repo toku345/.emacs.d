@@ -54,6 +54,31 @@ lisp/
 - Other tools: `multimarkdown` for Markdown / PlantUML jar at `~/bin/plantuml.jar` /
   Roswell for Common Lisp via `~/.roswell/helper.el`
 
+## Development
+
+Run the local validation gate before committing:
+
+```sh
+make check
+```
+
+The check target runs:
+
+- `git diff --check`
+- `emacs --batch -l init.el`
+- `checkdoc` over repository Emacs Lisp files
+- byte compilation of repository Emacs Lisp files
+
+`emacs` must be available on `PATH`. The first smoke load may access package
+archives because this configuration uses `package.el` to install missing
+packages automatically.
+
+To remove compiled Elisp files created outside the normal validation path, run:
+
+```sh
+make clean-elc
+```
+
 ## Key Bindings
 
 | Key | Command |

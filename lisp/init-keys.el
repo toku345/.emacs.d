@@ -1,6 +1,6 @@
 ;;; init-keys.el --- global key bindings -*- lexical-binding: t; -*-
 ;;; Commentary:
-;;; Global key bindings. Package-specific bindings live in their modules.
+;;; Global key bindings.  Package-specific bindings live in their modules.
 ;;; Preserve the feel of the old init.el bindings.
 ;;; Code:
 
