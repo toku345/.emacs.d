@@ -1,6 +1,6 @@
 ;;; early-init.el --- early initialization -*- lexical-binding: t; -*-
 ;;; Commentary:
-;;; Loaded before init.el on Emacs 27+. Keep startup optimizations,
+;;; Loaded before init.el on Emacs 27+.  Keep startup optimizations,
 ;;; native compilation settings, and pre-frame UI suppression here.
 ;;; Code:
 
