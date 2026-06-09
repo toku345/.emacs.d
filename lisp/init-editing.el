@@ -66,9 +66,12 @@
          ("C-'"   . undo-redo)))
 
 ;;; --- Folding ---
-(use-package yafolding
+(use-package treesit-fold
   :bind (:map global-map
-              ("M-RET" . yafolding-toggle-element)))
+              ("M-RET" . treesit-fold-toggle))
+  :config
+  (setq treesit-fold-line-count-show t)
+  (global-treesit-fold-mode 1))
 
 (provide 'init-editing)
 ;;; init-editing.el ends here
