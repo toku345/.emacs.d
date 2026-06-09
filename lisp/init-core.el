@@ -30,6 +30,13 @@
 (setq-default tab-width 2
               indent-tabs-mode nil)
 
+;;; macOS GUI modifier keys: make Command act as Meta and Option as Super.
+(when (eq system-type 'darwin)
+  (setq ns-command-modifier 'meta
+        ns-option-modifier 'super
+        mac-command-modifier 'meta
+        mac-option-modifier 'super))
+
 ;;; Buffer boundary display.
 (set-default 'indicate-empty-lines t)
 (setq-default indicate-buffer-boundaries 'right)
