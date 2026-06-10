@@ -65,7 +65,7 @@ make check
 The check target runs:
 
 - `git diff --check`
-- `emacs --batch -l init.el`
+- `emacs -Q --batch -l early-init.el -l init.el`
 - `checkdoc` over repository Emacs Lisp files
 - byte compilation of repository Emacs Lisp files
 
@@ -73,7 +73,9 @@ The check target runs:
 archives because this configuration uses `package.el` to install missing
 packages automatically.
 
-To remove compiled Elisp files created outside the normal validation path, run:
+To delete every `.elc` file in the repository — including compiled files of
+installed packages under `elpa/`, which then run uncompiled until
+reinstalled or recompiled — run:
 
 ```sh
 make clean-elc

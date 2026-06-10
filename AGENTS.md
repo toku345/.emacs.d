@@ -9,7 +9,7 @@ This repository is a modular Emacs configuration targeting Emacs 30+. The root c
 - `make check`: run the full local validation gate (whitespace check, smoke load, checkdoc, byte-compile) before committing.
 - `make smoke` (`emacs -Q --batch -l early-init.el -l init.el`): smoke-load the full configuration. The first run may access package archives to install missing packages.
 - `emacs -Q --batch -L lisp -l init-package.el -l lisp/init-core.el`: load a small subset when narrowing a module-level issue.
-- `make clean-elc`: remove compiled `.elc` files created outside the normal validation path.
+- `make clean-elc`: delete every `.elc` file in the repository, including compiled files of installed packages under `elpa/`; packages run uncompiled until reinstalled or recompiled.
 - `rg "pattern" lisp README.md`: search configuration and docs quickly.
 
 ## Coding Style & Naming Conventions
