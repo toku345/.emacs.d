@@ -96,6 +96,17 @@
 (use-package cargo
   :hook (rust-ts-mode . cargo-minor-mode))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Zig ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package zig-ts-mode
+  :commands zig-ts-mode
+  :hook ((zig-ts-mode . eglot-ensure)
+         (zig-ts-mode . my/eglot-format-on-save)))
+
+(use-package zig-mode
+  :mode "\\.zig\\'"
+  :hook ((zig-mode . eglot-ensure)
+         (zig-mode . my/eglot-format-on-save)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Go ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'go-ts-mode-hook #'eglot-ensure)
 (add-hook 'go-ts-mode-hook #'my/eglot-format-on-save)
