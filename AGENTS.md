@@ -6,12 +6,11 @@ This repository is a modular Emacs configuration targeting Emacs 30+. The root c
 
 ## Build, Test, and Development Commands
 
-- `emacs --batch -l init.el`: smoke-load the full configuration. The first run may access package archives to install missing packages.
+- `make check`: run the full local validation gate (whitespace check, smoke load, checkdoc, byte-compile) before committing.
+- `make smoke` (`emacs -Q --batch -l early-init.el -l init.el`): smoke-load the full configuration. The first run may access package archives to install missing packages.
 - `emacs -Q --batch -L lisp -l init-package.el -l lisp/init-core.el`: load a small subset when narrowing a module-level issue.
-- `git diff --check`: catch whitespace errors before committing.
+- `make clean-elc`: remove compiled `.elc` files created outside the normal validation path.
 - `rg "pattern" lisp README.md`: search configuration and docs quickly.
-
-There is no Makefile or dedicated build step; this repository is exercised by loading Emacs Lisp configuration.
 
 ## Coding Style & Naming Conventions
 
@@ -19,7 +18,7 @@ Use Emacs Lisp conventions already present in the repository: `lexical-binding` 
 
 ## Testing Guidelines
 
-No formal test suite exists yet. For normal changes, run the full smoke-load command and `git diff --check`. For package, LSP, or language-mode changes, also open the affected mode interactively when practical. If you add tests, use ERT under `test/` or `tests/`, name files like `init-topic-test.el`, and document the exact batch command in `README.md`.
+No formal test suite exists yet. For normal changes, run `make check`. For package, LSP, or language-mode changes, also open the affected mode interactively when practical. If you add tests, use ERT under `test/` or `tests/`, name files like `init-topic-test.el`, and document the exact batch command in `README.md`.
 
 ## Commit & Pull Request Guidelines
 
