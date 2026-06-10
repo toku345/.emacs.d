@@ -23,6 +23,11 @@
                  . ,(eglot-alternatives
                      '(("ruby-lsp")
                        ("solargraph" "socket" "--port" :autoport)))))
+  ;; Zig: zls provides completion, diagnostics, and formatting.
+  (setq eglot-server-programs
+        (assq-delete-all 'zig-mode eglot-server-programs))
+  (add-to-list 'eglot-server-programs
+               '((zig-ts-mode) . ("zls")))
   ;; Swift, replacing lsp-sourcekit. Register it when the binary exists.
   (let ((sourcekit "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp"))
     (when (file-exists-p sourcekit)
@@ -42,7 +47,9 @@
 (use-package treesit-auto
   :config
   ;; Prompt for missing grammars and remap supported modes to *-ts-mode.
-  (setq treesit-auto-install 'prompt)
+  ;; Zig is handled by zig-ts-mode, which owns its grammar recipe and mode entry.
+  (setq treesit-auto-install 'prompt
+        treesit-auto-langs (remove 'zig treesit-auto-langs))
   (global-treesit-auto-mode 1)
   (treesit-auto-add-to-auto-mode-alist
    '(dockerfile go json rust typescript tsx yaml)))

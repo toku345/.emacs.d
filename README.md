@@ -49,8 +49,8 @@ lisp/
 ### External Tools
 
 - LSP servers: `rust-analyzer` / `gopls` / `pyright` / `typescript-language-server` /
-  `solargraph` or `ruby-lsp` / `jdtls` / `terraform-ls`
-- Formatters: `prettier` / `rubocop` / `jq`
+  `solargraph` or `ruby-lsp` / `jdtls` / `terraform-ls` / `zls`
+- Formatters: `prettier` / `rubocop` / `jq` / `zig fmt`
 - Other tools: `multimarkdown` for Markdown / PlantUML jar at `~/bin/plantuml.jar` /
   Roswell for Common Lisp via `~/.roswell/helper.el`
 

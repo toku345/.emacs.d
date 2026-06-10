@@ -96,6 +96,17 @@
 (use-package cargo
   :hook (rust-ts-mode . cargo-minor-mode))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Zig ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package zig-ts-mode
+  :commands zig-ts-mode
+  :init
+  ;; Prefer zig-ts-mode's grammar management and avoid zig-mode format hooks.
+  (dolist (pattern '("\\.zig\\'" "\\.\\(zig\\|zon\\)\\'"))
+    (setq auto-mode-alist (assoc-delete-all pattern auto-mode-alist)))
+  (add-to-list 'auto-mode-alist '("\\.\\(zig\\|zon\\)\\'" . zig-ts-mode))
+  :hook ((zig-ts-mode . eglot-ensure)
+         (zig-ts-mode . my/eglot-format-on-save)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Go ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'go-ts-mode-hook #'eglot-ensure)
 (add-hook 'go-ts-mode-hook #'my/eglot-format-on-save)
