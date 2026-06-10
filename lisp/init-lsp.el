@@ -47,6 +47,7 @@
 (use-package treesit-auto
   :config
   ;; Prompt for missing grammars and remap supported modes to *-ts-mode.
+  ;; Zig is handled by zig-ts-mode, which owns its grammar recipe and mode entry.
   (setq treesit-auto-install 'prompt
         treesit-auto-langs (remove 'zig treesit-auto-langs))
   (global-treesit-auto-mode 1)
