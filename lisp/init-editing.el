@@ -40,6 +40,7 @@
 (add-hook 'emacs-lisp-mode-hook #'my/lisp-mode-hook)
 
 ;;; --- Snippets ---
+(declare-function yas-reload-all "yasnippet")
 (use-package yasnippet
   :diminish yas-minor-mode
   ;; Per-mode hooks instead of yas-global-mode keep yasnippet (and the

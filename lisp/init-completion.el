@@ -50,8 +50,8 @@
          ("M-s g"   . consult-grep))
   :init
   ;; Use consult for xref previews.
-  (setq xref-show-xrefs-function #'consult-xref
-        xref-show-definitions-function #'consult-xref)
+  (setopt xref-show-xrefs-function #'consult-xref
+          xref-show-definitions-function #'consult-xref)
   :config
   (setq consult-narrow-key "<"))
 
@@ -68,12 +68,13 @@
 (use-package corfu
   :init
   (global-corfu-mode 1)
+  :custom
+  (corfu-cycle t)
+  (corfu-auto t)                 ; Show popup automatically.
+  (corfu-auto-delay 0.2)         ; Old company-idle-delay equivalent.
+  (corfu-auto-prefix 2)          ; Old company-minimum-prefix-length equivalent.
+  (corfu-preselect 'prompt)
   :config
-  (setq corfu-cycle t
-        corfu-auto t                 ; Show popup automatically.
-        corfu-auto-delay 0.2         ; Old company-idle-delay equivalent.
-        corfu-auto-prefix 2          ; Old company-minimum-prefix-length equivalent.
-        corfu-preselect 'prompt)
   ;; Switch between indentation and completion at point.
   (setq tab-always-indent 'complete)
   :bind (:map corfu-map

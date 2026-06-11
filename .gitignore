@@ -45,6 +45,9 @@ tramp
 /package-quickstart.el
 /package-quickstart.elc
 
+# request.el runtime state (cookie jar must never be committed)
+/request/
+
 # reftex files
 *.rel
 

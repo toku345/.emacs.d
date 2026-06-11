@@ -6,6 +6,7 @@
 ;;; Code:
 
 ;;; --- eglot, the built-in LSP client ---
+(declare-function eglot-alternatives "eglot")
 (use-package eglot
   :ensure nil
   :commands (eglot eglot-ensure)

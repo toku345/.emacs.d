@@ -18,9 +18,18 @@ ELISP_FILES := \
 	scripts/checkdoc-batch.el \
 	scripts/byte-compile-batch.el
 
-.PHONY: check whitespace smoke checkdoc byte-compile clean-elc
+.PHONY: check whitespace coverage smoke checkdoc byte-compile clean-elc
 
-check: whitespace smoke checkdoc byte-compile
+check: whitespace coverage smoke checkdoc byte-compile
+
+# Fail when a lisp/*.el module is missing from the hand-maintained
+# ELISP_FILES list above; otherwise it silently skips checkdoc/byte-compile.
+coverage:
+	@missing="$(filter-out $(ELISP_FILES),$(wildcard lisp/*.el))"; \
+	if [ -n "$$missing" ]; then \
+		echo "ELISP_FILES is missing: $$missing"; \
+		exit 1; \
+	fi
 
 whitespace:
 	git diff --check

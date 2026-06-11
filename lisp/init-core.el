@@ -55,7 +55,7 @@
   (global-subword-mode 1))
 
 ;;; Automatically reload changed files.
-(setq global-auto-revert-non-file-buffers t)
+(setopt global-auto-revert-non-file-buffers t)
 (global-auto-revert-mode 1)
 
 ;;; Make scripts executable on save when they start with #!.
@@ -63,6 +63,7 @@
           #'executable-make-buffer-file-executable-if-script-p)
 
 ;;; Start the emacsclient server for GUI and daemon sessions, avoiding duplicates.
+(declare-function server-running-p "server")
 (when (or (display-graphic-p) (daemonp))
   (require 'server)
   (unless (server-running-p)
@@ -71,11 +72,12 @@
 ;;; dired
 (use-package dired
   :ensure nil
+  :custom
+  (dired-dwim-target t)             ; Guess copy/move target in two-pane dired.
+  (dired-recursive-copies 'always)
+  (dired-isearch-filenames t)
+  (dired-listing-switches "-alh")
   :config
-  (setq dired-dwim-target t            ; Guess copy/move target in two-pane dired.
-        dired-recursive-copies 'always
-        dired-isearch-filenames t
-        dired-listing-switches "-alh")
   ;; macOS ls lacks some GNU options, so prefer coreutils gls.
   ;; Support both Apple Silicon /opt/homebrew and Intel /usr/local.
   (when-let ((gls (executable-find "gls")))
