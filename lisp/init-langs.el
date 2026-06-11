@@ -153,7 +153,11 @@
 ;;; Stylesheet. scss-mode comes built in via css-mode.el; the MELPA scss-mode
 ;;; references flymake-allowed-file-name-masks, removed in Emacs 30, and fails
 ;;; to load. css-mode.el defines no scss-mode feature or library, so configure
-;;; it directly instead of through use-package.
+;;; it directly instead of through use-package. Keep the MELPA package
+;;; uninstalled: elpa/ is machine-local, and a stale installed copy registers
+;;; autoloads that shadow the built-in mode and silently break .scss buffers.
+(when (assq 'scss-mode package-alist)
+  (warn "Stale MELPA scss-mode is installed and shadows the built-in scss-mode; remove it with M-x package-delete"))
 (setq css-indent-offset 2)              ; Shared by css-mode and scss-mode.
 (add-hook 'scss-mode-hook #'prettier-js-mode)
 
