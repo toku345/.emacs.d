@@ -94,5 +94,15 @@ Loads treesit-fold on first use; its :config enables the global mode."
   (setq treesit-fold-line-count-show t)
   (global-treesit-fold-mode 1))
 
+;;; --- Spell checking ---
+;;; jinx compiles a native module against the enchant C library on first
+;;; load, so enable it only when the development headers are present
+;;; (libenchant-2-dev on Debian/Ubuntu, enchant via Homebrew on macOS).
+(use-package jinx
+  :if (ignore-errors
+        (eq 0 (call-process "pkg-config" nil nil nil "--exists" "enchant-2")))
+  :hook (text-mode . jinx-mode)         ; org and markdown derive from it.
+  :bind ("M-$" . jinx-correct))         ; Replaces the ispell-word default.
+
 (provide 'init-editing)
 ;;; init-editing.el ends here

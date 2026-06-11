@@ -9,10 +9,15 @@
 (use-package org
   :ensure nil
   :bind (:map global-map
-              ("C-c c" . org-capture))
+              ("C-c c" . org-capture)
+              ;; C-c a is eglot-code-actions inside eglot-managed buffers
+              ;; (init-lsp.el); the agenda stays reachable from any other.
+              ("C-c a" . org-agenda)
+              ("C-c l" . org-store-link))
   :custom
   (org-directory "~/works/org")
   (org-default-notes-file (expand-file-name "notes.org" org-directory))
+  (org-agenda-files (list org-directory))
   (org-startup-with-inline-images t)
   (org-html-doctype "html5")
   (org-html-html5-fancy t)

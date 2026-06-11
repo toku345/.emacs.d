@@ -27,7 +27,7 @@
 (bind-keys :map global-map
            ("C-h"     . delete-backward-char)  ; Help is moved to C-x ?.
            ("C-m"     . newline-and-indent)
-           ("C-c l"   . toggle-truncate-lines)
+           ("C-c t"   . toggle-truncate-lines) ; C-c l belongs to org-store-link.
            ("C-t"     . other-window)
            ("C-x ?"   . help-command)
            ("C-x SPC" . cua-rectangle-mark-mode)
@@ -36,8 +36,11 @@
            ;; navigation (init-lsp.el).
            ("M-["     . switch-to-prev-buffer)
            ("M-]"     . switch-to-next-buffer)
-           ("C-c C-p" . my/move-line-up)
-           ("C-c C-n" . my/move-line-down))
+           ;; C-c C-<letter> is major-mode territory and was shadowed in
+           ;; org, markdown, python, etc. org rebinds M-<up>/M-<down> to
+           ;; org-metaup/org-metadown, which move lines/elements the same way.
+           ("M-<up>"   . my/move-line-up)
+           ("M-<down>" . my/move-line-down))
 
 (provide 'init-keys)
 ;;; init-keys.el ends here
