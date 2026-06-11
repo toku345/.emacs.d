@@ -12,6 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # In container jobs, checkout writes its safe.directory entry under a
+      # temporary HOME, so later steps still see "dubious ownership" and
+      # every git command (whitespace checks, make whitespace) fails.
+      - name: Mark workspace as a safe git directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
       # init.el resolves load-path from user-emacs-directory, so the
       # checkout must be reachable as ~/.emacs.d.
       - name: Link checkout as user-emacs-directory
