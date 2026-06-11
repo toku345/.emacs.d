@@ -67,6 +67,8 @@ The check target runs:
 - `git diff --check`
 - `emacs -Q --batch -l early-init.el -l init.el`
 - `checkdoc` over repository Emacs Lisp files
+- ERT tests under `test/` (`emacs -Q --batch -l early-init.el -l init.el
+  -l test/init-langs-test.el -f ert-run-tests-batch-and-exit`)
 - byte compilation of repository Emacs Lisp files
 
 `emacs` must be available on `PATH`. The first smoke load may access package

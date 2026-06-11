@@ -16,11 +16,12 @@ ELISP_FILES := \
 	lisp/init-misc.el \
 	init.el \
 	scripts/checkdoc-batch.el \
-	scripts/byte-compile-batch.el
+	scripts/byte-compile-batch.el \
+	test/init-langs-test.el
 
-.PHONY: check whitespace smoke checkdoc byte-compile clean-elc
+.PHONY: check whitespace smoke checkdoc test byte-compile clean-elc
 
-check: whitespace smoke checkdoc byte-compile
+check: whitespace smoke checkdoc test byte-compile
 
 whitespace:
 	git diff --check
@@ -31,6 +32,11 @@ smoke:
 
 checkdoc:
 	$(EMACS) -Q --batch --eval "(progn (load-file \"scripts/checkdoc-batch.el\") (my/checkdoc-batch-run))" -- $(ELISP_FILES)
+
+# ERT tests run against the fully loaded configuration so package
+# activation (and any stale shadowing autoloads) is in effect.
+test:
+	$(EMACS) -Q --batch -l early-init.el -l init.el -l test/init-langs-test.el -f ert-run-tests-batch-and-exit
 
 byte-compile:
 	$(EMACS) -Q --batch -L lisp -l lisp/init-package.el --eval "(progn (load-file \"scripts/byte-compile-batch.el\") (my/byte-compile-batch-run))" -- $(ELISP_FILES)
