@@ -15,6 +15,7 @@
   :commands prettier-js-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Clojure ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(declare-function put-clojure-indent "clojure-mode")
 (use-package clojure-mode
   :defer t                              ; Autoloads keep auto-mode-alist wired.
   :init
@@ -32,13 +33,14 @@
   :after clojure-mode
   :hook (cider-repl-mode . my/lisp-mode-hook)
   :config
+  ;; REPL pretty printing stays on cider-repl-use-pretty-printing's default;
+  ;; the old cider-repl-toggle-pretty-printing variable no longer exists.
   (setq nrepl-log-messages t
         cider-repl-display-in-current-window t
         cider-repl-use-clojure-font-lock t
         cider-save-file-on-load 'always-save
         cider-font-lock-dynamically '(macro core function var)
-        cider-overlays-use-font-lock t
-        cider-repl-toggle-pretty-printing t))
+        cider-overlays-use-font-lock t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Scheme ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package geiser
@@ -120,8 +122,8 @@
 (add-hook 'typescript-ts-mode-hook #'prettier-js-mode)
 (add-hook 'tsx-ts-mode-hook #'eglot-ensure)
 (add-hook 'tsx-ts-mode-hook #'prettier-js-mode)
-(setq js-indent-level 2
-      typescript-ts-mode-indent-offset 2)
+(setopt js-indent-level 2
+        typescript-ts-mode-indent-offset 2)
 
 ;;; Angular
 (use-package ng2-mode
@@ -161,7 +163,7 @@
 ;;; autoloads that shadow the built-in mode and silently break .scss buffers.
 (when (assq 'scss-mode package-alist)
   (warn "Stale MELPA scss-mode is installed and shadows the built-in scss-mode; remove it with M-x package-delete"))
-(setq css-indent-offset 2)              ; Shared by css-mode and scss-mode.
+(setopt css-indent-offset 2)            ; Shared by css-mode and scss-mode.
 (add-hook 'scss-mode-hook #'prettier-js-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; JSON / YAML ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -22,6 +22,8 @@
 
 ;;; native-compilation (Emacs 28+)
 (when (featurep 'native-compile)
+  ;; Declared bare so non-native-comp builds byte-compile this file cleanly.
+  (defvar native-comp-async-report-warnings-errors)
   ;; Keep native-comp warnings in logs instead of showing them in the minibuffer.
   (setq native-comp-async-report-warnings-errors 'silent)
   ;; Enable deferred JIT native compilation where available.

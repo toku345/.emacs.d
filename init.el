@@ -13,18 +13,30 @@
 
 ;;; --- Module loading ---
 ;;; Require modules in dependency order. init-package prepares use-package.
-(require 'init-package)      ; package.el archives and use-package setup
-(require 'init-core)         ; core defaults, auto-revert, and dired
-(require 'init-keys)         ; global key bindings
-(require 'init-completion)   ; Vertico/Consult/Corfu completion stack
-(require 'init-ui)           ; theme, modeline, and appearance
-(require 'init-editing)      ; paredit, multiple-cursors, and yasnippet
-(require 'init-vc)           ; magit and diff-hl
-(require 'init-project)      ; project.el and search
-(require 'init-lsp)          ; eglot, flymake, and tree-sitter
-(require 'init-langs)        ; language modes
-(require 'init-org)          ; org and easy-hugo
-(require 'init-misc)         ; miscellaneous utilities
+;;; Interactively a broken module logs a warning and the rest still loads,
+;;; keeping the session repairable; in batch (make smoke) the error is
+;;; re-signaled so the verification gate stays fail-fast.
+(dolist (module '(init-package      ; package.el archives and use-package setup
+                  init-core         ; core defaults, auto-revert, and dired
+                  init-keys         ; global key bindings
+                  init-completion   ; Vertico/Consult/Corfu completion stack
+                  init-ui           ; theme, modeline, and appearance
+                  init-editing      ; paredit, multiple-cursors, and yasnippet
+                  init-vc           ; magit and diff-hl
+                  init-project      ; project.el and search
+                  init-lsp          ; eglot, flymake, and tree-sitter
+                  init-langs        ; language modes
+                  init-org          ; org and easy-hugo
+                  init-misc))       ; miscellaneous utilities
+  (condition-case err
+      (require module)
+    (error
+     (if noninteractive
+         (signal (car err) (cdr err))
+       (display-warning 'init
+                        (format "Failed to load %s: %s"
+                                module (error-message-string err))
+                        :error)))))
 
 ;;; Keep custom-set-* in custom.el, which is not version controlled.
 (unless custom-file

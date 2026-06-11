@@ -34,19 +34,23 @@
     (string-prefix-p "lisp/init-" relative)))
 
 (defun my/byte-compile-batch-run ()
-  "Byte-compile all command-line file arguments."
+  "Byte-compile all command-line file arguments.
+Warnings fail the run via `byte-compile-error-on-warn'."
   (let ((files (my/byte-compile-batch--files))
         (failed nil)
+        (byte-compile-error-on-warn t)
         (byte-compile-dest-file-function
          #'my/byte-compile-batch--dest-file))
     (add-to-list 'load-path (expand-file-name "lisp" default-directory))
     (dolist (file files)
       (message "Byte-compiling %s" file)
       (condition-case err
-          (progn
-            (unless (byte-compile-file file)
+          ;; Judge loading by this file's own result, not the global flag;
+          ;; an earlier failure must not skip loading later good modules.
+          (let ((compiled (byte-compile-file file)))
+            (unless compiled
               (setq failed t))
-            (when (and (not failed)
+            (when (and compiled
                        (my/byte-compile-batch--load-after-compile-p file))
               (load (file-name-sans-extension (expand-file-name file))
                     nil t)))

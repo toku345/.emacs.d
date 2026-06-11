@@ -1,0 +1,43 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    container: silex/emacs:30.2-ci
+    steps:
+      - uses: actions/checkout@v4
+
+      # In container jobs, checkout writes its safe.directory entry under a
+      # temporary HOME, so later steps still see "dubious ownership" and
+      # every git command (whitespace checks, make whitespace) fails.
+      - name: Mark workspace as a safe git directory
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      # init.el resolves load-path from user-emacs-directory, so the
+      # checkout must be reachable as ~/.emacs.d.
+      - name: Link checkout as user-emacs-directory
+        run: ln -sfn "$GITHUB_WORKSPACE" "$HOME/.emacs.d"
+
+      # The first smoke run installs all declared packages from the
+      # archives; cache elpa/ so later runs stay fast and offline.
+      - name: Cache installed packages
+        uses: actions/cache@v4
+        with:
+          path: elpa
+          key: elpa-emacs30.2-${{ hashFiles('lisp/*.el', 'init.el', 'early-init.el') }}
+          restore-keys: elpa-emacs30.2-
+
+      # make whitespace diffs the working tree, which is always clean on a
+      # fresh checkout; check the committed tree against the empty tree
+      # instead so committed whitespace errors fail CI. hash-object needs -w
+      # because a fresh clone's object store lacks the empty tree object.
+      - name: Whitespace check on committed files
+        run: git diff --check "$(git hash-object -w -t tree /dev/null)" HEAD
+
+      - name: Run validation gate
+        run: make check

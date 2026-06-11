@@ -3,6 +3,7 @@
 ;;; Git integration with magit and diff-hl, replacing git-gutter.
 ;;; Code:
 
+(declare-function magit-display-buffer-same-window-except-diff-v1 "magit")
 (use-package magit
   :bind (("C-x M-g" . magit-dispatch)   ; Replace removed magit-dispatch-popup.
          ("C-c m"   . magit-status)
@@ -17,6 +18,8 @@
   (magit-todos-mode 1))
 
 ;;; Fringe diff display, replacing git-gutter and integrating with magit.
+(declare-function diff-hl-magit-pre-refresh "diff-hl")
+(declare-function diff-hl-magit-post-refresh "diff-hl")
 (use-package diff-hl
   :hook (dired-mode . diff-hl-dired-mode)
   :init
