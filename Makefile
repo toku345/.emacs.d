@@ -19,7 +19,7 @@ ELISP_FILES := \
 	scripts/byte-compile-batch.el \
 	test/init-langs-test.el
 
-.PHONY: check whitespace coverage smoke checkdoc test byte-compile clean-elc
+.PHONY: check whitespace coverage smoke checkdoc test byte-compile upgrade clean-elc
 
 check: whitespace coverage smoke checkdoc test byte-compile
 
@@ -49,6 +49,11 @@ test:
 
 byte-compile:
 	$(EMACS) -Q --batch -L lisp -l lisp/init-package.el --eval "(progn (load-file \"scripts/byte-compile-batch.el\") (my/byte-compile-batch-run))" -- $(ELISP_FILES)
+
+# Refresh archives and upgrade every installed package. Most packages track
+# rolling MELPA snapshots, so always run make check afterwards (see README).
+upgrade:
+	$(EMACS) -Q --batch -L lisp -l lisp/init-package.el --eval "(progn (package-refresh-contents) (package-upgrade-all))"
 
 clean-elc:
 	find . -name '*.elc' -type f -delete
