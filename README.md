@@ -50,7 +50,9 @@ lisp/
 
 - LSP servers: `rust-analyzer` / `gopls` / `pyright` / `typescript-language-server` /
   `solargraph` or `ruby-lsp` / `jdtls` / `terraform-ls` / `zls`
-- Formatters: `prettier` / `rubocop` / `jq` / `zig fmt`
+- Formatters (run by apheleia on save): `prettier` / `rubocop` / `ruff` /
+  `rustfmt` / `gofmt` / `zig fmt` / `elm-format`; `jq` for manual JSON
+  region formatting
 - Other tools: `multimarkdown` for Markdown / PlantUML jar at `~/bin/plantuml.jar` /
   Roswell for Common Lisp via `~/.roswell/helper.el`
 
