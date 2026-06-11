@@ -170,7 +170,12 @@
 
 ;;; Stylesheet. scss-mode comes built in via css-mode.el; the MELPA scss-mode
 ;;; references flymake-allowed-file-name-masks, removed in Emacs 30, and fails
-;;; to load. Save-time formatting comes from apheleia (prettier-scss).
+;;; to load. Save-time formatting comes from apheleia (prettier-scss). Keep
+;;; the MELPA package uninstalled: elpa/ is machine-local, and a stale
+;;; installed copy registers autoloads that shadow the built-in mode and
+;;; silently break .scss buffers.
+(when (assq 'scss-mode package-alist)
+  (warn "Stale MELPA scss-mode is installed and shadows the built-in scss-mode; remove it with M-x package-delete"))
 (setopt css-indent-offset 2)            ; Shared by css-mode and scss-mode.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; JSON / YAML ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
