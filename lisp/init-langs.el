@@ -150,12 +150,12 @@
         web-mode-block-padding 2
         web-mode-enable-engine-detection t))
 
-;;; Stylesheet
-(use-package scss-mode
-  :hook (scss-mode . prettier-js-mode)
-  :config
-  (setq css-indent-offset 2
-        scss-compile-at-save nil))
+;;; Stylesheet. scss-mode comes built in via css-mode.el; the MELPA scss-mode
+;;; references flymake-allowed-file-name-masks, removed in Emacs 30, and fails
+;;; to load. css-mode.el defines no scss-mode feature or library, so configure
+;;; it directly instead of through use-package.
+(setq css-indent-offset 2)              ; Shared by css-mode and scss-mode.
+(add-hook 'scss-mode-hook #'prettier-js-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; JSON / YAML ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Let treesit-auto promote JSON/YAML files when grammars are ready.

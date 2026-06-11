@@ -31,8 +31,8 @@
            ("C-t"     . other-window)
            ("C-x ?"   . help-command)
            ("C-x SPC" . cua-rectangle-mark-mode)
-           ("M-n"     . (lambda () (interactive) (scroll-up 1)))
-           ("M-p"     . (lambda () (interactive) (scroll-down 1)))
+           ;; M-n/M-p stay unbound globally; flymake-mode-map uses them for
+           ;; diagnostics navigation (init-lsp.el).
            ("M-["     . switch-to-prev-buffer)
            ("M-]"     . switch-to-next-buffer)
            ("C-c C-p" . my/move-line-up)
