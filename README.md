@@ -74,6 +74,20 @@ The check target runs:
 archives because this configuration uses `package.el` to install missing
 packages automatically.
 
+To upgrade installed packages, refresh the archives and upgrade everything
+with a newer version, then re-run the validation gate:
+
+```sh
+make upgrade
+make check
+```
+
+Most packages track rolling MELPA snapshots, so a single upgrade can pull
+in many changes at once; always re-run `make check` afterwards. Package
+versions are not pinned — the package set is declared in `lisp/*.el`, but
+which version a fresh machine installs depends on the archives at install
+time (a lockfile via the planned Elpaca migration is tracked in issue #4).
+
 To delete every `.elc` file in the repository — including compiled files of
 installed packages under `elpa/`, which then run uncompiled until
 reinstalled or recompiled — run:

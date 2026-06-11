@@ -6,6 +6,14 @@
 
 (require 'package)
 
+;;; Fail hard on TLS certificate problems instead of falling back to the
+;;; interactive NSM prompt, which batch runs cannot answer. GNU/NonGNU
+;;; archives are additionally signature-checked (package-check-signature
+;;; defaults to allow-unsigned); MELPA ships unsigned, so certificate
+;;; verification is its only integrity guarantee. This is global for every
+;;; TLS connection Emacs makes, which is the intent.
+(setq gnutls-verify-error t)
+
 ;;; Archives: GNU ELPA / NonGNU ELPA / MELPA.
 ;;; Many modern packages such as Vertico and Corfu live in MELPA or NonGNU.
 (setq package-archives
