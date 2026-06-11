@@ -48,6 +48,10 @@
   :config
   (show-paren-mode 1))
 
+;;; Repeat the last key of a repeatable command without its prefix,
+;;; e.g. C-c g n n n for consecutive diff-hl hunk jumps (init-vc.el).
+(repeat-mode 1)
+
 ;;; Treat CamelCase parts as subwords.
 (use-package subword
   :ensure nil

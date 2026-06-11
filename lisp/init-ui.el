@@ -41,8 +41,13 @@
         whitespace-space-regexp "\\(\x3000+\\|^ +\\| +$\\)")
   (global-whitespace-mode 1))
 
-;;; Clean trailing whitespace before save.
-(add-hook 'before-save-hook #'whitespace-cleanup)
+;;; Clean whitespace on edited lines only. The previous global
+;;; whitespace-cleanup on before-save-hook rewrote untouched lines and
+;;; produced noisy diffs in repositories with pre-existing stray whitespace.
+(use-package ws-butler
+  :diminish
+  :config
+  (ws-butler-global-mode 1))
 
 ;;; Highlight the current line using global-hl-line-mode.
 (use-package hl-line

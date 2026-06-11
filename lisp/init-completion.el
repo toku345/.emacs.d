@@ -18,7 +18,9 @@
 (use-package vertico-repeat
   :ensure nil
   :after vertico
-  :bind ("C-c C-r" . vertico-repeat)
+  ;; User-reserved key; C-c C-r was shadowed by major modes (e.g. cider)
+  ;; and C-c r is eglot-rename in eglot buffers.
+  :bind ("C-c R" . vertico-repeat)
   :init
   (add-hook 'minibuffer-setup-hook #'vertico-repeat-save))
 
@@ -58,6 +60,7 @@
 ;;; Action menu for candidates, with consult integration.
 (use-package embark
   :bind (("C-." . embark-act)
+         ("M-o" . embark-act)           ; C-. is unreachable in most terminals.
          ("C-;" . embark-dwim)))
 
 (use-package embark-consult
@@ -88,8 +91,10 @@
   :hook (corfu-mode . corfu-popupinfo-mode))
 
 ;;; Show Corfu popups in terminal sessions.
+;;; Enabled unconditionally: the mode checks display-graphic-p per frame at
+;;; runtime, while a use-package :if is evaluated once at startup and broke
+;;; emacsclient -nw frames connecting to a GUI or daemon session.
 (use-package corfu-terminal
-  :if (not (display-graphic-p))
   :after corfu
   :config
   (corfu-terminal-mode 1))

@@ -20,6 +20,13 @@
 ;;; Fringe diff display, replacing git-gutter and integrating with magit.
 (declare-function diff-hl-magit-pre-refresh "diff-hl")
 (declare-function diff-hl-magit-post-refresh "diff-hl")
+
+;;; Repeat map for hunk navigation: C-c g n, then bare n/p to keep moving.
+(defvar-keymap my/diff-hl-repeat-map
+  :doc "Repeat map for diff-hl hunk navigation."
+  "n" 'diff-hl-next-hunk
+  "p" 'diff-hl-previous-hunk)
+
 (use-package diff-hl
   :hook (dired-mode . diff-hl-dired-mode)
   :init
@@ -34,6 +41,10 @@
   ;; Refresh diff display around magit operations.
   (add-hook 'magit-pre-refresh-hook #'diff-hl-magit-pre-refresh)
   (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
+  ;; Override the repeat-map property diff-hl sets to diff-hl-command-map,
+  ;; where a trailing n would run diff-hl-revert-hunk (destructive).
+  (put 'diff-hl-next-hunk 'repeat-map 'my/diff-hl-repeat-map)
+  (put 'diff-hl-previous-hunk 'repeat-map 'my/diff-hl-repeat-map)
   ;; Hunk operations. Use C-c g to avoid C-x p/n conflicts with project.el/narrow.
   :bind (("C-c g n" . diff-hl-next-hunk)
          ("C-c g p" . diff-hl-previous-hunk)
