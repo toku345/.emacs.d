@@ -42,8 +42,11 @@
 ;;; --- Snippets ---
 (use-package yasnippet
   :diminish yas-minor-mode
-  :init
-  (yas-global-mode 1)
+  ;; Per-mode hooks instead of yas-global-mode keep yasnippet (and the
+  ;; snippet directory scan) out of startup until the first file visit.
+  :hook ((prog-mode text-mode) . yas-minor-mode)
+  :config
+  (yas-reload-all)
   :bind (:map yas-minor-mode-map
               ;; Leave TAB to corfu/indentation and avoid expansion conflicts.
               ("<tab>" . nil)
@@ -73,18 +76,17 @@
 (declare-function treesit-fold-usable-mode-p "treesit-fold")
 
 (defun my/treesit-fold-toggle ()
-  "Toggle a tree-sitter fold when the current buffer supports it."
+  "Toggle a tree-sitter fold when the current buffer supports it.
+Loads treesit-fold on first use; its :config enables the global mode."
   (interactive)
-  (if (and (fboundp 'treesit-fold-ready-p)
-           (fboundp 'treesit-fold-usable-mode-p)
-           (fboundp 'treesit-fold-toggle)
+  (if (and (require 'treesit-fold nil t)
            (treesit-fold-ready-p)
            (treesit-fold-usable-mode-p))
       (treesit-fold-toggle)
     (message "No tree-sitter folding available in this buffer")))
 
 (use-package treesit-fold
-  :demand t
+  :defer t                          ; Loaded by my/treesit-fold-toggle above.
   :bind (:map global-map
               ("M-RET" . my/treesit-fold-toggle))
   :config

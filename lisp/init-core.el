@@ -107,8 +107,9 @@
   :config
   (save-place-mode 1))
 
-;;; EditorConfig for project-local style consistency.
+;;; EditorConfig for project-local style consistency. Built into Emacs 30.
 (use-package editorconfig
+  :ensure nil
   :config
   (editorconfig-mode 1))
 

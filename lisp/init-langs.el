@@ -16,6 +16,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Clojure ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package clojure-mode
+  :defer t                              ; Autoloads keep auto-mode-alist wired.
   :init
   (add-hook 'clojure-mode-hook #'yas-minor-mode)
   (add-hook 'clojure-mode-hook #'subword-mode)
@@ -41,6 +42,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Scheme ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package geiser
+  :defer t            ; Autoloads hook scheme-mode for on-demand activation.
   :init
   (add-hook 'geiser-mode-hook #'my/lisp-mode-hook)
   (add-hook 'geiser-repl-mode-hook #'my/lisp-mode-hook)
@@ -135,6 +137,7 @@
 
 ;;; Elm
 (use-package elm-mode
+  :defer t
   :init (setq elm-format-on-save t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Web ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

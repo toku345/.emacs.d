@@ -19,7 +19,11 @@
         ("nongnu" . 8)
         ("melpa"  . 6)))
 
-(unless (bound-and-true-p package--initialized)
+;;; Skip initialization when startup.el already activated packages, fully
+;;; (package--initialized) or via the quickstart file (package--activated);
+;;; re-running package-initialize would repeat the whole activation.
+(unless (or (bound-and-true-p package--initialized)
+            (bound-and-true-p package--activated))
   (package-initialize))
 
 ;;; use-package is bundled; keep only the fallback for older Emacs versions.
