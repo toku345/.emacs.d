@@ -5,14 +5,34 @@
 ;;; treesit-auto, configured in init-lsp.el, installs grammars and remaps modes.
 ;;; Code:
 
-;;; Helper for formatting with eglot before save.
-(defun my/eglot-format-on-save ()
-  "Run `eglot-format-buffer' before saving the current buffer."
-  (add-hook 'before-save-hook #'eglot-format-buffer nil t))
-
-;;; Formatter using the external prettier command.
-(use-package prettier-js
-  :commands prettier-js-mode)
+;;; Save-time formatting, unified through apheleia: asynchronous (no save
+;;; blocking on a slow LSP server), keeps point, and dispatches one external
+;;; formatter per mode. Replaces prettier-js, eglot-format-buffer hooks,
+;;; elm-format-on-save, and rubocop-autocorrect-on-save.
+(use-package apheleia
+  :diminish apheleia-mode
+  :config
+  ;; Explicit allowlist instead of the upstream default alist: only modes
+  ;; that formatted on save before keep doing so, plus the decided
+  ;; overrides (ruff instead of black, rubocop instead of prettier-ruby).
+  (setq apheleia-mode-alist
+        '((js-ts-mode . prettier-javascript)
+          (typescript-ts-mode . prettier-typescript)
+          (tsx-ts-mode . prettier-typescript)
+          (css-mode . prettier-css)
+          (css-ts-mode . prettier-css)
+          (scss-mode . prettier-scss)
+          (web-mode . prettier)
+          (svelte-mode . prettier-svelte)
+          (elm-mode . elm-format)
+          (python-mode . ruff)
+          (python-ts-mode . ruff)
+          (ruby-mode . rubocop)
+          (ruby-ts-mode . rubocop)
+          (rust-ts-mode . rustfmt)
+          (go-ts-mode . gofmt)
+          (zig-ts-mode . zig-fmt)))
+  (apheleia-global-mode 1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Clojure ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (declare-function put-clojure-indent "clojure-mode")
@@ -67,9 +87,10 @@
   :hook ((ruby-ts-mode . display-line-numbers-mode)
          (ruby-ts-mode . eglot-ensure)))
 
+;;; rubocop-mode keeps the check/project commands; autocorrect-on-save stays
+;;; off because apheleia runs rubocop -a as the save-time formatter.
 (use-package rubocop
-  :hook (ruby-ts-mode . rubocop-mode)
-  :custom (rubocop-autocorrect-on-save t))
+  :hook (ruby-ts-mode . rubocop-mode))
 
 (use-package ruby-electric
   :hook (ruby-ts-mode . ruby-electric-mode))
@@ -83,8 +104,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Python ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package python
   :ensure nil
-  :hook ((python-ts-mode . eglot-ensure)
-         (python-ts-mode . my/eglot-format-on-save)))
+  :hook (python-ts-mode . eglot-ensure))
 
 (use-package poetry
   :commands (poetry poetry-tracking-mode))
@@ -95,7 +115,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Rust ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'rust-ts-mode-hook #'eglot-ensure)
-(add-hook 'rust-ts-mode-hook #'my/eglot-format-on-save)
 
 (use-package cargo
   :hook (rust-ts-mode . cargo-minor-mode))
@@ -108,20 +127,15 @@
   (dolist (pattern '("\\.zig\\'" "\\.\\(zig\\|zon\\)\\'"))
     (setq auto-mode-alist (assoc-delete-all pattern auto-mode-alist)))
   (add-to-list 'auto-mode-alist '("\\.\\(zig\\|zon\\)\\'" . zig-ts-mode))
-  :hook ((zig-ts-mode . eglot-ensure)
-         (zig-ts-mode . my/eglot-format-on-save)))
+  :hook (zig-ts-mode . eglot-ensure))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Go ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-hook 'go-ts-mode-hook #'eglot-ensure)
-(add-hook 'go-ts-mode-hook #'my/eglot-format-on-save)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; JavaScript / TypeScript ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; js/typescript/tsx use built-in *-ts-mode via treesit-auto associations.
-(add-hook 'js-ts-mode-hook #'prettier-js-mode)
 (add-hook 'typescript-ts-mode-hook #'eglot-ensure)
-(add-hook 'typescript-ts-mode-hook #'prettier-js-mode)
 (add-hook 'tsx-ts-mode-hook #'eglot-ensure)
-(add-hook 'tsx-ts-mode-hook #'prettier-js-mode)
 (setopt js-indent-level 2
         typescript-ts-mode-indent-offset 2)
 
@@ -137,15 +151,14 @@
 (use-package coffee-mode
   :hook (coffee-mode . display-line-numbers-mode))
 
-;;; Elm
+;;; Elm. Save-time formatting comes from apheleia (elm-format), so the
+;;; package's own elm-format-on-save stays off to avoid double formatting.
 (use-package elm-mode
-  :defer t
-  :init (setq elm-format-on-save t))
+  :defer t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Web ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package web-mode
   :mode ("\\.erb\\'" "\\.mustache\\'" "\\.djhtml\\'" "\\.html?\\'" "\\.svelte\\'")
-  :hook (web-mode . prettier-js-mode)
   :config
   (setq web-mode-markup-indent-offset 2
         web-mode-css-indent-offset 2
@@ -157,14 +170,13 @@
 
 ;;; Stylesheet. scss-mode comes built in via css-mode.el; the MELPA scss-mode
 ;;; references flymake-allowed-file-name-masks, removed in Emacs 30, and fails
-;;; to load. css-mode.el defines no scss-mode feature or library, so configure
-;;; it directly instead of through use-package. Keep the MELPA package
-;;; uninstalled: elpa/ is machine-local, and a stale installed copy registers
-;;; autoloads that shadow the built-in mode and silently break .scss buffers.
+;;; to load. Save-time formatting comes from apheleia (prettier-scss). Keep
+;;; the MELPA package uninstalled: elpa/ is machine-local, and a stale
+;;; installed copy registers autoloads that shadow the built-in mode and
+;;; silently break .scss buffers.
 (when (assq 'scss-mode package-alist)
   (warn "Stale MELPA scss-mode is installed and shadows the built-in scss-mode; remove it with M-x package-delete"))
 (setopt css-indent-offset 2)            ; Shared by css-mode and scss-mode.
-(add-hook 'scss-mode-hook #'prettier-js-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; JSON / YAML ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Let treesit-auto promote JSON/YAML files when grammars are ready.
