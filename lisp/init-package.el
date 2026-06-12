@@ -4,6 +4,7 @@
 ;;; use-package is bundled with Emacs 29+, so it usually needs no install.
 ;;; Code:
 
+(require 'cl-lib)
 (require 'package)
 
 ;;; Archives: GNU ELPA / NonGNU ELPA / MELPA.
@@ -33,6 +34,46 @@
     (package-initialize))))
 
 (my/package-initialize)
+
+;;; Fail closed if quickstart refresh hides package activation errors.
+(defun my/package-quickstart-delete-cache ()
+  "Delete generated package quickstart files."
+  (dolist (file (list package-quickstart-file
+                      (concat package-quickstart-file "c")))
+    (when (file-exists-p file)
+      (delete-file file))))
+
+(defun my/package-quickstart-refresh-with-activation-check (refresh-function
+                                                            &rest args)
+  "Call REFRESH-FUNCTION with ARGS, failing on hidden activation errors."
+  (let ((activation-failures nil)
+        (original-package-activate (symbol-function 'package-activate))
+        result)
+    (condition-case err
+        (cl-letf (((symbol-function 'package-activate)
+                   (lambda (package &optional force)
+                     (condition-case activate-err
+                         (funcall original-package-activate package force)
+                       (error
+                        (push (format "%s: %s"
+                                      package
+                                      (error-message-string activate-err))
+                              activation-failures)
+                        (signal (car activate-err) (cdr activate-err)))))))
+          (setq result (apply refresh-function args)))
+      (error
+       (when activation-failures
+         (my/package-quickstart-delete-cache))
+       (signal (car err) (cdr err))))
+    (if activation-failures
+        (progn
+          (my/package-quickstart-delete-cache)
+          (error "Package quickstart activation failures: %s"
+                 (mapconcat #'identity (nreverse activation-failures) "; ")))
+      result)))
+
+(advice-add 'package-quickstart-refresh
+            :around #'my/package-quickstart-refresh-with-activation-check)
 
 ;;; use-package is bundled; keep only the fallback for older Emacs versions.
 (unless (require 'use-package nil t)

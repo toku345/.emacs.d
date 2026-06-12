@@ -73,6 +73,7 @@ The check target runs:
   -l scripts/package-quickstart-batch.el -l test/init-package-test.el
   -l test/init-langs-test.el
   -f ert-run-tests-batch-and-exit`)
+- package quickstart success-path check with a temporary generated file
 - byte compilation of repository Emacs Lisp files
 
 `emacs` must be available on `PATH`. The first smoke load may access package

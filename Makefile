@@ -21,9 +21,9 @@ ELISP_FILES := \
 	test/init-package-test.el \
 	test/init-langs-test.el
 
-.PHONY: check whitespace smoke checkdoc test byte-compile package-quickstart clean-elc
+.PHONY: check whitespace smoke checkdoc test package-quickstart-check byte-compile package-quickstart clean-elc
 
-check: whitespace smoke checkdoc test byte-compile
+check: whitespace smoke checkdoc test package-quickstart-check byte-compile
 
 whitespace:
 	git diff --check
@@ -39,6 +39,9 @@ checkdoc:
 # activation (and any stale shadowing autoloads) is in effect.
 test:
 	$(EMACS) -Q --batch -l early-init.el -l init.el -l scripts/package-quickstart-batch.el -l test/init-package-test.el -l test/init-langs-test.el -f ert-run-tests-batch-and-exit
+
+package-quickstart-check:
+	$(EMACS) -Q --batch -l early-init.el -l lisp/init-package.el -l scripts/package-quickstart-batch.el -f my/package-quickstart-batch-check
 
 byte-compile:
 	$(EMACS) -Q --batch -L lisp -l lisp/init-package.el --eval "(progn (load-file \"scripts/byte-compile-batch.el\") (my/byte-compile-batch-run))" -- $(ELISP_FILES)

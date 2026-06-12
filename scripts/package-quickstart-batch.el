@@ -3,27 +3,27 @@
 ;;; Refresh package quickstart in batch and fail on package activation errors.
 ;;; Code:
 
-(require 'cl-lib)
 (require 'package)
 
 (defun my/package-quickstart-batch-refresh ()
   "Refresh `package-quickstart-file', failing on activation errors."
-  (let ((activation-failures nil)
-        (original-package-activate (symbol-function 'package-activate)))
-    (cl-letf (((symbol-function 'package-activate)
-               (lambda (package &optional force)
-                 (condition-case err
-                     (funcall original-package-activate package force)
-                   (error
-                    (push (format "%s: %s"
-                                  package
-                                  (error-message-string err))
-                          activation-failures)
-                    (signal (car err) (cdr err)))))))
-      (package-quickstart-refresh))
-    (when activation-failures
-      (error "Package quickstart activation failures: %s"
-             (mapconcat #'identity (nreverse activation-failures) "; ")))))
+  (my/package-quickstart-refresh-with-activation-check
+   #'package-quickstart-refresh))
+
+(defun my/package-quickstart-batch-check ()
+  "Refresh a temporary quickstart file and verify it can be loaded."
+  (let ((package-quickstart-file
+         (make-temp-file "package-quickstart-check" nil ".el")))
+    (unwind-protect
+        (progn
+          (my/package-quickstart-batch-refresh)
+          (unless (file-exists-p package-quickstart-file)
+            (error "Package quickstart file was not generated"))
+          (load package-quickstart-file nil t))
+      (dolist (file (list package-quickstart-file
+                          (concat package-quickstart-file "c")))
+        (when (file-exists-p file)
+          (delete-file file))))))
 
 (provide 'package-quickstart-batch)
 ;;; package-quickstart-batch.el ends here
