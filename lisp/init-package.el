@@ -19,12 +19,20 @@
         ("nongnu" . 8)
         ("melpa"  . 6)))
 
-;;; Skip initialization when startup.el already activated packages, fully
-;;; (package--initialized) or via the quickstart file (package--activated);
-;;; re-running package-initialize would repeat the whole activation.
-(unless (or (bound-and-true-p package--initialized)
-            (bound-and-true-p package--activated))
-  (package-initialize))
+;;; Initialize package metadata without repeating activation.
+(defun my/package-initialize ()
+  "Initialize package metadata, preserving startup package activation."
+  (cond
+   ((bound-and-true-p package--initialized)
+    nil)
+   ((bound-and-true-p package--activated)
+    ;; Quickstart runs package activation before init.el, but does not populate
+    ;; descriptor metadata such as `package-alist'.
+    (package-initialize 'no-activate))
+   (t
+    (package-initialize))))
+
+(my/package-initialize)
 
 ;;; use-package is bundled; keep only the fallback for older Emacs versions.
 (unless (require 'use-package nil t)
