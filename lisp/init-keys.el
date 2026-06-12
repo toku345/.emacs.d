@@ -31,8 +31,9 @@
            ("C-t"     . other-window)
            ("C-x ?"   . help-command)
            ("C-x SPC" . cua-rectangle-mark-mode)
-           ("M-n"     . (lambda () (interactive) (scroll-up 1)))
-           ("M-p"     . (lambda () (interactive) (scroll-down 1)))
+           ;; The old M-n/M-p line-scroll bindings are retired in all modes,
+           ;; not only where flymake-mode-map shadows them for diagnostics
+           ;; navigation (init-lsp.el).
            ("M-["     . switch-to-prev-buffer)
            ("M-]"     . switch-to-next-buffer)
            ("C-c C-p" . my/move-line-up)

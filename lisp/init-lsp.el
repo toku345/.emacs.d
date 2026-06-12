@@ -15,7 +15,9 @@
               ("C-c a" . eglot-code-actions))
   :config
   (setq eglot-autoshutdown t          ; Stop server after the last buffer closes.
-        eglot-events-buffer-size 0    ; Disable event logs to keep eglot light.
+        ;; Disable event logs to keep eglot light. eglot-events-buffer-size
+        ;; was obsoleted by eglot 1.16 and setting it here has no effect.
+        eglot-events-buffer-config '(:size 0 :format full)
         eglot-sync-connect 1)
   ;; Ruby: support ruby-lsp while keeping Eglot's solargraph default as fallback.
   (add-to-list 'eglot-server-programs

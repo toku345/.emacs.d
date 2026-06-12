@@ -8,7 +8,9 @@
   :defer t
   :bind (:map paredit-mode-map
               ("C-h" . paredit-backward-delete))
-  :config
+  :init
+  ;; Register the hook in :init, not :config, so it is active before paredit
+  ;; loads; paredit-mode is autoloaded and pulls paredit in on first use.
   (defun my/conditionally-enable-paredit-mode ()
     "Enable paredit only in the eval-expression minibuffer."
     (when (eq this-command 'eval-expression)

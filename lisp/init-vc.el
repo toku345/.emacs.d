@@ -18,9 +18,9 @@
 
 ;;; Fringe diff display, replacing git-gutter and integrating with magit.
 (use-package diff-hl
-  :hook ((prog-mode . diff-hl-mode)
-         (dired-mode . diff-hl-dired-mode))
+  :hook (dired-mode . diff-hl-dired-mode)
   :init
+  ;; Covers every file-visiting buffer, so no per-mode diff-hl-mode hooks.
   (global-diff-hl-mode 1)
   :config
   ;; Update diffs live while editing.
