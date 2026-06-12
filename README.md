@@ -85,6 +85,9 @@ installed, deleted, or updated, run:
 make package-quickstart
 ```
 
+The target exits nonzero if package activation errors are observed during the
+refresh.
+
 To delete every `.elc` file in the repository — including compiled files of
 installed packages under `elpa/`, which then run uncompiled until
 reinstalled or recompiled — run:

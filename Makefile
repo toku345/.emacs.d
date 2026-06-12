@@ -17,6 +17,7 @@ ELISP_FILES := \
 	init.el \
 	scripts/checkdoc-batch.el \
 	scripts/byte-compile-batch.el \
+	scripts/package-quickstart-batch.el \
 	test/init-package-test.el \
 	test/init-langs-test.el
 
@@ -37,13 +38,13 @@ checkdoc:
 # ERT tests run against the fully loaded configuration so package
 # activation (and any stale shadowing autoloads) is in effect.
 test:
-	$(EMACS) -Q --batch -l early-init.el -l init.el -l test/init-package-test.el -l test/init-langs-test.el -f ert-run-tests-batch-and-exit
+	$(EMACS) -Q --batch -l early-init.el -l init.el -l scripts/package-quickstart-batch.el -l test/init-package-test.el -l test/init-langs-test.el -f ert-run-tests-batch-and-exit
 
 byte-compile:
 	$(EMACS) -Q --batch -L lisp -l lisp/init-package.el --eval "(progn (load-file \"scripts/byte-compile-batch.el\") (my/byte-compile-batch-run))" -- $(ELISP_FILES)
 
 package-quickstart:
-	$(EMACS) -Q --batch -l early-init.el -l lisp/init-package.el --eval "(package-quickstart-refresh)"
+	$(EMACS) -Q --batch -l early-init.el -l lisp/init-package.el -l scripts/package-quickstart-batch.el -f my/package-quickstart-batch-refresh
 
 clean-elc:
 	find . -name '*.elc' -type f -delete

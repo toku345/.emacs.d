@@ -18,7 +18,6 @@
 (use-package clojure-mode
   :defer t                              ; Autoloads keep auto-mode-alist wired.
   :init
-  (add-hook 'clojure-mode-hook #'yas-minor-mode)
   (add-hook 'clojure-mode-hook #'subword-mode)
   (add-hook 'clojure-mode-hook #'my/lisp-mode-hook)
   :config
