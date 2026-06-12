@@ -43,10 +43,12 @@
 (use-package geiser
   :defer t            ; Autoloads hook scheme-mode for on-demand activation.
   :init
+  (setq geiser-active-implementations '(racket))
   (add-hook 'geiser-mode-hook #'my/lisp-mode-hook)
-  (add-hook 'geiser-repl-mode-hook #'my/lisp-mode-hook)
-  :config
-  (setq geiser-active-implementations '(racket)))
+  (add-hook 'geiser-repl-mode-hook #'my/lisp-mode-hook))
+
+(use-package geiser-racket
+  :after geiser)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Common Lisp ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Sly through Roswell. Load the helper if it exists.

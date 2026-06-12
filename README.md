@@ -70,7 +70,8 @@ The check target runs:
 - `emacs -Q --batch -l early-init.el -l init.el`
 - `checkdoc` over repository Emacs Lisp files
 - ERT tests under `test/` (`emacs -Q --batch -l early-init.el -l init.el
-  -l test/init-package-test.el -l test/init-langs-test.el
+  -l scripts/package-quickstart-batch.el -l test/init-package-test.el
+  -l test/init-langs-test.el
   -f ert-run-tests-batch-and-exit`)
 - byte compilation of repository Emacs Lisp files
 
