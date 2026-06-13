@@ -12,11 +12,12 @@
 
 ;;; Edit grep buffers directly; this works well with consult/embark export.
 (use-package wgrep
-  :config
-  (setq wgrep-auto-save-buffer t))
+  :defer t                            ; Only needed inside grep buffers.
+  :custom (wgrep-auto-save-buffer t))
 
 ;;; Definition-jump fallback registered as an xref backend.
 (use-package dumb-jump
+  :defer t          ; The autoloaded hook function loads it on first xref use.
   :init
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
   :config

@@ -43,7 +43,9 @@ lisp/
 2. Place this repository at `~/.emacs.d`.
 3. On first startup, `package.el` installs required packages automatically.
    Network access is required.
-4. Missing tree-sitter grammars are prompted for on first use because
+4. Run `make package-quickstart` after packages are installed, or when you need
+   to manually refresh the combined startup autoload file after package changes.
+5. Missing tree-sitter grammars are prompted for on first use because
    `treesit-auto-install` is set to `'prompt`.
 
 ### External Tools
@@ -68,12 +70,25 @@ The check target runs:
 - `emacs -Q --batch -l early-init.el -l init.el`
 - `checkdoc` over repository Emacs Lisp files
 - ERT tests under `test/` (`emacs -Q --batch -l early-init.el -l init.el
-  -l test/init-langs-test.el -f ert-run-tests-batch-and-exit`)
+  -l scripts/package-quickstart-batch.el -l test/init-package-test.el
+  -l test/init-langs-test.el
+  -f ert-run-tests-batch-and-exit`)
+- package quickstart checks for the configured file and a temporary generated file
 - byte compilation of repository Emacs Lisp files
 
 `emacs` must be available on `PATH`. The first smoke load may access package
 archives because this configuration uses `package.el` to install missing
 packages automatically.
+
+To refresh the combined package quickstart autoload file after packages are
+installed, deleted, or updated, run:
+
+```sh
+make package-quickstart
+```
+
+The target exits nonzero if package activation errors are observed during the
+refresh.
 
 To delete every `.elc` file in the repository — including compiled files of
 installed packages under `elpa/`, which then run uncompiled until

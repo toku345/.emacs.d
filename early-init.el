@@ -45,6 +45,10 @@
       frame-resize-pixelwise t
       ;; Keep package activation before init.el; init-package.el sets archives.
       package-enable-at-startup t
+      ;; Activate packages from one combined autoloads file instead of loading
+      ;; ~100 per-package autoload files. package.el refreshes the file on
+      ;; install/delete; run make package-quickstart after manual changes.
+      package-quickstart t
       ;; Initial default-frame appearance, set early to avoid frame flicker.
       default-frame-alist '((tool-bar-lines . 0)
                             (menu-bar-lines . 0)

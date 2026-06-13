@@ -41,6 +41,10 @@ tramp
 # elpa packages
 /elpa/
 
+# package-quickstart combined autoloads (machine-generated)
+/package-quickstart.el
+/package-quickstart.elc
+
 # reftex files
 *.rel
 
