@@ -10,6 +10,8 @@
 (require 'cl-lib)
 (require 'ert)
 
+(declare-function my/package-quickstart-batch-check-configured-file
+                  "package-quickstart-batch")
 (declare-function my/package-quickstart-batch-refresh "package-quickstart-batch")
 (declare-function my/package-quickstart-refresh-with-activation-check "init-package")
 
@@ -85,6 +87,37 @@
           (let ((init-package-test-quickstart-loaded nil))
             (load package-quickstart-file nil t)
             (should init-package-test-quickstart-loaded)))
+      (dolist (file (list package-quickstart-file
+                          (concat package-quickstart-file "c")))
+        (when (file-exists-p file)
+          (delete-file file))))))
+
+(ert-deftest init-package-test-quickstart-check-loads-configured-file ()
+  "The batch check verifies the configured quickstart file when present."
+  (let ((package-quickstart-file
+         (make-temp-file "package-quickstart-configured" nil ".el")))
+    (unwind-protect
+        (progn
+          (with-temp-file package-quickstart-file
+            (insert "(setq init-package-test-quickstart-loaded t)\n"))
+          (let ((init-package-test-quickstart-loaded nil))
+            (my/package-quickstart-batch-check-configured-file)
+            (should init-package-test-quickstart-loaded)))
+      (dolist (file (list package-quickstart-file
+                          (concat package-quickstart-file "c")))
+        (when (file-exists-p file)
+          (delete-file file))))))
+
+(ert-deftest init-package-test-quickstart-check-fails-on-broken-configured-file ()
+  "The batch check fails instead of ignoring a broken configured quickstart file."
+  (let ((package-quickstart-file
+         (make-temp-file "package-quickstart-broken" nil ".el")))
+    (unwind-protect
+        (progn
+          (with-temp-file package-quickstart-file
+            (insert "(invalid-read-syntax"))
+          (should-error
+           (my/package-quickstart-batch-check-configured-file)))
       (dolist (file (list package-quickstart-file
                           (concat package-quickstart-file "c")))
         (when (file-exists-p file)

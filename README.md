@@ -43,8 +43,8 @@ lisp/
 2. Place this repository at `~/.emacs.d`.
 3. On first startup, `package.el` installs required packages automatically.
    Network access is required.
-4. Run `make package-quickstart` after packages are installed, and again after
-   package changes, to generate the combined startup autoload file.
+4. Run `make package-quickstart` after packages are installed, or when you need
+   to manually refresh the combined startup autoload file after package changes.
 5. Missing tree-sitter grammars are prompted for on first use because
    `treesit-auto-install` is set to `'prompt`.
 
@@ -73,7 +73,7 @@ The check target runs:
   -l scripts/package-quickstart-batch.el -l test/init-package-test.el
   -l test/init-langs-test.el
   -f ert-run-tests-batch-and-exit`)
-- package quickstart success-path check with a temporary generated file
+- package quickstart checks for the configured file and a temporary generated file
 - byte compilation of repository Emacs Lisp files
 
 `emacs` must be available on `PATH`. The first smoke load may access package

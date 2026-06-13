@@ -10,8 +10,14 @@
   (my/package-quickstart-refresh-with-activation-check
    #'package-quickstart-refresh))
 
+(defun my/package-quickstart-batch-check-configured-file ()
+  "Verify the configured quickstart file is loadable when it exists."
+  (when (file-exists-p package-quickstart-file)
+    (load package-quickstart-file nil nil)))
+
 (defun my/package-quickstart-batch-check ()
-  "Refresh a temporary quickstart file and verify it can be loaded."
+  "Verify configured and temporary package quickstart files."
+  (my/package-quickstart-batch-check-configured-file)
   (let ((package-quickstart-file
          (make-temp-file "package-quickstart-check" nil ".el")))
     (unwind-protect
