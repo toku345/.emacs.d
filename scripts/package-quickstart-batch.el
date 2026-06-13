@@ -10,10 +10,23 @@
   (my/package-quickstart-refresh-with-activation-check
    #'package-quickstart-refresh))
 
+(defun my/package-quickstart-batch-readable-file ()
+  "Return the configured quickstart file Emacs startup would load."
+  (let ((compiled-file (concat package-quickstart-file "c")))
+    (cond
+     ((file-readable-p compiled-file)
+      compiled-file)
+     ((file-readable-p package-quickstart-file)
+      package-quickstart-file))))
+
 (defun my/package-quickstart-batch-check-configured-file ()
   "Verify the configured quickstart file is loadable when it exists."
-  (when (file-exists-p package-quickstart-file)
-    (load package-quickstart-file nil nil)))
+  (let ((quickstart-file (my/package-quickstart-batch-readable-file)))
+    (when quickstart-file
+      (let ((load-source-file-function nil))
+        (unless (boundp 'package-activated-list)
+          (setq package-activated-list nil))
+        (load quickstart-file nil 'nomessage)))))
 
 (defun my/package-quickstart-batch-check ()
   "Verify configured and temporary package quickstart files."

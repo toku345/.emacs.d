@@ -12,6 +12,8 @@
 
 (declare-function my/package-quickstart-batch-check-configured-file
                   "package-quickstart-batch")
+(declare-function my/package-quickstart-batch-readable-file
+                  "package-quickstart-batch")
 (declare-function my/package-quickstart-batch-refresh "package-quickstart-batch")
 (declare-function my/package-quickstart-refresh-with-activation-check "init-package")
 
@@ -108,6 +110,29 @@
         (when (file-exists-p file)
           (delete-file file))))))
 
+(ert-deftest init-package-test-quickstart-check-prefers-compiled-file ()
+  "The batch check matches startup by preferring compiled quickstart files."
+  (let ((package-quickstart-file
+         (make-temp-file "package-quickstart-compiled" nil ".el")))
+    (unwind-protect
+        (progn
+          (with-temp-file package-quickstart-file
+            (insert ";;; package-quickstart-test.el -*- lexical-binding: t; -*-\n"
+                    "(setq init-package-test-quickstart-loaded 'compiled)\n"))
+          (byte-compile-file package-quickstart-file)
+          (with-temp-file package-quickstart-file
+            (insert "(setq init-package-test-quickstart-loaded 'source)\n"))
+          (set-file-times package-quickstart-file 0)
+          (should (string= (my/package-quickstart-batch-readable-file)
+                           (concat package-quickstart-file "c")))
+          (let ((init-package-test-quickstart-loaded nil))
+            (my/package-quickstart-batch-check-configured-file)
+            (should (eq init-package-test-quickstart-loaded 'compiled))))
+      (dolist (file (list package-quickstart-file
+                          (concat package-quickstart-file "c")))
+        (when (file-exists-p file)
+          (delete-file file))))))
+
 (ert-deftest init-package-test-quickstart-check-fails-on-broken-configured-file ()
   "The batch check fails instead of ignoring a broken configured quickstart file."
   (let ((package-quickstart-file
@@ -118,6 +143,27 @@
             (insert "(invalid-read-syntax"))
           (should-error
            (my/package-quickstart-batch-check-configured-file)))
+      (dolist (file (list package-quickstart-file
+                          (concat package-quickstart-file "c")))
+        (when (file-exists-p file)
+          (delete-file file))))))
+
+(ert-deftest init-package-test-quickstart-check-fails-on-broken-compiled-file ()
+  "The batch check fails on a broken compiled quickstart file."
+  (let ((package-quickstart-file
+         (make-temp-file "package-quickstart-broken-compiled" nil ".el")))
+    (unwind-protect
+        (progn
+          (with-temp-file package-quickstart-file
+            (insert "(setq init-package-test-quickstart-loaded 'source)\n"))
+          (with-temp-file (concat package-quickstart-file "c")
+            (insert "(invalid-read-syntax"))
+          (should (string= (my/package-quickstart-batch-readable-file)
+                           (concat package-quickstart-file "c")))
+          (let ((init-package-test-quickstart-loaded nil))
+            (should-error
+             (my/package-quickstart-batch-check-configured-file))
+            (should-not init-package-test-quickstart-loaded)))
       (dolist (file (list package-quickstart-file
                           (concat package-quickstart-file "c")))
         (when (file-exists-p file)
