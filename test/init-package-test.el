@@ -10,6 +10,7 @@
 (require 'cl-lib)
 (require 'ert)
 
+(declare-function my/package-quickstart-batch-check "package-quickstart-batch")
 (declare-function my/package-quickstart-batch-check-configured-file
                   "package-quickstart-batch")
 (declare-function my/package-quickstart-batch-readable-file
@@ -93,6 +94,22 @@
                           (concat package-quickstart-file "c")))
         (when (file-exists-p file)
           (delete-file file))))))
+
+(ert-deftest init-package-test-quickstart-check-requires-refresh-output ()
+  "The batch check requires refresh to create the temporary quickstart file."
+  (let ((refresh-called nil))
+    (cl-letf (((symbol-function 'my/package-quickstart-batch-check-configured-file)
+               #'ignore)
+              ((symbol-function 'my/package-quickstart-batch-refresh)
+               (lambda ()
+                 (setq refresh-called t)
+                 (should-not (file-exists-p package-quickstart-file))
+                 (with-temp-file package-quickstart-file
+                   (insert "(setq init-package-test-quickstart-loaded t)\n")))))
+      (let ((init-package-test-quickstart-loaded nil))
+        (my/package-quickstart-batch-check)
+        (should refresh-called)
+        (should init-package-test-quickstart-loaded)))))
 
 (ert-deftest init-package-test-quickstart-check-loads-configured-file ()
   "The batch check verifies the configured quickstart file when present."

@@ -5,6 +5,9 @@
 
 (require 'package)
 
+(declare-function my/package-quickstart-refresh-with-activation-check
+                  "init-package")
+
 (defun my/package-quickstart-batch-refresh ()
   "Refresh `package-quickstart-file', failing on activation errors."
   (my/package-quickstart-refresh-with-activation-check
@@ -35,6 +38,7 @@
          (make-temp-file "package-quickstart-check" nil ".el")))
     (unwind-protect
         (progn
+          (delete-file package-quickstart-file)
           (my/package-quickstart-batch-refresh)
           (unless (file-exists-p package-quickstart-file)
             (error "Package quickstart file was not generated"))
